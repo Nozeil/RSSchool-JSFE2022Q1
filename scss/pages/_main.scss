@@ -1,0 +1,21 @@
+@use '../abstracts/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.wrapper {
+	max-width: variables.$max-width;
+	margin: 0 auto;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	max-width: variables.$max-width;
+	padding: 0 40px;
+}

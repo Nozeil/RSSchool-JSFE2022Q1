@@ -1,0 +1,21 @@
+@use './variables';
+@use './mixins';
+
+%list {
+	list-style: none;
+}
+
+%link {
+	text-decoration: none;
+	transition: variables.$link-hover-transition;
+}
+
+%nav__link {
+	@include mixins.text-elems(0, 0, 0, 36px,'Arial', 400, normal,variables.$color-light-s, 24px, 0);
+	font-size: 15px;
+	@extend %link;
+	color: variables.$color-dark-s;
+	&:hover {
+		color: variables.$color-light-s;
+	}
+}
