@@ -1,0 +1,9 @@
+@use '../abstracts/placeholders';
+
+.start-screen__button {
+	width: 207px;
+	@extend %filled-button;
+	@extend %button;
+	@extend %color-dark-3xl;
+	@extend %h5;
+}

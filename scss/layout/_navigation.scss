@@ -7,12 +7,22 @@
 	padding: variables.$start-screen-header-padding 0;
 	margin: 16px 0 20px;
 	@extend %list;
+	
 }
 
 .nav__link {
-	@extend %nav__link;
+	@include mixins.font('Arial', 400, normal);
+	@include mixins.text-elems(0, 0, 0, 36px, 0);
+	@extend %paragraph-l;
+	@extend %link;
+	@extend %color-dark-s;
+	&:hover {
+		@extend %color-light-s;
+	}
+
 	&_active {
-		@extend %nav__link;
+		@extend %link;
+		@extend .nav__link;
 		padding-bottom: 4px;
 		color: variables.$color-light-s;
 		border-bottom: 3px solid variables.$color-primary;

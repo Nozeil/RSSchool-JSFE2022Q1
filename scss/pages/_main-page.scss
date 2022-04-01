@@ -1,0 +1,17 @@
+@use '../abstracts/variables';
+@use '../abstracts/placeholders';
+@use '../abstracts/mixins';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+	max-width: variables.$max-width;
+	margin: 0 auto;
+	@include mixins.fontAndColor(variables.$Georgia, variables.$weight-400, variables.$style-normal, variables.$color-dark-l);
+}

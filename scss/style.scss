@@ -1,6 +1,9 @@
-@use './abstracts/variables';
-@use './abstracts/placeholders';
 @use './base/typography';
-@use './pages/main';
+
+@use './pages/main-page';
+
+@use './components/buttons';
+
 @use './layout/header';
+@use './layout/main';
 @use './layout/navigation';

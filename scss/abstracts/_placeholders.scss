@@ -1,5 +1,106 @@
 @use './variables';
-@use './mixins';
+
+%flex {
+	display: flex;
+}
+
+%color-primary {
+	color: variables.$color-primary;
+}
+
+%color-primary-light {
+	color: variables.$color-primary-light;
+}
+
+%color-light-s {
+	color: variables.$color-light-s;
+}
+
+%color-light-l {
+	color: variables.$color-light-l;
+}
+
+%color-light-xl {
+	color: variables.$color-light-xl;
+}
+
+%color-dark-s {
+	color: variables.$color-dark-s;
+}
+
+%color-dark-m {
+	color: variables.$color-dark-m;
+}
+
+%color-dark-l {
+	color: variables.$color-dark-l;
+}
+
+%color-dark-xl {
+	color: variables.$color-dark-xl;
+}
+
+%color-dark-2xl {
+	color: variables.$color-dark-2xl;
+}
+
+%color-dark-3xl {
+	color: variables.$color-dark-3xl;
+}
+
+%h2 {
+	font-size: variables.$h2;
+	line-height: variables.$h2-height;
+}
+
+%h3 {
+	font-size: variables.$h3;
+	line-height: variables.$h3-height;
+}
+
+%h3-mobile {
+	font-size: variables.$h3-mobile;
+	line-height: variables.$h3-mobile-height;
+}
+
+%h4 {
+	font-size: variables.$h4;
+	line-height: variables.$h4-height;
+}
+
+%h5 {
+	font-size: variables.$h5;
+	line-height: variables.$h5-height;
+}
+
+%h5-modal-window {
+	font-size: variables.$h5-modal-window;
+	line-height: variables.$h5-modal-window-height;
+}
+
+%paragraph-l {
+	font-size: variables.$paragraph-l;
+	line-height: variables.$paragraph-l-height;
+}
+
+%paragraph-s {
+	font-size: variables.$paragraph-s;
+	line-height: variables.$paragraph-s-height;
+}
+
+%paragraph-mobile-menu {
+	font-size: variables.$paragraph-mobile-menu;
+	line-height: variables.$paragraph-mobile-menu-height;
+}
+
+%logo_title {
+	font-size: variables.$logo_title;
+	line-height: variables.$logo_title-height;
+}
+
+%logo_subtitle {
+	font-size: variables.$logo_subtitle;
+}
 
 %list {
 	list-style: none;
@@ -7,15 +108,24 @@
 
 %link {
 	text-decoration: none;
-	transition: variables.$link-hover-transition;
+	transition: variables.$hover-transition;
 }
 
-%nav__link {
-	@include mixins.text-elems(0, 0, 0, 36px,'Arial', 400, normal,variables.$color-light-s, 24px, 0);
-	font-size: 15px;
-	@extend %link;
-	color: variables.$color-dark-s;
+%button {
+	border-radius: 26px;
+	letter-spacing: 2px;
+	cursor: pointer;
 	&:hover {
-		color: variables.$color-light-s;
+		background-color: variables.$color-primary-light;
+		transition: variables.$hover-transition;
 	}
+	&:active {
+		transform: scale(95%);
+	}
+}
+
+%filled-button {
+	height: 52px;
+	border: none;
+	background-color: variables.$color-primary;
 }

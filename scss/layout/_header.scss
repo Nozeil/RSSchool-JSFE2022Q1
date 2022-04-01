@@ -1,17 +1,27 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
+@use '../abstracts/placeholders';
 
 .header {
-	background-image: variables.$start-screen-url;
+	display: flex;
+	justify-content: space-between;
+	@include mixins.container-padding(40px);
+	@include mixins.background(top);
 }
 
 .logo__title {
 	padding-top: variables.$start-screen-header-padding;
-	@include mixins.text-elems(0, 0, 10px, 0, variables.$Georgia, variables.$weight-400, variables.$style-normal,variables.$color-primary, 35.2px, 2px);
+	font-weight: 400;
+	@include mixins.text-elems(0, 0, 10px, 0, 2px);
+	@extend %logo_title;
+	@extend %color-primary;
 }
 
 .logo__subtitle {
 	padding-left: 4px;
-	@include mixins.text-elems(0, 0, 10px, 0, variables.$Arial, variables.$weight-400, variables.$style-normal, variables.$color-light-xl,  14.95px, 1px);
-	word-spacing: 1px;
+	@include mixins.font(variables.$Arial, variables.$weight-400, variables.$style-normal);
+	@extend %logo_subtitle;
+	@extend %color-light-xl;
+	@include mixins.text-elems(0, 0, 10px, 0, 1px);
+	word-spacing: 1.5px;
 }

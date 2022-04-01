@@ -1,24 +1,56 @@
-@mixin font-face($family, $style, $weight, $url) {
-	@font-face {
-		font: {
-		family: $family;
-		style: $style;
-		weight: $weight;
-	};
-	src: url('#{$url}.woff2') format('woff2'),
-	     url('#{$url}.woff') format('woff');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,U+2212, U+2215, U+FEFF, U+FFFD;
-	}
-}
+@use '../abstracts/variables';
 
-@mixin text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $family, $weight, $style, $color, $line-height, $letter-spacing) {
-	margin: $margin-top $margin-right $margin-bottom $margin-left;
+@mixin font($family, $weight, $style) {
 	font: {
 		family: $family;
 		weight: $weight;
 		style: $style;
-	};
+	}
+}
+
+@mixin fontAndColor($family, $weight, $style, $color) {
+	@include font($family, $weight, $style);
 	color: $color;
-	line-height: $line-height;
+}
+
+@mixin font-face($family, $style, $weight, $url) {
+	@font-face {
+		@include font($family, $style, $weight);
+		src: url('#{$url}.woff2') format('woff2'),
+		url('#{$url}.woff') format('woff');
+		unicode-range: U+0000-00FF,
+			U+0131,
+			U+0152-0153,
+			U+02BB-02BC,
+			U+02C6,
+			U+02DA,
+			U+02DC,
+			U+2000-206F,
+			U+2074,
+			U+20AC,
+			U+2122,
+			U+2191,
+			U+2193,
+			U+2212,
+			U+2215,
+			U+FEFF,
+			U+FFFD;
+	}
+}
+
+@mixin text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing) {
+	margin: $margin-top $margin-right $margin-bottom $margin-left;
 	letter-spacing: $letter-spacing;
+}
+
+@mixin container-padding($padding-left-right, $padding-top-bottom:0) {
+	padding: $padding-top-bottom $padding-left-right;
+}
+
+@mixin background($position, $image:variables.$background-url, $repeat:no-repeat) {
+	background: {
+		image: $image;
+		position: $position;
+		repeat: $repeat;
+	}
 }

@@ -1,0 +1,34 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.section {
+	@extend %flex;
+	@include mixins.container-padding(40px);
+	gap: variables.$start-screen-section-gap;
+}
+
+.start-screen {
+	@extend %flex;
+	@include mixins.background(bottom);
+}
+
+.start-screen__content {
+	margin-top: variables.$start-screen-content-top-margin;
+	max-width: 460px;
+}
+
+.start-screen__title {
+	max-width: 310px;
+	@include mixins.text-elems(0, 0, 0, 0, 0);
+	@extend %h2;
+	font-weight: variables.$weight-400; 
+	@extend %color-light-xl;
+}
+
+.start-screen__text {
+	@include mixins.font(variables.$Arial, variables.$weight-400, variables.$style-normal);
+	@include mixins.text-elems(42px, 0, 42px, 0, 0);
+	@extend %color-dark-s;
+	@extend %paragraph-l;
+}
