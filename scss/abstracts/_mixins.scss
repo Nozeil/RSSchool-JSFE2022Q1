@@ -43,8 +43,8 @@
 	letter-spacing: $letter-spacing;
 }
 
-@mixin container-padding($padding-left-right, $padding-top-bottom:0) {
-	padding: $padding-top-bottom $padding-left-right;
+@mixin container-padding($padding-right, $padding-left, $padding-top:0, $padding-bottom:0, ) {
+	padding: $padding-top $padding-right $padding-bottom $padding-left;
 }
 
 @mixin background($position, $image:variables.$background-url, $repeat:no-repeat) {
@@ -53,4 +53,19 @@
 		position: $position;
 		repeat: $repeat;
 	}
+}
+
+@mixin title($max-width, $weight, $margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing, $placeholder, $color) {
+	max-width: $max-width;
+	font-weight: $weight;
+	@include text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing);
+	@extend %#{$placeholder};
+	@extend %#{$color};
+}
+
+@mixin text($family, $weight, $style, $margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing, $color-placeholder, $text-placeolder) {
+	@include font($family, $weight, $style);
+	@include text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing);
+	@extend %#{$color-placeholder};
+	@extend %#{$text-placeolder};
 }

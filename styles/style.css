@@ -46,6 +46,14 @@
   color: #CDCDCD;
 }
 
+.about__title {
+  color: #545454;
+}
+
+.about__text {
+  color: #4C4C4C;
+}
+
 .start-screen__button {
   color: #292929;
 }
@@ -55,12 +63,17 @@
   line-height: 57px;
 }
 
+.about__title {
+  font-size: 35px;
+  line-height: 45px;
+}
+
 .start-screen__button {
   font-size: 15px;
   line-height: 17px;
 }
 
-.nav__link, .nav__link_active, .start-screen__text {
+.nav__link, .nav__link_active, .start-screen__text, .about__text {
   font-size: 15px;
   line-height: 24px;
 }
@@ -126,7 +139,7 @@ html {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 40px 0 40px;
   background-image: url("/assets/imgs/jpg/start_screen.jpg");
   background-position: top;
   background-repeat: no-repeat;
@@ -150,7 +163,7 @@ html {
 }
 
 .section {
-  padding: 0 40px;
+  padding: 0 40px 0 40px;
   gap: 42px;
 }
 
@@ -167,9 +180,9 @@ html {
 
 .start-screen__title {
   max-width: 310px;
+  font-weight: 400;
   margin: 0 0 0 0;
   letter-spacing: 0;
-  font-weight: 400;
 }
 
 .start-screen__text {
@@ -177,6 +190,33 @@ html {
   font-weight: 400;
   font-style: normal;
   margin: 42px 0 42px 0;
+  letter-spacing: 0;
+}
+
+.section.about {
+  padding: 80px 40px 100px 40px;
+  justify-content: center;
+  gap: 120px;
+  background-color: #FFFFFF;
+}
+
+.about {
+  flex-basis: 430px;
+  padding: 14px 0;
+}
+
+.about__title {
+  max-width: 360px;
+  font-weight: 400;
+  margin: 0 0 0 0;
+  letter-spacing: 2px;
+}
+
+.about__text {
+  font-family: "Arial";
+  font-weight: 400;
+  font-style: normal;
+  margin: 25px 0 0 0;
   letter-spacing: 0;
 }
 

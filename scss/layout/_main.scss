@@ -4,7 +4,7 @@
 
 .section {
 	@extend %flex;
-	@include mixins.container-padding(40px);
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding);
 	gap: variables.$start-screen-section-gap;
 }
 
@@ -15,20 +15,33 @@
 
 .start-screen__content {
 	margin-top: variables.$start-screen-content-top-margin;
-	max-width: 460px;
+	max-width: variables.$start-screen-content-width;
 }
 
 .start-screen__title {
-	max-width: 310px;
-	@include mixins.text-elems(0, 0, 0, 0, 0);
-	@extend %h2;
-	font-weight: variables.$weight-400; 
-	@extend %color-light-xl;
+	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, 0, 0, 0, 0, 0, h2, color-light-xl);
 }
 
 .start-screen__text {
-	@include mixins.font(variables.$Arial, variables.$weight-400, variables.$style-normal);
-	@include mixins.text-elems(42px, 0, 42px, 0, 0);
-	@extend %color-dark-s;
-	@extend %paragraph-l;
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
+}
+
+.section.about {
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	justify-content: center;
+	gap: variables.$about-section-gap;
+	background-color: variables.$color-light-xl;
+}
+
+.about {
+	flex-basis: variables.$about-flex-basis;
+	padding: 14px 0;
+}
+
+.about__title {
+	@include mixins.title(variables.$about-title, variables.$weight-400, 0, 0, 0, 0, 2px, h3, color-dark-l);
+}
+
+.about__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
 }

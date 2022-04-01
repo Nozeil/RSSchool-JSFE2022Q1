@@ -5,7 +5,7 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	@include mixins.container-padding(40px);
+	@include mixins.container-padding(40px, 40px);
 	@include mixins.background(top);
 }
 
