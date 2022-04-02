@@ -4,6 +4,22 @@
 	display: flex;
 }
 
+%align-center {
+	align-items: center;
+}
+
+%flex-column {
+	flex-direction: column;
+}
+
+%space-between {
+	justify-content: space-between;
+}
+
+%flex-center {
+	justify-content: center;
+}
+
 %color-primary {
 	color: variables.$color-primary;
 }
@@ -112,20 +128,46 @@
 }
 
 %button {
-	border-radius: 26px;
-	letter-spacing: 2px;
 	cursor: pointer;
 	&:hover {
 		background-color: variables.$color-primary-light;
 		transition: variables.$hover-transition;
 	}
+
 	&:active {
 		transform: scale(95%);
 	}
 }
 
+%button-height-radius {
+	border-radius:  variables.$button-height / 2;
+	height:  variables.$button-height;
+}
+
 %filled-button {
-	height: 52px;
+	@extend %button-height-radius;
 	border: none;
 	background-color: variables.$color-primary;
+}
+
+%transparent-button {
+	border: 2px solid variables.$color-primary;
+	background-color: transparent;
+}
+
+%round-button {
+	width: variables.$button-height;
+	height: variables.$button-height;
+	border-radius: 50%;
+	@extend %transparent-button;
+}
+
+%slider-button-text {
+	letter-spacing: 1px;
+	font-size: variables.$slider-button-text;
+	line-height: variables.$slider-button-text-height;
+}
+
+%text-center {
+	text-align: center;
 }

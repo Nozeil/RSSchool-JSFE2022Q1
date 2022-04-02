@@ -26,8 +26,24 @@
   src: url("../assets/fonts/Georgia/Georgia-Bold.woff2") format("woff2"), url("../assets/fonts/Georgia/Georgia-Bold.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-.section, .start-screen {
+.section, .start-screen, .pets__title, .header, .slider, .slider__cards, .slider__card {
   display: flex;
+}
+
+.section.pets, .slider, .slider__cards, .slider__card {
+  align-items: center;
+}
+
+.section.pets, .pets__title, .slider__card {
+  flex-direction: column;
+}
+
+.header {
+  justify-content: space-between;
+}
+
+.section.about {
+  justify-content: center;
 }
 
 .logo__title {
@@ -46,7 +62,7 @@
   color: #CDCDCD;
 }
 
-.about__title {
+.about__title, .pets__title, .slider__title {
   color: #545454;
 }
 
@@ -54,7 +70,7 @@
   color: #4C4C4C;
 }
 
-.start-screen__button {
+.start-screen__button, .slider__button, .pets__button {
   color: #292929;
 }
 
@@ -63,9 +79,14 @@
   line-height: 57px;
 }
 
-.about__title {
+.about__title, .pets__title {
   font-size: 35px;
   line-height: 45px;
+}
+
+.slider__title {
+  font-size: 20px;
+  line-height: 23px;
 }
 
 .start-screen__button {
@@ -96,23 +117,46 @@
   transition: 0.3s;
 }
 
-.start-screen__button {
-  border-radius: 26px;
-  letter-spacing: 2px;
+.start-screen__button, .slider__arrow-left, .slider__arrow-right, .slider__button, .pets__button {
   cursor: pointer;
 }
-.start-screen__button:hover {
+.start-screen__button:hover, .slider__arrow-left:hover, .slider__arrow-right:hover, .slider__button:hover, .pets__button:hover {
   background-color: #FDDCC4;
   transition: 0.3s;
 }
-.start-screen__button:active {
+.start-screen__button:active, .slider__arrow-left:active, .slider__arrow-right:active, .slider__button:active, .pets__button:active {
   transform: scale(95%);
 }
 
-.start-screen__button {
+.slider__button, .start-screen__button, .pets__button {
+  border-radius: 26px;
   height: 52px;
+}
+
+.start-screen__button, .pets__button {
   border: none;
   background-color: #F1CDB3;
+}
+
+.slider__button, .slider__arrow-left, .slider__arrow-right {
+  border: 2px solid #F1CDB3;
+  background-color: transparent;
+}
+
+.slider__arrow-left, .slider__arrow-right {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
+.slider__button, .pets__button {
+  letter-spacing: 1px;
+  font-size: 17px;
+  line-height: 22px;
+}
+
+.section.pets {
+  text-align: center;
 }
 
 * {
@@ -124,7 +168,7 @@ html {
 }
 
 .container {
-  max-width: 1280px;
+  width: 1280px;
   margin: 0 auto;
   font-family: "Georgia";
   font-weight: 400;
@@ -133,12 +177,58 @@ html {
 }
 
 .start-screen__button {
-  width: 207px;
+  width: 45%;
+  letter-spacing: 2px;
+}
+
+.slider__arrow-left:hover, .slider__arrow-right:hover {
+  border-color: #FDDCC4;
+}
+
+.slider__arrow-left {
+  background-image: url("/assets/imgs/svg/Arrow.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slider__arrow-right {
+  background-image: url("/assets/imgs/svg/Arrow-right.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slider__button {
+  width: 69%;
+}
+.slider__button:hover {
+  border-color: #FDDCC4;
+}
+
+.pets__button {
+  width: 261px;
+}
+
+.slider {
+  gap: 53px;
+}
+
+.slider__cards {
+  gap: 90px;
+}
+
+.slider__card {
+  margin-bottom: 30px;
+  gap: 30px;
+}
+
+.slider__title {
+  max-width: none;
+  font-weight: 400;
+  margin: 0 0 0 0;
+  letter-spacing: 1px;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
   padding: 0 40px 0 40px;
   background-image: url("/assets/imgs/jpg/start_screen.jpg");
   background-position: top;
@@ -175,11 +265,11 @@ html {
 
 .start-screen__content {
   margin-top: 163px;
-  max-width: 460px;
+  max-width: 39%;
 }
 
 .start-screen__title {
-  max-width: 310px;
+  max-width: 67%;
   font-weight: 400;
   margin: 0 0 0 0;
   letter-spacing: 0;
@@ -195,18 +285,17 @@ html {
 
 .section.about {
   padding: 80px 40px 100px 40px;
-  justify-content: center;
   gap: 120px;
   background-color: #FFFFFF;
 }
 
 .about {
-  flex-basis: 430px;
+  flex-basis: 36%;
   padding: 14px 0;
 }
 
 .about__title {
-  max-width: 360px;
+  max-width: 70%;
   font-weight: 400;
   margin: 0 0 0 0;
   letter-spacing: 2px;
@@ -218,6 +307,18 @@ html {
   font-style: normal;
   margin: 25px 0 0 0;
   letter-spacing: 0;
+}
+
+.section.pets {
+  padding: 80px 40px 100px 40px;
+  gap: 60px;
+}
+
+.pets__title {
+  max-width: none;
+  font-weight: 400;
+  margin: 0 0 0 0;
+  letter-spacing: 2px;
 }
 
 .nav__list {

@@ -1,0 +1,27 @@
+@use '../abstracts/variables';
+@use '../abstracts/placeholders';
+@use '../abstracts/mixins';
+
+.slider {
+	@extend %flex;
+	@extend %align-center;
+	gap: variables.$slider-flex-gap;
+}
+
+.slider__cards {
+	@extend %flex;
+	@extend %align-center;
+	gap: variables.$slider-column-gap;
+}
+
+.slider__card {
+	@extend %flex;
+	@extend %align-center;
+	@extend %flex-column;
+	margin-bottom: variables.$slider-card-margin-bottom;
+	gap: variables.$slider-row-gap;
+}
+
+.slider__title {
+	@include mixins.title(none, variables.$weight-400, 0, 0, 0, 0, 1px, h4, color-dark-l);
+}

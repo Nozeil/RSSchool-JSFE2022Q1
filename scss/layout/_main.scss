@@ -28,7 +28,7 @@
 
 .section.about {
 	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
-	justify-content: center;
+	@extend %flex-center;
 	gap: variables.$about-section-gap;
 	background-color: variables.$color-light-xl;
 }
@@ -44,4 +44,18 @@
 
 .about__text {
 	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
+}
+
+.section.pets {
+	@extend %flex-column;
+	@extend %align-center;
+	@extend %text-center;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	gap: variables.$pets-gap;
+}
+
+.pets__title {
+	@extend %flex;
+	@extend %flex-column;
+	@include mixins.title(none, variables.$weight-400, 0, 0, 0, 0, 2px, h3, color-dark-l);
 }
