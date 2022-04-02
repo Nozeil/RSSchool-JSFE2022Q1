@@ -20,11 +20,11 @@
 }
 
 .slider__arrow-left {
-	@include mixins.background(center, variables.$arrow-url);
+	@include mixins.background(variables.$arrow-url);
 }
 
 .slider__arrow-right {
-	@include mixins.background(center, variables.$arrow-right-url);
+	@include mixins.background(variables.$arrow-right-url);
 }
 
 .slider__button {

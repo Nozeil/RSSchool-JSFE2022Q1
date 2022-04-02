@@ -18,8 +18,16 @@
 	@extend %flex;
 	@extend %align-center;
 	@extend %flex-column;
-	margin-bottom: variables.$slider-card-margin-bottom;
+	padding-bottom: variables.$slider-card-padding-bottom;
+	border-radius: 9px;
+	background-color: variables.$color-light-s;
 	gap: variables.$slider-row-gap;
+	@extend %cursor-pointer;
+
+	&:hover {
+		box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
+	}
+	transition: variables.$hover-transition;
 }
 
 .slider__title {

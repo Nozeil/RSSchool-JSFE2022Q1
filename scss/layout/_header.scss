@@ -6,7 +6,7 @@
 	@extend %flex;
 	@extend %space-between;
 	@include mixins.container-padding(40px, 40px);
-	@include mixins.background(top);
+	@include mixins.background(url('/assets/imgs/jpg/start_screen.jpg'), top);
 }
 
 .logo__title {

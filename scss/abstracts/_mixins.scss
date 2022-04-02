@@ -47,7 +47,7 @@
 	padding: $padding-top $padding-right $padding-bottom $padding-left;
 }
 
-@mixin background($position, $image:variables.$background-url, $repeat:no-repeat) {
+@mixin background($image, $position:center, $repeat:no-repeat) {
 	background: {
 		image: $image;
 		position: $position;

@@ -1,4 +1,5 @@
 @use './variables';
+@use './mixins';
 
 %flex {
 	display: flex;
@@ -18,6 +19,10 @@
 
 %flex-center {
 	justify-content: center;
+}
+
+%wrap {
+	flex-wrap: wrap;
 }
 
 %color-primary {
@@ -127,8 +132,12 @@
 	transition: variables.$hover-transition;
 }
 
-%button {
+%cursor-pointer {
 	cursor: pointer;
+}
+
+%button {
+	@extend %cursor-pointer;
 	&:hover {
 		background-color: variables.$color-primary-light;
 		transition: variables.$hover-transition;
@@ -170,4 +179,12 @@
 
 %text-center {
 	text-align: center;
+}
+
+%pets-help-blocks {
+	@extend %flex-column;
+	@extend %align-center;
+	@extend %text-center;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	gap: variables.$pets-gap;
 }
