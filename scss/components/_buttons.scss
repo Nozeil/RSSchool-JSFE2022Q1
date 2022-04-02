@@ -11,9 +11,11 @@
 	@extend %h5;
 }
 
-.slider__arrow-left, .slider__arrow-right {
+.slider__arrow-left,
+.slider__arrow-right {
 	@extend %button;
 	@extend %round-button;
+
 	&:hover {
 		border-color: variables.$color-primary-light;
 	}
@@ -34,8 +36,9 @@
 	@extend %transparent-button;
 	@extend %button-height-radius;
 	@extend %color-dark-3xl;
+
 	&:hover {
-		border-color: variables.$color-primary-light;
+		@extend %slider-button-hover;
 	}
 }
 
@@ -47,3 +50,14 @@
 	@extend %color-dark-3xl;
 }
 
+.donation__button {
+	width: variables.$donation-button-width;
+	@include mixins.container-padding(15px, 60px, 10px, 10px);
+	border: none;
+	border-radius: 9px;
+	@extend %button;
+	color: variables.$color-dark-l;
+	background-color: variables.$color-primary;
+	@include mixins.background(url('/assets/imgs/svg/credit-card.svg'), 15px 9.5px);
+	word-spacing: 6px;
+}

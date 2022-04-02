@@ -129,7 +129,7 @@
 
 %link {
 	text-decoration: none;
-	transition: variables.$hover-transition;
+	@extend %transition;
 }
 
 %cursor-pointer {
@@ -140,7 +140,7 @@
 	@extend %cursor-pointer;
 	&:hover {
 		background-color: variables.$color-primary-light;
-		transition: variables.$hover-transition;
+		@extend %transition;
 	}
 
 	&:active {
@@ -154,8 +154,8 @@
 }
 
 %filled-button {
-	@extend %button-height-radius;
 	border: none;
+	@extend %button-height-radius;
 	background-color: variables.$color-primary;
 }
 
@@ -187,4 +187,13 @@
 	@extend %text-center;
 	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
 	gap: variables.$pets-gap;
+}
+
+%slider-button-hover {
+	border-color: variables.$color-primary-light;
+	background-color: variables.$color-primary-light;
+}
+
+%transition {
+	transition: variables.$hover-transition;
 }

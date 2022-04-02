@@ -19,7 +19,7 @@
 }
 
 .start-screen__title {
-	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, 0, 0, 0, 0, 0, h2, color-light-xl);
+	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, h2, color-light-xl);
 }
 
 .start-screen__text {
@@ -39,7 +39,7 @@
 }
 
 .about__title {
-	@include mixins.title(variables.$about-title, variables.$weight-400, 0, 0, 0, 0, 2px, h3, color-dark-l);
+	@include mixins.title(variables.$about-title, variables.$weight-400, h3, color-dark-l, 2px);
 }
 
 .about__text {
@@ -54,7 +54,7 @@
 .pets__title {
 	@extend %flex;
 	@extend %flex-column;
-	@include mixins.title(none, variables.$weight-400, 0, 0, 0, 0, 2px, h3, color-dark-l);
+	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
 }
 
 .section.help {
@@ -63,7 +63,7 @@
 }
 
 .help__title {
-	@include mixins.title(variables.$help-title-width, variables.$weight-400, 0, 0, 0, 0, 2px, h3, color-dark-l);
+	@include mixins.title(variables.$help-title-width, variables.$weight-400, h3, color-dark-l, 2px);
 }
 
 .help__list {
@@ -80,35 +80,81 @@
 	width: variables.$help-img-size;
 	height: variables.$help-img-size;
 	margin: 0 auto variables.$help-img-margin;
+
 	&.food {
 		@include mixins.background(url('/assets/imgs/svg/pet-food.svg'));
 	}
+
 	&.transportation {
 		@include mixins.background(url('/assets/imgs/svg/transportation.svg'));
 	}
+
 	&.toys {
 		@include mixins.background(url('/assets/imgs/svg/toys.svg'));
 	}
+
 	&.bowls {
 		@include mixins.background(url('/assets/imgs/svg/bowls-and-cups.svg'));
 	}
+
 	&.shampoos {
 		@include mixins.background(url('/assets/imgs/svg/shampoos.svg'));
 	}
+
 	&.vitamins {
 		@include mixins.background(url('/assets/imgs/svg/vitamins.svg'));
 	}
+
 	&.medicines {
 		@include mixins.background(url('/assets/imgs/svg/medicines.svg'));
 	}
+
 	&.collars {
 		@include mixins.background(url('/assets/imgs/svg/collars-or-leashes.svg'));
 	}
+
 	&.areas {
 		@include mixins.background(url('/assets/imgs/svg/sleeping-area.svg'));
 	}
 }
 
 .help__subtitle {
-	@include mixins.title(none, variables.$weight-400, 0, 0, 0, 0, 0.06em, h4, color-dark-l);
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+}
+
+.donation {
+	@extend %flex;
+	@extend %flex-center;
+	gap: variables.$donation-gap;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	background-color: variables.$color-light-l;
+}
+
+.donation__puppy {
+	margin: 10px 0;
+}
+
+.donation__content {
+	@extend %flex;
+	@extend %flex-column;
+	gap: variables.$donation-content-gap;
+	width: variables.$donation-content-width;
+}
+
+.donation__title {
+	@include mixins.title(variables.$dontaion-title-width, variables.$weight-400, h3, color-dark-l, 0.06em);
+}
+
+.donation__subtitle {
+	@include mixins.title(none, variables.$weight-400, h5, color-dark-l, 0.06em);
+}
+
+.donation__link {
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+	@extend %link;
+}
+
+.donation__info {
+	@include mixins.fontAndColor(variables.$Arial, variables.$weight-400, italic, color-dark-m);
+	@extend %paragraph-s;
 }

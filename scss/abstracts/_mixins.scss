@@ -10,7 +10,7 @@
 
 @mixin fontAndColor($family, $weight, $style, $color) {
 	@include font($family, $weight, $style);
-	color: $color;
+	@extend %#{$color};
 }
 
 @mixin font-face($family, $style, $weight, $url) {
@@ -55,12 +55,13 @@
 	}
 }
 
-@mixin title($max-width, $weight, $margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing, $placeholder, $color) {
+@mixin title($max-width, $weight, $placeholder, $color, $letter-spacing: 0, $margin: 0,) {
 	max-width: $max-width;
 	font-weight: $weight;
-	@include text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing);
+	margin: $margin;
 	@extend %#{$placeholder};
 	@extend %#{$color};
+	letter-spacing: $letter-spacing;
 }
 
 @mixin text($family, $weight, $style, $margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing, $color-placeholder, $text-placeolder) {
