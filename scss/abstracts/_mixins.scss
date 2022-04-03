@@ -55,7 +55,7 @@
 	}
 }
 
-@mixin title($max-width, $weight, $placeholder, $color, $letter-spacing: 0, $margin: 0,) {
+@mixin title($max-width, $weight, $placeholder, $color, $letter-spacing: 0, $margin: 0) {
 	max-width: $max-width;
 	font-weight: $weight;
 	margin: $margin;
@@ -69,4 +69,24 @@
 	@include text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing);
 	@extend %#{$color-placeholder};
 	@extend %#{$text-placeolder};
+}
+
+@mixin footer-item($m-l, $m-b) {
+	margin-left: $m-l;
+
+	&:first-child {
+		margin-bottom: $m-b;
+	}
+}
+
+@mixin before($width, $height, $top, $left, $image, $content: '', $position: absolute) {
+	&:before {
+		content: $content;
+		position: $position;
+		top: $top;
+		left: $left;
+		width: $width;
+		height: $height;
+		@include background($image);
+	}
 }

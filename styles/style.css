@@ -1,32 +1,32 @@
 @font-face {
-  font-family: "Arial";
+  font-family: "Arial", serif;
   font-weight: normal;
   font-style: 400;
   src: url("../assets/fonts/Arial/ArialMT.woff2") format("woff2"), url("../assets/fonts/Arial/ArialMT.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Arial-italic";
+  font-family: "Arial, serif-italic";
   font-weight: italic;
   font-style: 400;
   src: url("../assets/fonts/Arial/Arial-ItalicMT.woff2") format("woff2"), url("../assets/fonts/Arial/Arial-ItalicMT.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Georgia";
+  font-family: "Georgia", sans-serif;
   font-weight: normal;
   font-style: 400;
   src: url("../assets/fonts/Georgia/Georgia.woff2") format("woff2"), url("../assets/fonts/Georgia/Georgia.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Georgia-bold";
+  font-family: "Georgia, sans-serif-bold";
   font-weight: normal;
   font-style: 700;
   src: url("../assets/fonts/Georgia/Georgia-Bold.woff2") format("woff2"), url("../assets/fonts/Georgia/Georgia-Bold.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-.section, .start-screen, .pets__title, .help__list, .donation, .donation__content, .header, .slider, .slider__cards, .slider__card {
+.footer, .section, .start-screen, .pets__title, .help__list, .donation, .donation__content, .header, .slider, .slider__cards, .slider__card {
   display: flex;
 }
 
@@ -38,7 +38,7 @@
   flex-direction: column;
 }
 
-.header {
+.footer, .header {
   justify-content: space-between;
 }
 
@@ -50,19 +50,21 @@
   flex-wrap: wrap;
 }
 
-.logo__title {
+.contacts__link,
+.locations__link, .logo__title {
   color: #F1CDB3;
 }
 
-.nav__link:hover, .nav__link_active:hover {
+.contacts__link:hover,
+.locations__link:hover, .nav__link:hover, .nav__link_active:hover {
   color: #FAFAFA;
 }
 
-.start-screen__title, .logo__subtitle {
+.contacts__title, .locations__title, .start-screen__title, .logo__subtitle {
   color: #FFFFFF;
 }
 
-.nav__link, .nav__link_active, .start-screen__text {
+.start-screen__text, .nav__link, .nav__link_active {
   color: #CDCDCD;
 }
 
@@ -87,12 +89,13 @@
   line-height: 57px;
 }
 
-.about__title, .pets__title, .help__title, .donation__title {
+.contacts__title, .locations__title, .about__title, .pets__title, .help__title, .donation__title {
   font-size: 35px;
   line-height: 45px;
 }
 
-.help__subtitle, .donation__link, .slider__title {
+.contacts__link,
+.locations__link, .help__subtitle, .donation__link, .slider__title {
   font-size: 20px;
   line-height: 23px;
 }
@@ -102,7 +105,7 @@
   line-height: 17px;
 }
 
-.nav__link, .nav__link_active, .start-screen__text, .about__text {
+.start-screen__text, .about__text, .nav__link, .nav__link_active {
   font-size: 15px;
   line-height: 24px;
 }
@@ -121,11 +124,13 @@
   font-size: 13px;
 }
 
-.nav__list, .help__list {
+.contacts__list,
+.locations__list, .help__list, .nav__list {
   list-style: none;
 }
 
-.nav__link, .nav__link_active, .donation__link {
+.contacts__link,
+.locations__link, .donation__link, .nav__link, .nav__link_active {
   text-decoration: none;
 }
 
@@ -186,7 +191,8 @@
   background-color: #FDDCC4;
 }
 
-.slider__card:hover .slider__button, .nav__link, .nav__link_active, .donation__link, .start-screen__button:hover, .slider__arrow-left:hover,
+.slider__card:hover .slider__button, .contacts__link,
+.locations__link, .donation__link, .nav__link, .nav__link_active, .start-screen__button:hover, .slider__arrow-left:hover,
 .slider__arrow-right:hover, .slider__button:hover, .pets__button:hover, .donation__button:hover {
   transition: 0.3s;
 }
@@ -202,7 +208,7 @@ html {
 .container {
   width: 1280px;
   margin: 0 auto;
-  font-family: "Georgia";
+  font-family: "Georgia", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -289,12 +295,31 @@ html {
 
 .logo__subtitle {
   padding-left: 4px;
-  font-family: "Arial";
+  font-family: "Arial", serif;
   font-weight: 400;
   font-style: normal;
   margin: 0 0 10px 0;
   letter-spacing: 1px;
   word-spacing: 1.5px;
+}
+
+.nav__list {
+  display: flex;
+  padding: 60px 0;
+  margin: 16px 0 20px;
+}
+
+.nav__link, .nav__link_active {
+  font-family: "Arial";
+  font-weight: 400;
+  font-style: normal;
+  margin: 0 0 0 36px;
+  letter-spacing: 0;
+}
+.nav__link_active {
+  padding-bottom: 4px;
+  color: #FAFAFA;
+  border-bottom: 3px solid #F1CDB3;
 }
 
 .section {
@@ -321,7 +346,7 @@ html {
 }
 
 .start-screen__text {
-  font-family: "Arial";
+  font-family: "Arial", serif;
   font-weight: 400;
   font-style: normal;
   margin: 42px 0 42px 0;
@@ -347,7 +372,7 @@ html {
 }
 
 .about__text {
-  font-family: "Arial";
+  font-family: "Arial", serif;
   font-weight: 400;
   font-style: normal;
   margin: 25px 0 0 0;
@@ -477,28 +502,112 @@ html {
 }
 
 .donation__info {
-  font-family: "Arial";
+  font-family: "Arial", serif;
   font-weight: 400;
   font-style: italic;
 }
 
-.nav__list {
-  display: flex;
-  padding: 60px 0;
-  margin: 16px 0 20px;
+.footer {
+  padding: 40px 40px 0 40px;
+  background-image: url("/assets/imgs/jpg/start_screen.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.nav__link, .nav__link_active {
-  font-family: "Arial";
-  font-weight: 400;
-  font-style: normal;
-  margin: 0 0 0 36px;
-  letter-spacing: 0;
+.contacts {
+  flex-basis: 24%;
 }
-.nav__link_active {
-  padding-bottom: 4px;
-  color: #FAFAFA;
-  border-bottom: 3px solid #F1CDB3;
+
+.locations {
+  flex-basis: 26%;
+}
+
+.contacts__title {
+  max-width: none;
+  font-weight: 400;
+  margin: 6% 0 15%;
+  letter-spacing: 0.06em;
+}
+
+.locations__title {
+  max-width: none;
+  font-weight: 400;
+  margin: 5% 0 11%;
+  letter-spacing: 0.06em;
+}
+
+.contacts__list,
+.locations__list {
+  margin: 0;
+  padding: 0;
+}
+
+.contacts__item {
+  position: relative;
+  margin-left: 20.8%;
+}
+.contacts__item:first-child {
+  margin-bottom: 17%;
+}
+
+.locations__item {
+  position: relative;
+  margin-left: 13.5%;
+}
+.locations__item:first-child {
+  margin-bottom: 12%;
+}
+
+.contacts__link,
+.locations__link {
+  letter-spacing: 0.06em;
+}
+.mail:before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -60px;
+  width: 40px;
+  height: 26px;
+  background-image: url("/assets/imgs/svg/icon-email.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tel:before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -60px;
+  width: 40px;
+  height: 32px;
+  background-image: url("/assets/imgs/svg/icon-phone.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Boston:before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -42px;
+  width: 22px;
+  height: 32px;
+  background-image: url("/assets/imgs/svg/icon-marker.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.London:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -42px;
+  width: 22px;
+  height: 32px;
+  background-image: url("/assets/imgs/svg/icon-marker.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -149,7 +149,7 @@
 }
 
 %button-height-radius {
-	border-radius:  variables.$button-height / 2;
+	border-radius:  calc(variables.$button-height / 2);
 	height:  variables.$button-height;
 }
 
