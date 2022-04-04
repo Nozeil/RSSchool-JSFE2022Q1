@@ -1,0 +1,86 @@
+@use '../abstracts/variables';
+
+@mixin font($family, $weight, $style) {
+	font: {
+		family: $family;
+		weight: $weight;
+		style: $style;
+	}
+}
+
+@mixin fontAndColor($family, $weight, $style, $color) {
+	@include font($family, $weight, $style);
+	@extend %#{$color};
+}
+
+@mixin font-face($family, $style, $weight, $url) {
+	@font-face {
+		@include font($family, $style, $weight);
+		src: url('#{$url}.woff2') format('woff2'),
+		url('#{$url}.woff') format('woff');
+		unicode-range: U+0000-00FF,
+			U+0131,
+			U+0152-0153,
+			U+02BB-02BC,
+			U+02C6,
+			U+02DA,
+			U+02DC,
+			U+2000-206F,
+			U+2074,
+			U+20AC,
+			U+2122,
+			U+2191,
+			U+2193,
+			U+2212,
+			U+2215,
+			U+FEFF,
+			U+FFFD;
+	}
+}
+
+@mixin text-elems($margin-top, $margin-right, $margin-bottom, $margin-left, $letter-spacing) {
+	margin: $margin-top $margin-right $margin-bottom $margin-left;
+	letter-spacing: $letter-spacing;
+}
+
+@mixin container-padding($padding-right, $padding-left, $padding-top:0, $padding-bottom:0, ) {
+	padding: $padding-top $padding-right $padding-bottom $padding-left;
+}
+
+@mixin background($image, $position:center, $repeat:no-repeat) {
+	background: {
+		image: $image;
+		position: $position;
+		repeat: $repeat;
+	}
+}
+
+@mixin title($max-width, $weight, $placeholder, $color, $letter-spacing: 0, $margin: 0) {
+	max-width: $max-width;
+	font-weight: $weight;
+	margin: $margin;
+	@extend %#{$placeholder};
+	@extend %#{$color};
+	letter-spacing: $letter-spacing;
+}
+
+@mixin footer-item($m-l, $m-b) {
+	margin-left: $m-l;
+
+	&:first-child {
+		margin-bottom: $m-b;
+	}
+}
+
+@mixin before($width, $height, $top, $left, $image, $z-index:0, $bg-position:center, $repeat:no-repeat,  $content: '', $position: absolute) {
+	&:before {
+		content: $content;
+		position: $position;
+		top: $top;
+		left: $left;
+		width: $width;
+		height: $height;
+		@include background($image, $bg-position, $repeat);
+		z-index: $z-index;
+	}
+}

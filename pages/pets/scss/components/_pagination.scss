@@ -2,26 +2,26 @@
 @use '../abstracts/placeholders';
 @use '../abstracts/mixins';
 
-.slider {
+.pagination {
 	@extend %flex;
 	@extend %align-center;
-	gap: variables.$slider-flex-gap;
+	gap: variables.$pagination-flex-gap;
 }
 
-.slider__cards {
-	@extend %flex;
-	@extend %align-center;
-	gap: variables.$slider-column-gap;
+.pagination__cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: variables.$pagination-row-gap variables.$pagination-column-gap;
 }
 
-.slider__card {
+.pagination__card {
 	@extend %flex;
 	@extend %align-center;
 	@extend %flex-column;
-	padding-bottom: variables.$slider-card-padding-bottom;
+	padding-bottom: variables.$pagination-card-padding-bottom;
 	border-radius: 9px;
 	background-color: variables.$color-light-s;
-	gap: variables.$slider-row-gap;
+	gap: variables.$pagination-row-gap;
 	@extend %cursor-pointer;
 
 	&:hover {
@@ -29,12 +29,17 @@
 		box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 	}
 
-	&:hover .slider__button {
-		@extend %slider-button-hover;
+	&:hover .pagination__button {
+		@extend %pagination-button-hover;
 		@extend %transition;
 	}
 }
 
-.slider__title {
+.pagination__title {
 	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 1px);
+}
+
+.pagination-buttons {
+	@extend %flex;
+	gap: variables.$pagination-buttons-gap;
 }

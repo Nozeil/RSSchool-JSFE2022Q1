@@ -1,0 +1,223 @@
+@use './variables';
+@use './mixins';
+
+%flex {
+	display: flex;
+}
+
+%align-center {
+	align-items: center;
+}
+
+%flex-column {
+	flex-direction: column;
+}
+
+%space-between {
+	justify-content: space-between;
+}
+
+%flex-center {
+	justify-content: center;
+}
+
+%wrap {
+	flex-wrap: wrap;
+}
+
+%color-primary {
+	color: variables.$color-primary;
+}
+
+%color-primary-light {
+	color: variables.$color-primary-light;
+}
+
+%color-light-s {
+	color: variables.$color-light-s;
+}
+
+%color-light-l {
+	color: variables.$color-light-l;
+}
+
+%color-light-xl {
+	color: variables.$color-light-xl;
+}
+
+%color-dark-s {
+	color: variables.$color-dark-s;
+}
+
+%color-dark-m {
+	color: variables.$color-dark-m;
+}
+
+%color-dark-l {
+	color: variables.$color-dark-l;
+}
+
+%color-dark-xl {
+	color: variables.$color-dark-xl;
+}
+
+%color-dark-2xl {
+	color: variables.$color-dark-2xl;
+}
+
+%color-dark-3xl {
+	color: variables.$color-dark-3xl;
+}
+
+%h2 {
+	font-size: variables.$h2;
+	line-height: variables.$h2-height;
+}
+
+%h3 {
+	font-size: variables.$h3;
+	line-height: variables.$h3-height;
+}
+
+%h3-mobile {
+	font-size: variables.$h3-mobile;
+	line-height: variables.$h3-mobile-height;
+}
+
+%h4 {
+	font-size: variables.$h4;
+	line-height: variables.$h4-height;
+}
+
+%h5 {
+	font-size: variables.$h5;
+	line-height: variables.$h5-height;
+}
+
+%h5-modal-window {
+	font-size: variables.$h5-modal-window;
+	line-height: variables.$h5-modal-window-height;
+}
+
+%paragraph-l {
+	font-size: variables.$paragraph-l;
+	line-height: variables.$paragraph-l-height;
+}
+
+%paragraph-s {
+	font-size: variables.$paragraph-s;
+	line-height: variables.$paragraph-s-height;
+}
+
+%paragraph-mobile-menu {
+	font-size: variables.$paragraph-mobile-menu;
+	line-height: variables.$paragraph-mobile-menu-height;
+}
+
+%logo_title {
+	font-size: variables.$logo_title;
+	line-height: variables.$logo_title-height;
+}
+
+%logo_subtitle {
+	font-size: variables.$logo_subtitle;
+}
+
+%list {
+	list-style: none;
+}
+
+%link {
+	text-decoration: none;
+	@extend %transition;
+}
+
+%cursor-pointer {
+	cursor: pointer;
+}
+
+%button {
+	@extend %cursor-pointer;
+	&:hover {
+		background-color: variables.$color-primary-light;
+		@extend %transition;
+	}
+
+	&:active {
+		transform: scale(95%);
+	}
+}
+
+%button-height-radius {
+	border-radius:  calc(variables.$button-height / 2);
+	height:  variables.$button-height;
+}
+
+%filled-button {
+	border: none;
+	@extend %button-height-radius;
+	background-color: variables.$color-primary;
+}
+
+%transparent-button {
+	border: 2px solid variables.$color-primary;
+	background-color: transparent;
+}
+
+%round-button {
+	width: variables.$button-height;
+	height: variables.$button-height;
+	border-radius: 50%;
+	@extend %transparent-button;
+}
+
+%pagination-button-text {
+	letter-spacing: 0.06em;
+	font-size: variables.$pagination-button-text;
+	line-height: variables.$pagination-button-text-height;
+}
+
+%pagination-button {
+	@extend %h4;
+	letter-spacing: 0.06em;
+}
+
+%pagination-button-paginator {
+	@extend %pagination-button;
+	&:hover {
+		border-color: variables.$color-primary-light;
+	}
+}
+
+%text-center {
+	text-align: center;
+}
+
+%pets-help-blocks {
+	@extend %flex-column;
+	@extend %align-center;
+	@extend %text-center;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	gap: variables.$pets-gap;
+}
+
+%pagination-button-hover {
+	border-color: variables.$color-primary-light;
+	background-color: variables.$color-primary-light;
+}
+
+%transition {
+	transition: variables.$hover-transition;
+}
+
+
+%gradient {
+	position: relative;
+	@include mixins.background(radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%));
+}
+
+%backdrop {
+	&:before {
+		backdrop-filter: brightness(85%);
+	 }
+}

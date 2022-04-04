@@ -1,0 +1,36 @@
+@use '../abstracts/placeholders';
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.pagination__button {
+	width: variables.$pagination-button-width;
+	@extend %pagination-button-text;
+	@extend %button;
+	@extend %transparent-button;
+	@extend %button-height-radius;
+	@extend %color-dark-3xl;
+
+	&:hover {
+		@extend %pagination-button-hover;
+	}
+}
+
+.pagination-buttons__button_inactive {
+	@extend %round-button;
+	@extend %pagination-button;
+	@extend %color-dark-s;
+	border-color: variables.$color-dark-s;
+}
+
+.pagination-buttons__button_paginator {
+	@extend %round-button;
+	@extend %pagination-button-paginator;
+	@extend %button;
+	@extend %color-dark-3xl;
+}
+
+.pagination-buttons__button_active {
+	@extend .pagination-buttons__button_paginator;
+	background-color: variables.$color-primary;
+}
+
