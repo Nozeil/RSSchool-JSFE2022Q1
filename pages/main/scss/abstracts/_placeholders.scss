@@ -209,3 +209,7 @@
 		backdrop-filter: brightness(85%);
 	 }
 }
+
+%fit-content-width {
+	min-width: fit-content;
+}

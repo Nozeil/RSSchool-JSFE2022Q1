@@ -204,8 +204,14 @@
   background-repeat: no-repeat;
 }
 
-.footer:before, .start-screen-container:before {
+.start-screen-container:before {
   backdrop-filter: brightness(85%);
+}
+
+.footer, .start-screen-container, .section-about,
+.section-help, .section-pets,
+.section-donation {
+  min-width: fit-content;
 }
 
 * {
@@ -519,7 +525,7 @@ html {
 }
 
 .footer {
-  padding: 40px 40px 0 40px;
+  padding: 40px 0 0 0;
   z-index: 0;
 }
 .footer:before {

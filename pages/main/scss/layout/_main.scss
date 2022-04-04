@@ -3,6 +3,7 @@
 @use '../abstracts/placeholders';
 
 .start-screen-container {
+	@extend %fit-content-width;
 	@extend %gradient;
 	@extend %backdrop;
 	@include mixins.before(100%, 100%, 0, 0, url('/assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
@@ -30,6 +31,7 @@
 
 .section-about,
 .section-help {
+	@extend %fit-content-width;
 	background-color: variables.$color-light-xl
 }
 
@@ -52,6 +54,7 @@
 
 .section-pets,
 .section-donation {
+	@extend %fit-content-width;
 	background-color: variables.$color-light-l;
 }
 

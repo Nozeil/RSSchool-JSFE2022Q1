@@ -3,6 +3,7 @@
 @use '../abstracts/placeholders';
 
 .header {
+	@extend %fit-content-width;
 	background-color: variables.$color-light-xl;
 }
 
