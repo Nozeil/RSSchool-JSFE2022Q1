@@ -60,17 +60,17 @@
 }
 
 .mail {
-	@include mixins.before(40px, 26px, -1px, -60px, url('../../../../assets/imgs/svg/icon-email.svg'));
+	@include mixins.before(40px, 26px, -1px, -60px, url('../../../assets/imgs/svg/icon-email.svg'));
 }
 
 .tel {
-	@include mixins.before(40px, 32px, -4px, -60px, url('../../../../assets/imgs/svg/icon-phone.svg'));
+	@include mixins.before(40px, 32px, -4px, -60px, url('../../../assets/imgs/svg/icon-phone.svg'));
 }
 
 .Boston {
-	@include mixins.before(22px, 32px, 6px, -42px, url('../../../../assets/imgs/svg/icon-marker.svg'));
+	@include mixins.before(22px, 32px, 6px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
 }
 
 .London {
-	@include mixins.before(22px, 32px, -5px, -42px, url('../../../../assets/imgs/svg/icon-marker.svg'));
+	@include mixins.before(22px, 32px, -5px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
 }

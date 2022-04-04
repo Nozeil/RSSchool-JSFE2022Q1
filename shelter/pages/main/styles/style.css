@@ -242,13 +242,13 @@ html {
 }
 
 .slider__arrow-left {
-  background-image: url("../../../../assets/imgs/svg/Arrow.svg");
+  background-image: url("../../../assets/imgs/svg/Arrow.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .slider__arrow-right {
-  background-image: url("../../../../assets/imgs/svg/Arrow-right.svg");
+  background-image: url("../../../assets/imgs/svg/Arrow-right.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -267,7 +267,7 @@ html {
   border-radius: 9px;
   color: #545454;
   background-color: #F1CDB3;
-  background-image: url("../../../../assets/imgs/svg/credit-card.svg");
+  background-image: url("../../../assets/imgs/svg/credit-card.svg");
   background-position: 15px 9.5px;
   background-repeat: no-repeat;
   word-spacing: 6px;
@@ -343,7 +343,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../../../assets/imgs/png/noise_transparent@2x.png");
+  background-image: url("../../../assets/imgs/png/noise_transparent@2x.png");
   background-position: center;
   background-repeat: repeat;
   z-index: -1;
@@ -430,47 +430,47 @@ html {
   margin: 0 auto 30px;
 }
 .help__img.food {
-  background-image: url("../../../../assets/imgs/svg/pet-food.svg");
+  background-image: url("../../../assets/imgs/svg/pet-food.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.transportation {
-  background-image: url("../../../../assets/imgs/svg/transportation.svg");
+  background-image: url("../../../assets/imgs/svg/transportation.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.toys {
-  background-image: url("../../../../assets/imgs/svg/toys.svg");
+  background-image: url("../../../assets/imgs/svg/toys.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.bowls {
-  background-image: url("../../../../assets/imgs/svg/bowls-and-cups.svg");
+  background-image: url("../../../assets/imgs/svg/bowls-and-cups.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.shampoos {
-  background-image: url("../../../../assets/imgs/svg/shampoos.svg");
+  background-image: url("../../../assets/imgs/svg/shampoos.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.vitamins {
-  background-image: url("../../../../assets/imgs/svg/vitamins.svg");
+  background-image: url("../../../assets/imgs/svg/vitamins.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.medicines {
-  background-image: url("../../../../assets/imgs/svg/medicines.svg");
+  background-image: url("../../../assets/imgs/svg/medicines.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.collars {
-  background-image: url("../../../../assets/imgs/svg/collars-or-leashes.svg");
+  background-image: url("../../../assets/imgs/svg/collars-or-leashes.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
 .help__img.areas {
-  background-image: url("../../../../assets/imgs/svg/sleeping-area.svg");
+  background-image: url("../../../assets/imgs/svg/sleeping-area.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -534,7 +534,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../../..//assets/imgs/png/noise_transparent@2x.png");
+  background-image: url("../../..//assets/imgs/png/noise_transparent@2x.png");
   background-position: center;
   background-repeat: repeat;
   z-index: -1;
@@ -595,7 +595,7 @@ html {
   left: -60px;
   width: 40px;
   height: 26px;
-  background-image: url("../../../../assets/imgs/svg/icon-email.svg");
+  background-image: url("../../../assets/imgs/svg/icon-email.svg");
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
@@ -608,7 +608,7 @@ html {
   left: -60px;
   width: 40px;
   height: 32px;
-  background-image: url("../../../../assets/imgs/svg/icon-phone.svg");
+  background-image: url("../../../assets/imgs/svg/icon-phone.svg");
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
@@ -621,7 +621,7 @@ html {
   left: -42px;
   width: 22px;
   height: 32px;
-  background-image: url("../../../../assets/imgs/svg/icon-marker.svg");
+  background-image: url("../../../assets/imgs/svg/icon-marker.svg");
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
@@ -634,7 +634,7 @@ html {
   left: -42px;
   width: 22px;
   height: 32px;
-  background-image: url("../../../../assets/imgs/svg/icon-marker.svg");
+  background-image: url("../../../assets/imgs/svg/icon-marker.svg");
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
