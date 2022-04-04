@@ -1,0 +1,31 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.nav__list {
+	@extend %flex;
+	padding: variables.$start-screen-header-padding 0;
+	margin: 16px 0 20px;
+	@extend %list;
+
+}
+
+.nav__link {
+	@include mixins.font(variables.$Arial, 400, normal);
+	@include mixins.text-elems(0, 0, 0, 36px, 0);
+	@extend %paragraph-l;
+	@extend %link;
+	@extend %color-dark-l;
+
+	&:hover {
+		@extend %color-dark-3xl;
+	}
+
+	&_active {
+		@extend %link;
+		@extend .nav__link;
+		@extend %color-dark-3xl;
+		padding-bottom: 4px;
+		border-bottom: 3px solid variables.$color-primary;
+	}
+}

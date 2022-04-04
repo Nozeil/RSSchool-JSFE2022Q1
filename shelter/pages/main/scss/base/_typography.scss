@@ -1,0 +1,6 @@
+@use '../abstracts/mixins';
+@use '../abstracts/variables';
+@include mixins.font-face(variables.$Arial, variables.$style-normal, variables.$weight-400, '../assets/fonts/Arial/ArialMT');
+@include mixins.font-face('#{variables.$Arial}-italic' , italic, variables.$weight-400, '../assets/fonts/Arial/Arial-ItalicMT');
+@include mixins.font-face(variables.$Georgia, variables.$style-normal, variables.$weight-400, '../assets/fonts/Georgia/Georgia');
+@include mixins.font-face('#{variables.$Georgia}-bold', variables.$style-normal, 700, '../assets/fonts/Georgia/Georgia-Bold');

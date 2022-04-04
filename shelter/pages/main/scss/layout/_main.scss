@@ -1,0 +1,165 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.start-screen-container {
+	@extend %fit-content-width;
+	@extend %gradient;
+	@extend %backdrop;
+	@include mixins.before(100%, 100%, 0, 0, url('/assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
+	z-index: 0;
+}
+
+.start-screen__content {
+	margin-top: variables.$start-screen-content-top-margin;
+	max-width: variables.$start-screen-content-width;
+}
+
+.start-screen__title {
+	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, h2, color-light-xl);
+}
+
+.start-screen__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
+}
+
+.container.about {
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	@extend %flex-center;
+	gap: variables.$about-section-gap;
+}
+
+.section-about,
+.section-help {
+	@extend %fit-content-width;
+	background-color: variables.$color-light-xl
+}
+
+.about {
+	flex-basis: variables.$about-flex-basis;
+	padding: 14px 0;
+}
+
+.about__title {
+	@include mixins.title(variables.$about-title, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.about__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
+}
+
+.container.pets {
+	@extend %pets-help-blocks;
+}
+
+.section-pets,
+.section-donation {
+	@extend %fit-content-width;
+	background-color: variables.$color-light-l;
+}
+
+.pets__title {
+	@extend %flex;
+	@extend %flex-column;
+	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.container.help {
+	@extend %pets-help-blocks;
+}
+
+.help__title {
+	@include mixins.title(variables.$help-title-width, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.help__list {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %wrap;
+	gap: variables.$help-gap;
+	margin: 0;
+	padding: 0;
+	@extend %list;
+}
+
+.help__img {
+	width: variables.$help-img-size;
+	height: variables.$help-img-size;
+	margin: 0 auto variables.$help-img-margin;
+
+	&.food {
+		@include mixins.background(url('/assets/imgs/svg/pet-food.svg'));
+	}
+
+	&.transportation {
+		@include mixins.background(url('/assets/imgs/svg/transportation.svg'));
+	}
+
+	&.toys {
+		@include mixins.background(url('/assets/imgs/svg/toys.svg'));
+	}
+
+	&.bowls {
+		@include mixins.background(url('/assets/imgs/svg/bowls-and-cups.svg'));
+	}
+
+	&.shampoos {
+		@include mixins.background(url('/assets/imgs/svg/shampoos.svg'));
+	}
+
+	&.vitamins {
+		@include mixins.background(url('/assets/imgs/svg/vitamins.svg'));
+	}
+
+	&.medicines {
+		@include mixins.background(url('/assets/imgs/svg/medicines.svg'));
+	}
+
+	&.collars {
+		@include mixins.background(url('/assets/imgs/svg/collars-or-leashes.svg'));
+	}
+
+	&.areas {
+		@include mixins.background(url('/assets/imgs/svg/sleeping-area.svg'));
+	}
+}
+
+.help__subtitle {
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+}
+
+.donation {
+	@extend %flex;
+	@extend %flex-center;
+	gap: variables.$donation-gap;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+}
+
+.donation__puppy {
+	margin: 10px 0;
+}
+
+.donation__content {
+	@extend %flex;
+	@extend %flex-column;
+	gap: variables.$donation-content-gap;
+	width: variables.$donation-content-width;
+}
+
+.donation__title {
+	@include mixins.title(variables.$dontaion-title-width, variables.$weight-400, h3, color-dark-l, 0.06em);
+}
+
+.donation__subtitle {
+	@include mixins.title(none, variables.$weight-400, h5, color-dark-l, 0.06em);
+}
+
+.donation__link {
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+	@extend %link;
+}
+
+.donation__info {
+	@include mixins.fontAndColor(variables.$Arial, variables.$weight-400, italic, color-dark-m);
+	@extend %paragraph-s;
+}

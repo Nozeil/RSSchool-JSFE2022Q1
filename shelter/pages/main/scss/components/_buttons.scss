@@ -1,0 +1,63 @@
+@use '../abstracts/placeholders';
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.start-screen__button {
+	width: 44.2%;
+	letter-spacing: 2px;
+	@extend %filled-button;
+	@extend %button;
+	@extend %color-dark-3xl;
+	@extend %h5;
+}
+
+.slider__arrow-left,
+.slider__arrow-right {
+	@extend %button;
+	@extend %round-button;
+
+	&:hover {
+		border-color: variables.$color-primary-light;
+	}
+}
+
+.slider__arrow-left {
+	@include mixins.background(variables.$arrow-url);
+}
+
+.slider__arrow-right {
+	@include mixins.background(variables.$arrow-right-url);
+}
+
+.slider__button {
+	width: variables.$slider-button-width;
+	@extend %slider-button-text;
+	@extend %button;
+	@extend %transparent-button;
+	@extend %button-height-radius;
+	@extend %color-dark-3xl;
+
+	&:hover {
+		@extend %slider-button-hover;
+	}
+}
+
+.pets__button {
+	width: variables.$pets-button-width;
+	@extend %button;
+	@extend %filled-button;
+	@extend %slider-button-text;
+	@extend %color-dark-3xl;
+}
+
+.donation__button {
+	width: variables.$donation-button-width;
+	@include mixins.container-padding(15px, 60px, 10px, 10px);
+	border: none;
+	border-radius: 9px;
+	@extend %button;
+	color: variables.$color-dark-l;
+	background-color: variables.$color-primary;
+	@include mixins.background(url('/assets/imgs/svg/credit-card.svg'), 15px 9.5px);
+	word-spacing: 6px;
+}

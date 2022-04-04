@@ -1,0 +1,40 @@
+@use '../abstracts/variables';
+@use '../abstracts/placeholders';
+@use '../abstracts/mixins';
+
+.slider {
+	@extend %flex;
+	@extend %align-center;
+	gap: variables.$slider-flex-gap;
+}
+
+.slider__cards {
+	@extend %flex;
+	@extend %align-center;
+	gap: variables.$slider-column-gap;
+}
+
+.slider__card {
+	@extend %flex;
+	@extend %align-center;
+	@extend %flex-column;
+	padding-bottom: variables.$slider-card-padding-bottom;
+	border-radius: 9px;
+	background-color: variables.$color-light-s;
+	gap: variables.$slider-row-gap;
+	@extend %cursor-pointer;
+
+	&:hover {
+		background-color: variables.$color-light-xl;
+		box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+	}
+
+	&:hover .slider__button {
+		@extend %slider-button-hover;
+		@extend %transition;
+	}
+}
+
+.slider__title {
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 1px);
+}
