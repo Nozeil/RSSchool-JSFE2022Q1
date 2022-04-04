@@ -30,7 +30,12 @@
 }
 
 .pagination-buttons__button_active {
-	@extend .pagination-buttons__button_paginator;
+	width: variables.$button-height;
+	height: variables.$button-height;
+	@extend %pagination-button;
+	@extend %color-dark-3xl;
+	border: none;
+	border-radius: 50%;
 	background-color: variables.$color-primary;
 }
 
