@@ -197,3 +197,15 @@
 %transition {
 	transition: variables.$hover-transition;
 }
+
+
+%gradient {
+	position: relative;
+	@include mixins.background(radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%));
+}
+
+%backdrop {
+	&:before {
+		backdrop-filter: brightness(85%);
+	 }
+}

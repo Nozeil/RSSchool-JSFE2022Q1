@@ -2,15 +2,11 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
-.section {
-	@extend %flex;
-	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding);
-	gap: variables.$start-screen-section-gap;
-}
-
-.start-screen {
-	@extend %flex;
-	@include mixins.background(url('/assets/imgs/jpg/start_screen.jpg'), bottom);
+.start-screen-container {
+	@extend %gradient;
+	@extend %backdrop;
+	@include mixins.before(100%, 100%, 0, 0, url('/assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
+	z-index: 0;
 }
 
 .start-screen__content {
@@ -26,11 +22,15 @@
 	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
 }
 
-.section.about {
+.container.about {
 	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
 	@extend %flex-center;
 	gap: variables.$about-section-gap;
-	background-color: variables.$color-light-xl;
+}
+
+.section-about,
+.section-help {
+	background-color: variables.$color-light-xl
 }
 
 .about {
@@ -46,8 +46,12 @@
 	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
 }
 
-.section.pets {
+.container.pets {
 	@extend %pets-help-blocks;
+}
+
+.section-pets,
+.section-donation {
 	background-color: variables.$color-light-l;
 }
 
@@ -57,9 +61,8 @@
 	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
 }
 
-.section.help {
+.container.help {
 	@extend %pets-help-blocks;
-	background-color: variables.$color-light-xl;
 }
 
 .help__title {
@@ -127,7 +130,6 @@
 	@extend %flex-center;
 	gap: variables.$donation-gap;
 	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
-	background-color: variables.$color-light-l;
 }
 
 .donation__puppy {

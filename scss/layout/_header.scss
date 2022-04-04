@@ -2,13 +2,6 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
-.header {
-	@extend %flex;
-	@extend %space-between;
-	@include mixins.container-padding(40px, 40px);
-	@include mixins.background(url('/assets/imgs/jpg/start_screen.jpg'), top);
-}
-
 .logo__title {
 	padding-top: variables.$start-screen-header-padding;
 	font-weight: 400;

@@ -11,8 +11,8 @@
 </head>
 
 <body class="body">
-	<div class="container">
-		<header class="header">
+	<div class="start-screen-container">
+		<header class="header container">
 			<div class="logo">
 				<h1 class="logo__title">
 					Cozy House
@@ -38,24 +38,26 @@
 				</ul>
 			</nav>
 		</header>
-		<main class="main">
-			<section class="section start-screen">
-				<div class="start-screen__content">
-					<h2 class="start-screen__title">
-						Not only people need a house
-					</h2>
-					<p class="start-screen__text">
-						We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will
-						love you more than anybody else in the world, you will see!
-					</p>
-					<a href="#our-friends" class="start-screen__link">
-						<button class="start-screen__button">Make a friend
-						</button>
-					</a>
-				</div>
-				<img class="start-screen__puppy" src="/assets/imgs/png/start-screen-puppy.png" alt="start-screen-puppy">
-			</section>
-			<section class="section about">
+		<section class="section start-screen container">
+			<div class="start-screen__content">
+				<h2 class="start-screen__title">
+					Not only people need a house
+				</h2>
+				<p class="start-screen__text">
+					We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will
+					love you more than anybody else in the world, you will see!
+				</p>
+				<a href="#our-friends" class="start-screen__link">
+					<button class="start-screen__button">Make a friend
+					</button>
+				</a>
+			</div>
+			<img class="start-screen__puppy" src="/assets/imgs/png/start-screen-puppy.png" alt="start-screen-puppy">
+		</section>
+	</div>
+	<main class="main">
+		<section class="section-about">
+			<div class="container about">
 				<img class="about__img" src="/assets/imgs/png/about-pets.png" alt="about-pets">
 				<div class="about">
 					<h3 class="about__title">
@@ -73,8 +75,10 @@
 						pets and would hardly ever leave them alone.
 					</p>
 				</div>
-			</section>
-			<section class="section pets" id="our-friends">
+			</div>
+		</section>
+		<section class="section-pets" id="our-friends">
+			<div class="container pets">
 				<h3 class="pets__title">
 					<span>Our friends who</span>
 					<span>are looking for a house</span>
@@ -118,8 +122,10 @@
 						Get to know the rest
 					</button>
 				</a>
-			</section>
-			<section class="section help" id="help">
+			</div>
+		</section>
+		<section class="section-help" id="help">
+			<div class="container help">
 				<h3 class="help__title">
 					How you can help
 					our shelter
@@ -162,30 +168,34 @@
 						<h4 class="help__subtitle">Sleeping areas</h4>
 					</li>
 				</ul>
-			</section>
-			<section class="section donation">
+			</div>
+		</section>
+		<section class="section-donation">
+			<div class="container donation">
 				<img class="donation__puppy" src="/assets/imgs/png/donation-dog.png" alt="dontaion puppy">
-				<div class="donation__content">
-					<h3 class="donation__title">
-						You can also make a donation
-					</h3>
-					<h5 class="donation__subtitle">
-						Name of the bank / Type of bank account
-					</h5>
-					<a class="donation__link" href="">
-						<button class="donation__button">
-							8380 2880 8028 8791 7435
-						</button>
-					</a>
-					<div class="donation__info">
-						Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero
-						sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames
-						ac ante ipsum primis in faucibus.
-					</div>
+			<div class="donation__content">
+				<h3 class="donation__title">
+					You can also make a donation
+				</h3>
+				<h5 class="donation__subtitle">
+					Name of the bank / Type of bank account
+				</h5>
+				<a class="donation__link" href="">
+					<button class="donation__button">
+						8380 2880 8028 8791 7435
+					</button>
+				</a>
+				<div class="donation__info">
+					Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero
+					sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames
+					ac ante ipsum primis in faucibus.
 				</div>
-			</section>
-		</main>
-		<footer class="footer">
+			</div>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="container">
 			<div class="contacts" id="contacts">
 				<h3 class="contacts__title">
 					For questions and suggestions
@@ -223,7 +233,8 @@
 				</ul>
 			</div>
 			<img class="footer__puppy" src="/assets/imgs/png/footer-puppy.png" alt="footer puppy">
-		</footer>
+		</div>
+	</footer>
 	</div>
 
 	<script src="/scripts/index.js"></script>

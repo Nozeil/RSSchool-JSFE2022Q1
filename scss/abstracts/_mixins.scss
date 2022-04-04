@@ -79,7 +79,7 @@
 	}
 }
 
-@mixin before($width, $height, $top, $left, $image, $content: '', $position: absolute) {
+@mixin before($width, $height, $top, $left, $image, $z-index:0, $bg-position:center, $repeat:no-repeat,  $content: '', $position: absolute) {
 	&:before {
 		content: $content;
 		position: $position;
@@ -87,6 +87,7 @@
 		left: $left;
 		width: $width;
 		height: $height;
-		@include background($image);
+		@include background($image, $bg-position, $repeat);
+		z-index: $z-index;
 	}
 }
