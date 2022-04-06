@@ -171,7 +171,7 @@
 }
 
 .donation__link {
-	@include mixins.title(92%, variables.$weight-400, h4, color-dark-l, 0.015px);
+	@include mixins.title(92%, variables.$weight-400, h4, color-dark-l, 0.06em);
 	@extend %donation-button;
 	@extend %link;
 }
