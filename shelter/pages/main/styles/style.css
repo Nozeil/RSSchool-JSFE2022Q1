@@ -204,7 +204,7 @@
   background-repeat: no-repeat;
 }
 
-.start-screen-container:before {
+.footer:before, .start-screen-container:before {
   backdrop-filter: brightness(85%);
 }
 
