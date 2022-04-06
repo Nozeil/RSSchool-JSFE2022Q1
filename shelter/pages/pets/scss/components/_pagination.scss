@@ -23,6 +23,7 @@
 	background-color: variables.$color-light-s;
 	gap: variables.$pagination-row-gap;
 	@extend %cursor-pointer;
+	@extend %transition;
 
 	&:hover {
 		background-color: variables.$color-light-xl;

@@ -213,3 +213,29 @@
 %fit-content-width {
 	min-width: fit-content;
 }
+
+%start-screen-button {
+	width: 44.2%;
+	letter-spacing: 2px;
+	@extend %filled-button;
+	@extend %button;
+	@extend %color-dark-3xl;
+	@extend %h5;
+}
+
+%pets-button {
+	width: variables.$pets-button-width;
+	@extend %button;
+	@extend %filled-button;
+	@extend %slider-button-text;
+	@extend %color-dark-3xl;
+}
+
+%donation-button {
+	@include mixins.container-padding(15px, 60px, 10px, 10px);
+	border-radius: 9px;
+	@extend %button;
+	background-color: variables.$color-primary;
+	@include mixins.background(url('../../../assets/imgs/svg/credit-card.svg'), 15px 9.5px);
+	word-spacing: 6px;
+}

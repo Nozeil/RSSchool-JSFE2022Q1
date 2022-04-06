@@ -158,7 +158,7 @@
   background-color: #FDDCC4;
 }
 
-.pagination__card:hover .pagination__button, .contacts__link,
+.pagination__card, .pagination__card:hover .pagination__button, .contacts__link,
 .locations__link, .our-pets__link, .nav__link, .nav__link_active, .pagination__button:hover, .pagination-buttons__button_paginator:hover {
   transition: 0.3s;
 }
