@@ -23,6 +23,7 @@
 	background-color: variables.$color-light-s;
 	gap: variables.$slider-row-gap;
 	@extend %cursor-pointer;
+	@extend %transition;
 
 	&:hover {
 		background-color: variables.$color-light-xl;

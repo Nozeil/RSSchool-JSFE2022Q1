@@ -23,6 +23,14 @@
 	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
 }
 
+.start-screen__link {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %align-center;
+	@extend %start-screen-button;
+	@extend %link;
+}
+
 .container.about {
 	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
 	@extend %flex-center;
@@ -62,6 +70,14 @@
 	@extend %flex;
 	@extend %flex-column;
 	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.pets__link {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %align-center;
+	@extend %pets-button;
+	@extend %link;
 }
 
 .container.help {
@@ -155,7 +171,8 @@
 }
 
 .donation__link {
-	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+	@include mixins.title(92%, variables.$weight-400, h4, color-dark-l, 0.015px);
+	@extend %donation-button;
 	@extend %link;
 }
 
