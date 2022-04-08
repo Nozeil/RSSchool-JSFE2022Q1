@@ -204,10 +204,6 @@
   background-repeat: no-repeat;
 }
 
-.footer:before, .start-screen-container:before {
-  backdrop-filter: brightness(85%);
-}
-
 .footer, .start-screen-container, .section-about,
 .section-help, .section-pets,
 .section-donation {

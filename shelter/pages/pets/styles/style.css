@@ -170,10 +170,6 @@
   background-repeat: no-repeat;
 }
 
-.footer:before {
-  backdrop-filter: brightness(85%);
-}
-
 .footer, .section-pets, .header {
   min-width: fit-content;
 }
