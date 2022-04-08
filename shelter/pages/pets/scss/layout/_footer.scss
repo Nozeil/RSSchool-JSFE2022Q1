@@ -6,7 +6,6 @@
 	@extend %fit-content-width;
 	@include mixins.container-padding(0, 0, variables.$left-right-container-padding);
 	@extend %gradient;
-	@extend %backdrop;
 	@include mixins.before(100%, 100%, 0, 0, url('../../../assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
 	z-index: 0;
 }

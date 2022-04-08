@@ -216,12 +216,6 @@
 	@include mixins.background(radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%));
 }
 
-%backdrop {
-	&:before {
-		backdrop-filter: brightness(85%);
-	 }
-}
-
 %fit-content-width {
 	min-width: fit-content;
 }
