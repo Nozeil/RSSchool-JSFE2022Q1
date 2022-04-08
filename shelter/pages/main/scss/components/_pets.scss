@@ -1,0 +1,27 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.container.pets {
+	@extend %pets-help-blocks;
+}
+
+.section-pets,
+.section-donation {
+	@extend %fit-content-width;
+	background-color: variables.$color-light-l;
+}
+
+.pets__title {
+	@extend %flex;
+	@extend %flex-column;
+	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.pets__link {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %align-center;
+	@extend %pets-button;
+	@extend %link;
+}

@@ -1,0 +1,27 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.container.about {
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	@extend %flex-center;
+	gap: variables.$about-section-gap;
+}
+
+.section-about {
+	@extend %fit-content-width;
+	background-color: variables.$color-light-xl
+}
+
+.about {
+	flex-basis: variables.$about-flex-basis;
+	padding: 14px 0;
+}
+
+.about__title {
+	@include mixins.title(variables.$about-title, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.about__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
+}

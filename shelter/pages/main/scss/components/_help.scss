@@ -1,0 +1,72 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.section-help {
+	@extend %fit-content-width;
+	background-color: variables.$color-light-xl
+}
+
+.container.help {
+	@extend %pets-help-blocks;
+}
+
+.help__title {
+	@include mixins.title(variables.$help-title-width, variables.$weight-400, h3, color-dark-l, 2px);
+}
+
+.help__list {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %wrap;
+	gap: variables.$help-gap;
+	margin: 0;
+	padding: 0;
+	@extend %list;
+}
+
+.help__img {
+	width: variables.$help-img-size;
+	height: variables.$help-img-size;
+	margin: 0 auto variables.$help-img-margin;
+
+	&.food {
+		@include mixins.background(url('../../../assets/imgs/svg/pet-food.svg'));
+	}
+
+	&.transportation {
+		@include mixins.background(url('../../../assets/imgs/svg/transportation.svg'));
+	}
+
+	&.toys {
+		@include mixins.background(url('../../../assets/imgs/svg/toys.svg'));
+	}
+
+	&.bowls {
+		@include mixins.background(url('../../../assets/imgs/svg/bowls-and-cups.svg'));
+	}
+
+	&.shampoos {
+		@include mixins.background(url('../../../assets/imgs/svg/shampoos.svg'));
+	}
+
+	&.vitamins {
+		@include mixins.background(url('../../../assets/imgs/svg/vitamins.svg'));
+	}
+
+	&.medicines {
+		@include mixins.background(url('../../../assets/imgs/svg/medicines.svg'));
+	}
+
+	&.collars {
+		@include mixins.background(url('../../../assets/imgs/svg/collars-or-leashes.svg'));
+	}
+
+	&.areas {
+		@include mixins.background(url('../../../assets/imgs/svg/sleeping-area.svg'));
+	}
+}
+
+.help__subtitle {
+	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+}

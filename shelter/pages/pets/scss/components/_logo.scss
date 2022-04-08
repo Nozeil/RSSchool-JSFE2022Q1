@@ -1,0 +1,19 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.logo__title {
+	font-weight: 400;
+	@extend %color-dark-l;
+	@include mixins.text-elems(0, 0, 10px, 0, 2px);
+	@extend %logo_title;
+}
+
+.logo__subtitle {
+	padding-left: 4px;
+	@include mixins.font(variables.$Arial, variables.$weight-400, variables.$style-normal);
+	@extend %logo_subtitle;
+	@extend %color-dark-3xl;
+	@include mixins.text-elems(0, 0, 0, 0, 1px);
+	word-spacing: 1.5px;
+}

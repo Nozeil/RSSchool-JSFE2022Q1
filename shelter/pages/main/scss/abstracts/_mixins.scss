@@ -91,3 +91,9 @@
 		z-index: $z-index;
 	}
 }
+
+@mixin media-tablet {
+	@media (max-width: 1279px) {
+		@content;
+	}
+}

@@ -1,0 +1,31 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.start-screen-container {
+	@extend %fit-content-width;
+	@extend %gradient;
+	@include mixins.before(100%, 100%, 0, 0, url('../../../assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
+	z-index: 0;
+}
+
+.start-screen__content {
+	margin-top: variables.$start-screen-content-top-margin;
+	max-width: variables.$start-screen-content-width;
+}
+
+.start-screen__title {
+	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, h2, color-light-xl);
+}
+
+.start-screen__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
+}
+
+.start-screen__link {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %align-center;
+	@extend %start-screen-button;
+	@extend %link;
+}

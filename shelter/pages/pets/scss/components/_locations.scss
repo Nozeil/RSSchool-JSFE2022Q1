@@ -1,0 +1,41 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.locations {
+	flex-basis: 26%;
+}
+
+.locations__title {
+	@include mixins.title(none, variables.$weight-400, h3, color-light-xl, 00.06em, variables.$footer-locations-title-margin);
+}
+
+.locations__list {
+	@extend %list;
+	margin: 0;
+	padding: 0;
+}
+
+.locations__item {
+	position: relative;
+	@include mixins.footer-item(variables.$location-item-m-l, variables.$location-item-m-b);
+}
+
+.locations__link {
+	@extend %h4;
+	@extend %color-primary;
+	letter-spacing: 0.06em;
+	@extend %link;
+
+	&:hover {
+		@extend %color-light-s;
+	}
+}
+
+.locations__Boston {
+	@include mixins.before(22px, 32px, 6px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
+}
+
+.locations__London {
+	@include mixins.before(22px, 32px, -5px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
+}

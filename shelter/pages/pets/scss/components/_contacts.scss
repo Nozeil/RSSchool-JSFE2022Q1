@@ -1,0 +1,41 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.contacts {
+	flex-basis: 24%;
+}
+
+.contacts__title {
+	@include mixins.title(none, variables.$weight-400, h3, color-light-xl, 00.06em, variables.$footer-contacts-title-margin);
+}
+
+.contacts__list {
+	@extend %list;
+	margin: 0;
+	padding: 0;
+}
+
+.contacts__link {
+	@extend %h4;
+	@extend %color-primary;
+	letter-spacing: 0.06em;
+	@extend %link;
+
+	&:hover {
+		@extend %color-light-s;
+	}
+}
+
+.contacts__item {
+	position: relative;
+	@include mixins.footer-item(variables.$contacts-item-m-l, variables.$contacts-item-m-b);
+}
+
+.contacts__mail {
+	@include mixins.before(40px, 26px, -1px, -60px, url('../../../assets/imgs/svg/icon-email.svg'));
+}
+
+.contacts__tel {
+	@include mixins.before(40px, 32px, -4px, -60px, url('../../../assets/imgs/svg/icon-phone.svg'));
+}

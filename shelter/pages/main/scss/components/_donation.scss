@@ -1,0 +1,40 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.donation {
+	@extend %flex;
+	@extend %flex-center;
+	gap: variables.$donation-gap;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+}
+
+.donation__puppy {
+	margin: 10px 0;
+}
+
+.donation__content {
+	@extend %flex;
+	@extend %flex-column;
+	gap: variables.$donation-content-gap;
+	width: variables.$donation-content-width;
+}
+
+.donation__title {
+	@include mixins.title(variables.$dontaion-title-width, variables.$weight-400, h3, color-dark-l, 0.06em);
+}
+
+.donation__subtitle {
+	@include mixins.title(none, variables.$weight-400, h5, color-dark-l, 0.06em);
+}
+
+.donation__link {
+	@include mixins.title(92%, variables.$weight-400, h4, color-dark-l, 0.06em);
+	@extend %donation-button;
+	@extend %link;
+}
+
+.donation__info {
+	@include mixins.fontAndColor(variables.$Arial, variables.$weight-400, italic, color-dark-m);
+	@extend %paragraph-s;
+}
