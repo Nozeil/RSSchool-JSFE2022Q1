@@ -3,18 +3,28 @@
 @use '../abstracts/mixins';
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 .container {
 	@extend %flex;
 	@extend %space-between;
 	@include mixins.container-padding(40px, 40px);
-	width: variables.$max-width;
+	max-width: variables.$max-width;
 	margin: 0 auto;
 	@include mixins.fontAndColor(variables.$Georgia, variables.$weight-400, variables.$style-normal, color-dark-l);
+
+	@include mixins.media-tablet {
+		@include mixins.container-padding(30px, 30px);
+		max-width: variables.$max-width-tablet;
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.container-padding(10px, 10px);
+		max-width: variables.$max-width-mobile;
+	}
 }

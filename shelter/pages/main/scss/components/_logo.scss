@@ -8,6 +8,10 @@
 	@include mixins.text-elems(0, 0, 10px, 0, 2px);
 	@extend %logo_title;
 	@extend %color-primary;
+
+	@include mixins.media-tablet {
+		padding-top: calc((variables.$start-screen-header-padding) - 30px);
+	}
 }
 
 .logo__subtitle {

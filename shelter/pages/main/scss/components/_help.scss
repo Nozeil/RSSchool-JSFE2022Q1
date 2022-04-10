@@ -3,16 +3,32 @@
 @use '../abstracts/placeholders';
 
 .section-help {
-	@extend %fit-content-width;
 	background-color: variables.$color-light-xl
 }
 
 .container.help {
 	@extend %pets-help-blocks;
+
+	@include mixins.media-tablet {
+		@include mixins.container-padding(variables.$left-right-container-padding - 10px, variables.$left-right-container-padding - 10px, 80px, 100px);
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.container-padding(variables.$left-right-container-padding - 30px, variables.$left-right-container-padding - 30px, 42px, 42px);
+		gap: variables.$pets-gap - 18px;
+	}
 }
 
 .help__title {
 	@include mixins.title(variables.$help-title-width, variables.$weight-400, h3, color-dark-l, 2px);
+
+	@include mixins.media-tablet {
+		max-width: 44%;
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title (90%);
+	}
 }
 
 .help__list {
@@ -23,12 +39,30 @@
 	margin: 0;
 	padding: 0;
 	@extend %list;
+
+	@include mixins.media-tablet {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 55px 65px;
+	}
+
+	@include mixins.media-mobile {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
 }
 
 .help__img {
+	margin: 0 auto variables.$help-img-margin;
 	width: variables.$help-img-size;
 	height: variables.$help-img-size;
-	margin: 0 auto variables.$help-img-margin;
+
+	@include mixins.media-mobile {
+		margin-bottom: variables.$help-img-margin - 10px;
+		width: variables.$help-img-size - 10px;
+		height: variables.$help-img-size - 10px;
+		background-size: contain;
+	}
 
 	&.food {
 		@include mixins.background(url('../../../assets/imgs/svg/pet-food.svg'));
@@ -69,4 +103,10 @@
 
 .help__subtitle {
 	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 0.06em);
+
+	@include mixins.media-mobile {
+		font-size: variables.$h5;
+		line-height: variables.$h5-height;
+		letter-spacing: 0.08em;
+	}
 }

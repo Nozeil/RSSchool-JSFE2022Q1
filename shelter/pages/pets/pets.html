@@ -24,7 +24,7 @@
 					</h5>
 				</div>
 			</a>
-			<nav class="nav">
+			<nav class="nav nav_hidden">
 				<ul class="nav__list">
 					<li class="nav__item">
 						<a href="../main/index.html" class="nav__link">About the shelter</a>
@@ -40,6 +40,9 @@
 					</li>
 				</ul>
 			</nav>
+			<div class="burger burger_hidden">
+				<span class="burger__line"></span>
+			</div>
 		</div>
 	</header>
 	<main class="main">
@@ -78,7 +81,7 @@
 								Learn more
 							</button>
 						</div>
-						<div class="pagination__card">
+						<div class="pagination__card pagination__card_hidden-mobile">
 							<img class="pagination__image" src="../../assets/imgs/png/pets-sophia.png" alt="pet">
 							<h4 class="pagination__title">
 								Sophia
@@ -87,7 +90,7 @@
 								Learn more
 							</button>
 						</div>
-						<div class="pagination__card">
+						<div class="pagination__card pagination__card_hidden-mobile">
 							<img class="pagination__image" src="../../assets/imgs/png/pets-timmy.png" alt="pet">
 							<h4 class="pagination__title">
 								Timmy
@@ -96,7 +99,7 @@
 								Learn more
 							</button>
 						</div>
-						<div class="pagination__card">
+						<div class="pagination__card pagination__card_hidden-mobile">
 							<img class="pagination__image" src="../../assets/imgs/png/pets-charly.png" alt="pet">
 							<h4 class="pagination__title">
 								Charly
@@ -105,7 +108,7 @@
 								Learn more
 							</button>
 						</div>
-						<div class="pagination__card">
+						<div class="pagination__card pagination__card_hidden">
 							<img class="pagination__image" src="../../assets/imgs/png/pets-scarlet.png" alt="pet">
 							<h4 class="pagination__title">
 								Scarlett
@@ -114,7 +117,7 @@
 								Learn more
 							</button>
 						</div>
-						<div class="pagination__card">
+						<div class="pagination__card pagination__card_hidden">
 							<img class="pagination__image" src="../../assets/imgs/png/pets-freddie.png" alt="pet">
 							<h4 class="pagination__title">
 								Freddie
@@ -146,42 +149,30 @@
 		</section>
 	</main>
 	<footer class="footer">
-		<div class="container">
+		<div class="container footer__container">
 			<div class="contacts" id="contacts">
 				<h3 class="contacts__title">
 					For questions and suggestions
 				</h3>
-				<ul class="contacts__list">
-					<li class="contacts__item">
-						<a class="contacts__link contacts__mail" href="mailto:email@shelter.com">
-							email@shelter.com
-						</a>
-					</li>
-					<li class="contacts__item">
-						<a class="contacts__link contacts__tel" href="tel:+136745677554">
-							+13 674 567 75 54
-						</a>
-					</li>
-				</ul>
+				<a class="contacts__link contacts__mail" href="mailto:email@shelter.com">
+					email@shelter.com
+				</a>
+				<a class="contacts__link contacts__tel" href="tel:+136745677554">
+					+13 674 567 75 54
+				</a>
 			</div>
 			<div class="locations">
 				<h3 class="locations__title">
 					We are waiting for your visit
 				</h3>
-				<ul class="locations__list">
-					<li class="locations__item">
-						<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39" rel="noopener noreferrer"
-							target="_blank">
-							1 Central Street, Boston (entrance from the store)
-						</a>
-					</li>
-					<li class="locations__item">
-						<a class="locations__link locations__London" href="https://goo.gl/maps/sbF56ULGDWsFxrWG6" rel="noopener noreferrer"
-							target="_blank">
-							18 South Park, London
-						</a>
-					</li>
-				</ul>
+				<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39"
+					rel="noopener noreferrer" target="_blank">
+					1 Central Street, Boston (entrance from the store)
+				</a>
+				<a class="locations__link locations__London" href="https://goo.gl/maps/sbF56ULGDWsFxrWG6"
+					rel="noopener noreferrer" target="_blank">
+					18 South Park, London
+				</a>
 			</div>
 			<img class="footer__puppy" src="../../assets/imgs/png/footer-puppy.png" alt="footer puppy">
 		</div>

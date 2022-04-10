@@ -138,6 +138,7 @@
 
 %button {
 	@extend %cursor-pointer;
+
 	&:hover {
 		background-color: variables.$color-primary-light;
 		@extend %transition;
@@ -149,8 +150,8 @@
 }
 
 %button-height-radius {
-	border-radius:  calc(variables.$button-height / 2);
-	height:  variables.$button-height;
+	border-radius: calc(variables.$button-height / 2);
+	height: variables.$button-height;
 }
 
 %filled-button {
@@ -184,6 +185,7 @@
 
 %pagination-button-paginator {
 	@extend %pagination-button;
+
 	&:hover {
 		border-color: variables.$color-primary-light;
 	}
@@ -216,6 +218,9 @@
 	@include mixins.background(radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%));
 }
 
-%fit-content-width {
-	min-width: fit-content;
+%locations-contacts {
+	@extend %flex;
+	@extend %flex-column;
+	@extend %align-center;
+	margin-top: 16px;
 }

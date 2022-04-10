@@ -72,7 +72,7 @@
 	}
 }
 
-@mixin before($width, $height, $top, $left, $image, $z-index:0, $bg-position:center, $repeat:no-repeat,  $content: '', $position: absolute) {
+@mixin before($width, $height, $top, $left, $image, $z-index:0, $bg-position:center, $repeat:no-repeat, $content: '', $position: absolute) {
 	&:before {
 		content: $content;
 		position: $position;
@@ -83,4 +83,34 @@
 		@include background($image, $bg-position, $repeat);
 		z-index: $z-index;
 	}
+}
+
+@mixin media-tablet {
+	@media (max-width:variables.$media-tablet) {
+		@content;
+	}
+}
+
+@mixin media-mobile {
+	@media (max-width:variables.$media-mobile) {
+		@content;
+	}
+}
+
+@mixin burger-line($width, $height, $top, $left, $content: '', $position: absolute, $bg-color) {
+	content: $content;
+	position: $position;
+	top: $top;
+	left: $left;
+	width: $width;
+	height: $height;
+	background-color: $bg-color;
+}
+
+@mixin mobile-title ($width: 100%, $size: variables.$h3-mobile, $height: variables.$h3-mobile-height, $spacing: 0.06em, $align: center) {
+	max-width: $width;
+	font-size: $size;
+	line-height: $height;
+	letter-spacing: $spacing;
+	text-align: $align;
 }

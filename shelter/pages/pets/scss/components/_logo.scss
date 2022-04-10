@@ -2,6 +2,12 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
+.logo {
+	@include mixins.media-mobile {
+		padding: 30px 0;
+	}
+}
+
 .logo__title {
 	font-weight: 400;
 	@extend %color-dark-l;

@@ -3,23 +3,50 @@
 @use '../abstracts/placeholders';
 
 .start-screen-container {
-	@extend %fit-content-width;
 	@extend %gradient;
 	@include mixins.before(100%, 100%, 0, 0, url('../../../assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
 	z-index: 0;
 }
 
+.start-screen {
+	@include mixins.media-tablet {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
 .start-screen__content {
 	margin-top: variables.$start-screen-content-top-margin;
 	max-width: variables.$start-screen-content-width;
+
+	@include mixins.media-tablet {
+		margin-top: calc((variables.$start-screen-content-top-margin) - 133px);
+		max-width: calc((variables.$start-screen-content-width) + 26%);
+	}
+
+	@include mixins.media-mobile {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: calc((variables.$start-screen-content-top-margin) - 114px);
+		max-width: calc((variables.$start-screen-content-width) + 61%);
+	}
 }
 
 .start-screen__title {
 	@include mixins.title(variables.$start-screen-title-width, variables.$weight-400, h2, color-light-xl);
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title(67%);
+	}
 }
 
 .start-screen__text {
 	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 42px, 0, 42px, 0, 0, color-dark-s, paragraph-l);
+
+	@include mixins.media-mobile {
+		text-align: center;
+	}
 }
 
 .start-screen__link {
@@ -28,4 +55,26 @@
 	@extend %align-center;
 	@extend %start-screen-button;
 	@extend %link;
+
+	@include mixins.media-tablet {
+		margin: 0 auto;
+		width: 45%;
+	}
+
+	@include mixins.media-mobile {
+		width: 69%;
+	}
+}
+
+.start-screen__puppy {
+	@include mixins.media-tablet {
+		align-self: flex-end;
+		width: 80.3%;
+		margin: 100px 0 0;
+	}
+
+	@include mixins.media-mobile {
+		width: 87.3%;
+		margin: 105px 0 0;
+	}
 }

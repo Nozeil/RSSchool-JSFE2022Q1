@@ -12,6 +12,16 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: variables.$pagination-row-gap variables.$pagination-column-gap;
+
+	@include mixins.media-tablet {
+		grid-template-columns: repeat(2, 1fr);
+		margin: 0 0 10px;
+	}
+
+	@include mixins.media-mobile {
+		grid-template-columns: 1fr;
+		margin: 0;
+	}
 }
 
 .pagination__card {
@@ -34,6 +44,18 @@
 		@extend %pagination-button-hover;
 		@extend %transition;
 	}
+
+	@include mixins.media-tablet {
+		&_hidden {
+			display: none;
+		}
+	}
+
+	@include mixins.media-mobile {
+		&_hidden-mobile {
+			display: none;
+		}
+	}
 }
 
 .pagination__title {
@@ -43,4 +65,9 @@
 .pagination-buttons {
 	@extend %flex;
 	gap: variables.$pagination-buttons-gap;
+
+	@include mixins.media-mobile {
+		margin-bottom: 10px;
+		gap: variables.$pagination-buttons-gap - 10px;
+	}
 }
