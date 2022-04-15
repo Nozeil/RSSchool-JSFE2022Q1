@@ -1,0 +1,66 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.locations {
+	@extend %locations-contacts;
+	gap: 35px;
+	flex-basis: 26%;
+
+	@include mixins.media-tablet {
+		margin: 0;
+	}
+
+	@include mixins.media-mobile {
+		gap: 41px;
+	}
+}
+
+.locations__title {
+	@include mixins.title(none, variables.$weight-400, h3, color-light-xl, 0.06em);
+
+	@include mixins.media-tablet {
+		max-width: 89%;
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title(98%);
+	}
+}
+
+.locations__link {
+	position: relative;
+	@extend %h4;
+	@extend %color-primary;
+	letter-spacing: 0.06em;
+	@extend %link;
+
+	&:hover {
+		@extend %color-light-s;
+	}
+}
+
+.locations__Boston {
+	margin-left: 42px;
+	@include mixins.before(22px, 32px, 6px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
+
+	@include mixins.media-tablet {
+		margin-left: 60px;
+	}
+
+	@include mixins.media-mobile {
+		margin-left: 42px;
+	}
+}
+
+.locations__London {
+	@include mixins.before(22px, 32px, -5px, -42px, url('../../../assets/imgs/svg/icon-marker.svg'));
+
+	@include mixins.media-tablet {
+		margin-right: 3px;
+	}
+
+	@include mixins.media-mobile {
+		margin: 0 0 0 12px;
+	}
+}

@@ -1,0 +1,39 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.container.pets {
+	@extend %pets-help-blocks;
+
+	@include mixins.media-tablet {
+		@include mixins.container-padding(variables.$left-right-container-padding - 10px, variables.$left-right-container-padding - 10px, 80px, 100px);
+	}
+
+	@include mixins.media-mobile {
+		gap: variables.$pets-gap - 19px;
+		@include mixins.container-padding(variables.$left-right-container-padding - 30px, variables.$left-right-container-padding - 30px, 42px, 42px);
+	}
+}
+
+.section-pets,
+.section-donation {
+	background-color: variables.$color-light-l;
+}
+
+.pets__title {
+	@extend %flex;
+	@extend %flex-column;
+	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title();
+	}
+}
+
+.pets__link {
+	@extend %flex;
+	@extend %flex-center;
+	@extend %align-center;
+	@extend %pets-button;
+	@extend %link;
+}

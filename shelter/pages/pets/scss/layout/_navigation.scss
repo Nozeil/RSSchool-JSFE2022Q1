@@ -2,12 +2,19 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
+.nav {
+	@include mixins.media-mobile {
+		&_hidden {
+			display: none;
+		}
+	}
+}
+
 .nav__list {
 	@extend %flex;
 	padding: variables.$start-screen-header-padding 0;
 	margin: 16px 0 20px;
 	@extend %list;
-
 }
 
 .nav__link {

@@ -2,12 +2,23 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
+.nav {
+	@include mixins.media-mobile {
+		&_hidden {
+			display: none;
+		}
+	}
+}
+
 .nav__list {
 	@extend %flex;
 	padding: variables.$start-screen-header-padding 0;
 	margin: 16px 0 20px;
 	@extend %list;
-	
+
+	@include mixins.media-tablet {
+		padding: calc((variables.$start-screen-header-padding) - 30px) 0;
+	}
 }
 
 .nav__link {
@@ -16,6 +27,7 @@
 	@extend %paragraph-l;
 	@extend %link;
 	@extend %color-dark-s;
+
 	&:hover {
 		@extend %color-light-s;
 	}

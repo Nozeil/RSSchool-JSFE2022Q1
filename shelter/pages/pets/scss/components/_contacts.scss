@@ -1,0 +1,55 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.contacts {
+	@extend %locations-contacts;
+	flex-basis: 24%;
+	gap: 46px;
+
+	@include mixins.media-tablet {
+		margin: 0;
+	}
+}
+
+.contacts__title {
+	@include mixins.title(none, variables.$weight-400, h3, color-light-xl, 0.06em);
+
+	@include mixins.media-tablet {
+		max-width: 81%;
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title ();
+	}
+}
+
+.contacts__link {
+	position: relative;
+	@extend %h4;
+	@extend %color-primary;
+	letter-spacing: 0.06em;
+	@extend %link;
+
+	&:hover {
+		@extend %color-light-s;
+	}
+}
+
+.contacts__mail {
+	@include mixins.before(40px, 26px, -3px, -60px, url('../../../assets/imgs/svg/icon-email.svg'));
+	margin-left: 24px;
+
+	@include mixins.media-mobile {
+		margin-left: 60px;
+	}
+}
+
+.contacts__tel {
+	@include mixins.before(40px, 32px, -4px, -60px, url('../../../assets/imgs/svg/icon-phone.svg'));
+	margin-left: 12px;
+
+	@include mixins.media-mobile {
+		margin: 3px 0 0 60px;
+	}
+}

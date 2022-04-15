@@ -1,0 +1,90 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.donation {
+	@extend %flex;
+	@extend %flex-center;
+	gap: variables.$donation-gap;
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+
+	@include mixins.media-tablet {
+		flex-direction: column-reverse;
+		align-items: center;
+		gap: variables.$donation-gap + 30px;
+		@include mixins.container-padding(variables.$left-right-container-padding - 10px, variables.$left-right-container-padding - 10px, 80px, 100px);
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.container-padding(variables.$left-right-container-padding - 30px, variables.$left-right-container-padding - 30px, 42px, 42px);
+		gap: variables.$donation-gap + 12px;
+	}
+}
+
+.donation__puppy {
+	max-height: 261px;
+	margin: 10px 0;
+
+	@include mixins.media-tablet {
+		margin: 0;
+	}
+
+	@include mixins.media-mobile {
+		width: 260px;
+	}
+}
+
+.donation__content {
+	@extend %flex;
+	@extend %flex-column;
+	gap: variables.$donation-content-gap;
+	width: variables.$donation-content-width;
+
+	@include mixins.media-tablet {
+		width: variables.$donation-content-width + 22%;
+	}
+
+	@include mixins.media-mobile {
+		align-items: center;
+		width: variables.$donation-content-width + 62%;
+	}
+}
+
+.donation__title {
+	@include mixins.title(variables.$dontaion-title-width, variables.$weight-400, h3, color-dark-l, 0.06em);
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title (74%);
+	}
+}
+
+.donation__subtitle {
+	@include mixins.title(none, variables.$weight-400, h5, color-dark-l, 0.06em);
+
+	@include mixins.media-mobile {
+		line-height: 24px;
+		letter-spacing: 0;
+	}
+}
+
+.donation__link {
+	@include mixins.title(92%, variables.$weight-400, h4, color-dark-l, 0.06em);
+	@extend %donation-button;
+	@extend %link;
+	white-space: nowrap;
+	@include mixins.media-mobile {
+		padding: 14px 15px 13px 60px;
+		max-width: 100%;
+		font-size: variables.$h5;
+		line-height: variables.$h5-height;
+	}
+}
+
+.donation__info {
+	@include mixins.fontAndColor(variables.$Arial, variables.$weight-400, italic, color-dark-m);
+	@extend %paragraph-s;
+
+	@include mixins.media-mobile {
+		text-align: justify;
+	}
+}

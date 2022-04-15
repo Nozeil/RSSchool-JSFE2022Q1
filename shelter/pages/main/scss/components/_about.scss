@@ -1,0 +1,65 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.container__about {
+	@include mixins.container-padding(variables.$left-right-container-padding, variables.$left-right-container-padding, 80px, 100px);
+	@extend %flex-center;
+	gap: variables.$about-section-gap;
+
+	@include mixins.media-tablet {
+		flex-direction: column-reverse;
+		align-items: center;
+		gap: calc((variables.$about-section-gap) - 40px);
+		@include mixins.container-padding(variables.$left-right-container-padding - 10px, variables.$left-right-container-padding - 10px, 80px, 100px);
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.container-padding(variables.$left-right-container-padding - 30px, variables.$left-right-container-padding - 30px, 42px, 42px);
+		gap: calc((variables.$about-section-gap) - 78px);
+	}
+}
+
+.section-about {
+	background-color: variables.$color-light-xl
+}
+
+.about {
+	flex-basis: variables.$about-flex-basis;
+	padding: 14px 0;
+
+	@include mixins.media-tablet {
+		padding: 0;
+		width: 61%;
+	}
+
+	@include mixins.media-mobile {
+		padding: 0;
+		width: 89%;
+	}
+
+}
+
+.about__title {
+	@include mixins.title(variables.$about-title, variables.$weight-400, h3, color-dark-l, 2px);
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title();
+	}
+}
+
+.about__text {
+	@include mixins.text(variables.$Arial, variables.$weight-400, variables.$style-normal, 25px, 0, 0, 0, 0, color-dark-xl, paragraph-l);
+
+	@include mixins.media-mobile {
+		margin: 24px 0 0;
+		text-align: justify;
+	}
+}
+
+.about__img {
+	max-height: 408px;
+	@include mixins.media-mobile {
+		width: 86.5%;
+	}
+}

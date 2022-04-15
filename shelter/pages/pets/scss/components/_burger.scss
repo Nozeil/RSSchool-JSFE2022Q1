@@ -1,0 +1,24 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.burger {
+	position: relative;
+	display: none;
+
+	&__line {
+
+		&::before {
+			@include mixins.burger-line(30px, 2px, -10px, 0, $bg-color:variables.$color-black);
+		}
+
+		@include mixins.burger-line(30px, 2px, 59px, -73px, $bg-color:variables.$color-black);
+
+		&::after {
+			@include mixins.burger-line(30px, 2px, 10px, 0, $bg-color:variables.$color-black);
+		}
+	}
+
+	@include mixins.media-mobile {
+		display: inline-block;
+	}
+}

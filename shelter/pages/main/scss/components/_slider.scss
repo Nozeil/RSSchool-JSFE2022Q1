@@ -6,12 +6,44 @@
 	@extend %flex;
 	@extend %align-center;
 	gap: variables.$slider-flex-gap;
+
+	@include mixins.media-tablet {
+		gap: variables.$slider-flex-gap - 41px;
+	}
+
+	@include mixins.media-mobile {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: variables.$slider-flex-gap - 33px 0;
+	}
 }
 
 .slider__cards {
 	@extend %flex;
 	@extend %align-center;
 	gap: variables.$slider-column-gap;
+
+	@include mixins.media-tablet {
+		gap: variables.$slider-column-gap - 50px;
+	}
+
+	@include mixins.media-mobile {
+		grid-column: span 2;
+		align-self: center;
+	}
+}
+
+.slider__arrow-left {
+	@include mixins.media-mobile {
+		grid-row-start: 2;
+		justify-self: center;
+	}
+}
+
+.slider__arrow-right {
+	@include mixins.media-mobile {
+		justify-self: center;
+	}
 }
 
 .slider__card {
@@ -34,6 +66,20 @@
 		@extend %slider-button-hover;
 		@extend %transition;
 	}
+
+	@include mixins.media-tablet {
+		&_hidden {
+			display: none;
+		}
+	}
+
+	@include mixins.media-mobile {
+		&_mobile-hidden {
+			display: none;
+		}
+	}
+
+
 }
 
 .slider__title {

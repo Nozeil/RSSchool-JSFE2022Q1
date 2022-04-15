@@ -1,11 +1,15 @@
 @use './base/typography';
-
-@use './pages/main-page';
-
-@use './components/buttons';
-@use './components/pagination';
+@use './base/base';
 
 @use './layout/header';
 @use './layout/navigation';
-@use './layout/main';
 @use './layout/footer';
+
+@use './components/logo';
+@use './components/burger';
+@use './components/buttons';
+@use './components/pets';
+@use './components/pagination';
+@use './components/contacts';
+@use './components/locations';
+

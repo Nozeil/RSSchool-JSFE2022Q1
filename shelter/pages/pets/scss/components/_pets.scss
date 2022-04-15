@@ -9,10 +9,19 @@
 
 .container.pets {
 	@extend %pets-help-blocks;
+
+	@include mixins.media-tablet {
+		@include mixins.container-padding(30px, 30px, 200px, 76px);
+		gap: variables.$pets-gap - 30px;
+	}
+
+	@include mixins.media-mobile {
+		@include mixins.container-padding(10px, 10px, 162px, 32px);
+		gap: variables.$pets-gap - 18px;
+	}
 }
 
-.section-pets{
-	@extend %fit-content-width;
+.section-pets {
 	background-color: variables.$color-light-l;
 }
 
@@ -20,4 +29,8 @@
 	@extend %flex;
 	@extend %flex-column;
 	@include mixins.title(none, variables.$weight-400, h3, color-dark-l, 2px);
+
+	@include mixins.media-mobile {
+		@include mixins.mobile-title();
+	}
 }
