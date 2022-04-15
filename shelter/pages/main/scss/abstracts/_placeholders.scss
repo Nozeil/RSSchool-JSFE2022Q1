@@ -136,6 +136,10 @@
 	cursor: pointer;
 }
 
+%cursor-disabled {
+	cursor: not-allowed;
+}
+
 %button {
 	@extend %cursor-pointer;
 

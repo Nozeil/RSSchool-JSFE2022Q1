@@ -3,15 +3,10 @@
 @use '../abstracts/placeholders';
 
 .logo__title {
-	padding-top: variables.$start-screen-header-padding;
 	font-weight: 400;
 	@include mixins.text-elems(0, 0, 10px, 0, 2px);
 	@extend %logo_title;
 	@extend %color-primary;
-
-	@include mixins.media-tablet {
-		padding-top: calc((variables.$start-screen-header-padding) - 30px);
-	}
 }
 
 .logo__subtitle {
@@ -19,6 +14,6 @@
 	@include mixins.font(variables.$Arial, variables.$weight-400, variables.$style-normal);
 	@extend %logo_subtitle;
 	@extend %color-light-xl;
-	@include mixins.text-elems(0, 0, 10px, 0, 1px);
+	@include mixins.text-elems(0, 0, 0, 0, 1px);
 	word-spacing: 1.5px;
 }

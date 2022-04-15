@@ -14,27 +14,29 @@
 <body class="body">
 	<div class="start-screen-container">
 		<header class="header container">
-			<div class="logo">
-				<h1 class="logo__title">
-					Cozy House
-				</h1>
-				<h5 class="logo__subtitle">
-					Shelter for pets in Boston
-				</h5>
-			</div>
+			<a href="#!" class="header__logo">
+				<div class="logo">
+					<h1 class="logo__title">
+						Cozy House
+					</h1>
+					<h5 class="logo__subtitle">
+						Shelter for pets in Boston
+					</h5>
+				</div>
+			</a>
 			<nav class="nav nav_hidden">
 				<ul class="nav__list">
 					<li class="nav__item">
-						<a href="#" class="nav__link_active">About the shelter</a>
+						<a class="nav__link_active" href="#">About the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a href="../../pages/pets/pets.html" class="nav__link" target="_blank">Our pets</a>
+						<a class="nav__link" href="../../pages/pets/pets.html" target="_blank">Our pets</a>
 					</li>
 					<li class="nav__item">
-						<a href="#help" class="nav__link">Help the shelter</a>
+						<a class="nav__link_disabled" href="#help">Help the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a href="#contacts" class="nav__link">Contacts</a>
+						<a class="nav__link_disabled" href="#contacts">Contacts</a>
 					</li>
 				</ul>
 			</nav>
@@ -209,7 +211,7 @@
 				<h3 class="locations__title">
 					We are waiting for your visit
 				</h3>
-					<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39"
+				<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39"
 					rel="noopener noreferrer" target="_blank">
 					1 Central Street, Boston (entrance from the store)
 				</a>
@@ -221,7 +223,7 @@
 			<img class="footer__puppy" src="../../assets/imgs/png/footer-puppy.png" alt="footer puppy">
 		</div>
 	</footer>
-	<script src="../../scripts/index.js"></script>
+	<script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

@@ -62,7 +62,7 @@
   color: #FFFFFF;
 }
 
-.nav__link, .nav__link_active, .start-screen__text {
+.nav__link, .nav__link_active, .nav__link_disabled, .start-screen__text {
   color: #CDCDCD;
 }
 
@@ -102,7 +102,7 @@
   line-height: 17px;
 }
 
-.nav__link, .nav__link_active, .about__text, .start-screen__text {
+.nav__link, .nav__link_active, .nav__link_disabled, .about__text, .start-screen__text {
   font-size: 15px;
   line-height: 24px;
 }
@@ -125,13 +125,17 @@
   list-style: none;
 }
 
-.nav__link, .nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link {
+.nav__link, .nav__link_active, .nav__link_disabled, .header__logo, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link {
   text-decoration: none;
 }
 
-.slider__card, .slider__arrow-left,
+.header__logo, .slider__card, .slider__arrow-left,
 .slider__arrow-right, .slider__button, .donation__link, .pets__link, .start-screen__link {
   cursor: pointer;
+}
+
+.nav__link_disabled {
+  cursor: not-allowed;
 }
 
 .slider__arrow-left:hover,
@@ -186,7 +190,7 @@
   background-color: #FDDCC4;
 }
 
-.slider__card, .slider__card:hover .slider__button, .nav__link, .nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .slider__arrow-left:hover,
+.slider__card, .slider__card:hover .slider__button, .nav__link, .nav__link_active, .nav__link_disabled, .header__logo, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .slider__arrow-left:hover,
 .slider__arrow-right:hover, .slider__button:hover, .donation__link:hover, .pets__link:hover, .start-screen__link:hover {
   transition: 0.3s;
 }
@@ -250,15 +254,9 @@ html {
 }
 
 .logo__title {
-  padding-top: 60px;
   font-weight: 400;
   margin: 0 0 10px 0;
   letter-spacing: 2px;
-}
-@media (max-width: 1279px) {
-  .logo__title {
-    padding-top: 30px;
-  }
 }
 
 .logo__subtitle {
@@ -266,7 +264,7 @@ html {
   font-family: "Arial", sans-serif;
   font-weight: 400;
   font-style: normal;
-  margin: 0 0 10px 0;
+  margin: 0 0 0 0;
   letter-spacing: 1px;
   word-spacing: 1.5px;
 }
@@ -1011,6 +1009,15 @@ html {
   letter-spacing: 1px;
 }
 
+.header__logo {
+  margin: 60px 0 10px;
+}
+@media (max-width: 1279px) {
+  .header__logo {
+    margin: 30px 0 10px;
+  }
+}
+
 @media (max-width: 767px) {
   .nav_hidden {
     display: none;
@@ -1038,6 +1045,14 @@ html {
   padding-bottom: 4px;
   color: #FAFAFA;
   border-bottom: 3px solid #F1CDB3;
+}
+
+.nav__link_disabled {
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0 0 0 36px;
+  letter-spacing: 0;
 }
 
 .footer {

@@ -1,0 +1,12 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.header__logo {
+	margin: variables.$start-screen-header-padding 0 10px;
+	@include mixins.media-tablet {
+		margin: calc((variables.$start-screen-header-padding) - 30px) 0 10px;
+	}
+	@extend %link;
+	@extend %cursor-pointer;
+}

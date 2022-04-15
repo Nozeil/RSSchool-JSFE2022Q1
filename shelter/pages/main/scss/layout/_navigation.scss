@@ -40,3 +40,12 @@
 		border-bottom: 3px solid variables.$color-primary;
 	}
 }
+
+.nav__link_disabled {
+	@include mixins.font(variables.$Arial, 400, normal);
+	@include mixins.text-elems(0, 0, 0, 36px, 0);
+	@extend %paragraph-l;
+	@extend %link;
+	@extend %color-dark-s;
+	@extend %cursor-disabled;
+}
