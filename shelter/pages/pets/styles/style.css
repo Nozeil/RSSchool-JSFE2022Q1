@@ -144,7 +144,7 @@
 }
 
 .container.pets {
-  padding: 80px 40px 100px 40px;
+  padding: 200px 40px 100px 40px;
   gap: 60px;
 }
 
@@ -198,7 +198,10 @@ html {
 }
 
 .header {
+  position: fixed;
+  width: 100%;
   background-color: #FFFFFF;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
@@ -307,7 +310,7 @@ html {
   left: -73px;
   width: 30px;
   height: 2px;
-  background-color: #F1CDB3;
+  background-color: #000000;
 }
 .burger__line::before {
   content: "";
@@ -316,7 +319,7 @@ html {
   left: 0;
   width: 30px;
   height: 2px;
-  background-color: #F1CDB3;
+  background-color: #000000;
 }
 .burger__line::after {
   content: "";
@@ -325,7 +328,7 @@ html {
   left: 0;
   width: 30px;
   height: 2px;
-  background-color: #F1CDB3;
+  background-color: #000000;
 }
 @media (max-width: 767px) {
   .burger {
@@ -354,13 +357,13 @@ html {
 
 @media (max-width: 1279px) {
   .container.pets {
-    padding: 80px 30px 76px 30px;
+    padding: 200px 30px 76px 30px;
     gap: 30px;
   }
 }
 @media (max-width: 767px) {
   .container.pets {
-    padding: 42px 10px 32px 10px;
+    padding: 162px 10px 32px 10px;
     gap: 42px;
   }
 }

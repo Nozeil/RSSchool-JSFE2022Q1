@@ -3,5 +3,8 @@
 @use '../abstracts/placeholders';
 
 .header {
+	position: fixed;
+	width: 100%;
 	background-color: variables.$color-light-xl;
+	z-index: 1;
 }
