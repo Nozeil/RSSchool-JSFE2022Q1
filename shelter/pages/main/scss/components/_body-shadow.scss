@@ -1,0 +1,25 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.body__shadow {
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	@include mixins.media-mobile {
+		width: 100vw;
+		height: 100vh;
+		opacity: 0;
+		transition: ease-in-out 0.5s;
+	}
+
+}
+
+.body__shadow_active {
+	@include mixins.media-mobile {
+		background-color: variables.$color-dark-3xl;
+		pointer-events: all;
+		opacity: 0.6;
+		z-index: 2;
+	}
+}

@@ -1,6 +1,7 @@
 @use './base/typography';
 @use './base/base';
 
+@use './components/body-shadow';
 @use './components/logo';
 @use './components/burger';
 @use './components/start-screen';
@@ -13,6 +14,5 @@
 @use './components/buttons';
 @use './components/slider';
 
-@use './layout/header';
 @use './layout/navigation';
 @use './layout/footer';

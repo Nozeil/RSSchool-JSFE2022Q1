@@ -14,7 +14,7 @@
 <body class="body">
 	<div class="start-screen-container">
 		<header class="header container">
-			<a href="#!" class="header__logo">
+			<a class="header__logo" href="#!">
 				<div class="logo">
 					<h1 class="logo__title">
 						Cozy House
@@ -25,12 +25,27 @@
 				</div>
 			</a>
 			<nav class="nav nav_hidden">
+				<div class="nav-menu-header">
+					<a class="header__logo nav-menu-header__logo" href="#!">
+						<div class="logo">
+							<h1 class="logo__title">
+								Cozy House
+							</h1>
+							<h5 class="logo__subtitle">
+								Shelter for pets in Boston
+							</h5>
+						</div>
+					</a>
+					<div class="burger burger_hidden nav-menu-header__burger">
+						<span class="burger__line"></span>
+					</div>
+				</div>
 				<ul class="nav__list">
 					<li class="nav__item">
 						<a class="nav__link_active" href="#">About the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a class="nav__link" href="../../pages/pets/pets.html" target="_blank">Our pets</a>
+						<a class="nav__link" href="../pets/pets.html" target="_blank">Our pets</a>
 					</li>
 					<li class="nav__item">
 						<a class="nav__link_disabled" href="#help">Help the shelter</a>
@@ -40,7 +55,7 @@
 					</li>
 				</ul>
 			</nav>
-			<div class="burger burger_hidden">
+			<div class="burger">
 				<span class="burger__line"></span>
 			</div>
 		</header>
@@ -53,7 +68,7 @@
 					We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will
 					love you more than anybody else in the world, you will see!
 				</p>
-				<a href="#our-friends" class="start-screen__link">
+				<a href="../pets/pets.html" class="start-screen__link">
 					Make a friend
 				</a>
 			</div>
@@ -121,7 +136,7 @@
 					</div>
 					<button class="slider__arrow-right"></button>
 				</div>
-				<a href="../../pages/pets/pets.html" class="pets__link" target="_blank">
+				<a class="pets__link" href="../pets/pets.html">
 					Get to know the rest
 				</a>
 			</div>
