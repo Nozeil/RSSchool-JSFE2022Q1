@@ -71,8 +71,3 @@
 	}
 
 }
-
-.nav__link_disabled {
-	@extend %nav-link;
-	@extend %cursor-disabled;
-}

@@ -62,7 +62,7 @@
   color: #FFFFFF;
 }
 
-.start-screen__text, .nav__link, .nav__link_active, .nav__link_disabled {
+.start-screen__text, .nav__link, .nav__link_active {
   color: #CDCDCD;
 }
 
@@ -102,7 +102,7 @@
   line-height: 17px;
 }
 
-.about__text, .start-screen__text, .nav__link, .nav__link_active, .nav__link_disabled {
+.about__text, .start-screen__text, .nav__link, .nav__link_active {
   font-size: 15px;
   line-height: 24px;
 }
@@ -125,17 +125,13 @@
   list-style: none;
 }
 
-.nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .header__logo, .nav__link, .nav__link_disabled {
+.nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .header__logo, .nav__link {
   text-decoration: none;
 }
 
 .slider__card, .header__logo, .slider__arrow-left,
 .slider__arrow-right, .slider__button, .donation__link, .pets__link, .start-screen__link {
   cursor: pointer;
-}
-
-.nav__link_disabled {
-  cursor: not-allowed;
 }
 
 .slider__arrow-left:hover,
@@ -190,7 +186,7 @@
   background-color: #FDDCC4;
 }
 
-.slider__card, .slider__card:hover .slider__button, .burger__line, .burger, .nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .header__logo, .nav__link, .nav__link_disabled, .slider__arrow-left:hover,
+.slider__card, .slider__card:hover .slider__button, .burger__line, .burger, .nav__link_active, .locations__link, .contacts__link, .donation__link, .pets__link, .start-screen__link, .header__logo, .nav__link, .slider__arrow-left:hover,
 .slider__arrow-right:hover, .slider__button:hover, .donation__link:hover, .pets__link:hover, .start-screen__link:hover {
   transition: 0.3s;
 }
@@ -224,7 +220,7 @@
   margin-top: 16px;
 }
 
-.nav__link, .nav__link_active, .nav__link_disabled {
+.nav__link, .nav__link_active {
   font-family: "Arial", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -232,7 +228,7 @@
   letter-spacing: 0;
 }
 @media (max-width: 767px) {
-  .nav__link, .nav__link_active, .nav__link_disabled {
+  .nav__link, .nav__link_active {
     margin: 0;
     font-size: 32px;
     line-height: 52px;
