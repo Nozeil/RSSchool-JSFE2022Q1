@@ -243,6 +243,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.body_overflow-y-hidden {
+  overflow-y: hidden;
+}
+
 .container {
   padding: 0 40px 0 40px;
   max-width: 1280px;
