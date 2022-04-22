@@ -1,0 +1,21 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.body__shadow {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	opacity: 0;
+	transition: ease-in-out 0.5s;
+}
+
+.body__shadow_active {
+	background-color: variables.$color-dark-3xl;
+	pointer-events: all;
+	opacity: 0.6;
+	z-index: 2;
+}
+

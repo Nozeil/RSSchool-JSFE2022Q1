@@ -58,6 +58,11 @@
 	}
 }
 
+.pagination__image {
+	height: 270px;
+	border-radius: 9px 9px 0px 0px;
+}
+
 .pagination__title {
 	@include mixins.title(none, variables.$weight-400, h4, color-dark-l, 1px);
 }

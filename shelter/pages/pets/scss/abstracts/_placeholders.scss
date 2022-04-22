@@ -224,3 +224,17 @@
 	@extend %align-center;
 	margin-top: 16px;
 }
+
+%nav-link {
+	@include mixins.font(variables.$Arial, 400, normal);
+	@include mixins.text-elems(0, 0, 0, 36px, 0);
+	@extend %paragraph-l;
+	@extend %link;
+	@extend %color-dark-l;
+
+	@include mixins.media-mobile {
+		margin: 0;
+		font-size: variables.$nav-mobile;
+		line-height: variables.$nav-mobile-height;
+	}
+}

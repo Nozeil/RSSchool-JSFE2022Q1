@@ -1,24 +1,47 @@
 @use '../abstracts/variables';
+@use '../abstracts/placeholders';
 @use '../abstracts/mixins';
 
 .burger {
 	position: relative;
 	display: none;
-
+	top: 49px;
+	right: 43px;
+	width: 30px;
+	height: 23px;
 	&__line {
 
 		&::before {
-			@include mixins.burger-line(30px, 2px, -10px, 0, $bg-color:variables.$color-black);
+			@include mixins.burger-line(30px, 2px, -10px, 0, $bg-color:variables.$color-primary);
 		}
 
-		@include mixins.burger-line(30px, 2px, 59px, -73px, $bg-color:variables.$color-black);
+		@include mixins.burger-line(30px, 2px, 10px, 0, $bg-color:variables.$color-primary);
 
 		&::after {
-			@include mixins.burger-line(30px, 2px, 10px, 0, $bg-color:variables.$color-black);
+			@include mixins.burger-line(30px, 2px, 10px, 0, $bg-color:variables.$color-primary);
 		}
+
+		@extend %transition;
+		pointer-events: none;
 	}
 
 	@include mixins.media-mobile {
-		display: inline-block;
+		display: block;
 	}
+
+	@extend %transition;
+}
+
+.nav-menu-header__burger {
+	right: -38px;
+	z-index: 3;
+}
+
+.burger_hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.burger_rotated {
+	transform: rotate(90deg);
 }

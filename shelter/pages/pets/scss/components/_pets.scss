@@ -2,11 +2,6 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
-.our-pets__link {
-	@extend %link;
-	margin: auto 0;
-}
-
 .container.pets {
 	@extend %pets-help-blocks;
 
