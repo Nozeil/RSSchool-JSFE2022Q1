@@ -23,7 +23,7 @@
 	@include mixins.media-tablet {
 		width: variables.$slider-card-width * 2 + (variables.$slider-column-gap - 50px) + (variables.$slider-cards-margin - 41px) * 2;
 	}
-	
+
 	@include mixins.media-mobile {
 		grid-column: span 2;
 		align-self: center;
@@ -84,6 +84,11 @@
 		@extend %transition;
 	}
 
+}
+
+.slider__image {
+	height: 270px;
+	border-radius: 9px 9px 0px 0px;
 }
 
 .slider__title {

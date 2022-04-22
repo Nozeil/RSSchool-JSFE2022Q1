@@ -1,6 +1,6 @@
 import { SHADOW } from './_body-shadow.js';
 
-const BODY = document.querySelector('.body');
+export const BODY = document.querySelector('.body');
 const HEADER_LOGO = document.querySelector('.header__logo');
 const BURGERS = document.querySelectorAll('.burger');
 const NAV = document.querySelector('.nav');
@@ -8,6 +8,7 @@ const NAV = document.querySelector('.nav');
 document.addEventListener('click', (event) => {
 	if (BODY.classList.contains('body_burger-active') &&
 		event.target.classList.contains('nav__link') ||
+		BODY.classList.contains('body_burger-active') &&
 		event.target.classList.contains('body__shadow') ||
 		event.target.classList.contains('burger')) {
 		toggleBurgerMenu();
