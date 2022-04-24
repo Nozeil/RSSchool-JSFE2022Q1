@@ -10,6 +10,10 @@ html {
 	scroll-behavior: smooth;
 }
 
+.body_overflow-y-hidden {
+	overflow-y: hidden; 
+}
+
 .container {
 	@extend %flex;
 	@extend %space-between;

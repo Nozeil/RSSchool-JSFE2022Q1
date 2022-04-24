@@ -14,31 +14,48 @@
 <body class="body">
 	<div class="start-screen-container">
 		<header class="header container">
-			<div class="logo">
-				<h1 class="logo__title">
-					Cozy House
-				</h1>
-				<h5 class="logo__subtitle">
-					Shelter for pets in Boston
-				</h5>
-			</div>
+			<a class="header__logo" href="#!">
+				<div class="logo">
+					<h1 class="logo__title">
+						Cozy House
+					</h1>
+					<h5 class="logo__subtitle">
+						Shelter for pets in Boston
+					</h5>
+				</div>
+			</a>
 			<nav class="nav nav_hidden">
+				<div class="nav-menu-header">
+					<a class="header__logo nav-menu-header__logo" href="#!">
+						<div class="logo">
+							<h1 class="logo__title">
+								Cozy House
+							</h1>
+							<h5 class="logo__subtitle">
+								Shelter for pets in Boston
+							</h5>
+						</div>
+					</a>
+					<div class="burger burger_hidden nav-menu-header__burger">
+						<span class="burger__line"></span>
+					</div>
+				</div>
 				<ul class="nav__list">
 					<li class="nav__item">
-						<a href="#" class="nav__link_active">About the shelter</a>
+						<a class="nav__link nav__link_active" href="#">About the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a href="../../pages/pets/pets.html" class="nav__link" target="_blank">Our pets</a>
+						<a class="nav__link" href="../pets/pets.html">Our pets</a>
 					</li>
 					<li class="nav__item">
-						<a href="#help" class="nav__link">Help the shelter</a>
+						<a class="nav__link" href="#help">Help the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a href="#contacts" class="nav__link">Contacts</a>
+						<a class="nav__link" href="#contacts">Contacts</a>
 					</li>
 				</ul>
 			</nav>
-			<div class="burger burger_hidden">
+			<div class="burger">
 				<span class="burger__line"></span>
 			</div>
 		</header>
@@ -51,7 +68,7 @@
 					We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will
 					love you more than anybody else in the world, you will see!
 				</p>
-				<a href="#our-friends" class="start-screen__link">
+				<a href="../pets/pets.html" class="start-screen__link">
 					Make a friend
 				</a>
 			</div>
@@ -88,41 +105,13 @@
 				</h3>
 				<div class="slider">
 					<button class="slider__arrow-left"></button>
-					<div class="slider__cards">
-						<div class="slider__card">
-							<img class="slider__image" src="../../assets/imgs/png/pets-katrine.png" alt="pet">
-							<h4 class="slider__title">
-								Katrine
-							</h4>
-							<button class="slider__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="slider__card slider__card_mobile-hidden">
-							<img class="slider__image" src="../../assets/imgs/png/pets-jennifer.png" alt="pet">
-							<h4 class="slider__title">
-								Jennifer
-							</h4>
-							<button class="slider__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="slider__card slider__card_hidden">
-							<img class="slider__image" src="../../assets/imgs/png/pets-woody.png" alt="pet">
-							<h4 class="slider__title">
-								Woody
-							</h4>
-							<button class="slider__button ">
-								Learn more
-							</button>
-						</div>
+					<div class="slider__wrapper">
 					</div>
 					<button class="slider__arrow-right"></button>
 				</div>
-				<a href="../../pages/pets/pets.html" class="pets__link" target="_blank">
+				<a class="pets__link" href="../pets/pets.html">
 					Get to know the rest
 				</a>
-			</div>
 		</section>
 		<section class="section-help" id="help">
 			<div class="container help">
@@ -209,7 +198,7 @@
 				<h3 class="locations__title">
 					We are waiting for your visit
 				</h3>
-					<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39"
+				<a class="locations__link locations__Boston" href="https://goo.gl/maps/eEhgQE6Z5ydm8fQ39"
 					rel="noopener noreferrer" target="_blank">
 					1 Central Street, Boston (entrance from the store)
 				</a>
@@ -221,7 +210,7 @@
 			<img class="footer__puppy" src="../../assets/imgs/png/footer-puppy.png" alt="footer puppy">
 		</div>
 	</footer>
-	<script src="../../scripts/index.js"></script>
+	<script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

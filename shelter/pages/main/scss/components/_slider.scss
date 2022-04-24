@@ -5,11 +5,6 @@
 .slider {
 	@extend %flex;
 	@extend %align-center;
-	gap: variables.$slider-flex-gap;
-
-	@include mixins.media-tablet {
-		gap: variables.$slider-flex-gap - 41px;
-	}
 
 	@include mixins.media-mobile {
 		display: grid;
@@ -18,19 +13,41 @@
 	}
 }
 
-.slider__cards {
-	@extend %flex;
-	@extend %align-center;
-	gap: variables.$slider-column-gap;
+.slider__wrapper {
+	position: relative;
+	display: flex;
+	width: variables.$slider-card-width * 3 + variables.$slider-column-gap * 2 + variables.$slider-cards-margin * 2;
+	height: 435px;
+	overflow: hidden;
 
 	@include mixins.media-tablet {
-		gap: variables.$slider-column-gap - 50px;
+		width: variables.$slider-card-width * 2 + (variables.$slider-column-gap - 50px) + (variables.$slider-cards-margin - 41px) * 2;
 	}
 
 	@include mixins.media-mobile {
 		grid-column: span 2;
 		align-self: center;
+		width: variables.$slider-card-width;
 	}
+}
+
+.slider__cards {
+	position: absolute;
+	@extend %flex;
+	@extend %align-center;
+	margin: 0 variables.$slider-cards-margin;
+	gap: variables.$slider-column-gap;
+
+	@include mixins.media-tablet {
+		gap: variables.$slider-column-gap - 50px;
+		margin: 0 variables.$slider-cards-margin - 41px;
+	}
+
+	@include mixins.media-mobile {
+		margin: 0;
+	}
+
+	transition: ease-in-out 1s;
 }
 
 .slider__arrow-left {
@@ -67,19 +84,11 @@
 		@extend %transition;
 	}
 
-	@include mixins.media-tablet {
-		&_hidden {
-			display: none;
-		}
-	}
+}
 
-	@include mixins.media-mobile {
-		&_mobile-hidden {
-			display: none;
-		}
-	}
-
-
+.slider__image {
+	height: 270px;
+	border-radius: 9px 9px 0px 0px;
 }
 
 .slider__title {

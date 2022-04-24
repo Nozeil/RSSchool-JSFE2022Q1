@@ -11,10 +11,10 @@
 	<title>Our pets</title>
 </head>
 
-<body>
+<body class="body">
 	<header class="header">
 		<div class="our-pets container">
-			<a class="our-pets__link" href="../main/index.html">
+			<a class="header__logo" href="../main/index.html">
 				<div class="logo">
 					<h1 class="logo__title">
 						Cozy House
@@ -25,22 +25,37 @@
 				</div>
 			</a>
 			<nav class="nav nav_hidden">
+				<div class="nav-menu-header">
+					<a class="header__logo nav-menu-header__logo" href="../main/index.html">
+						<div class="logo">
+							<h1 class="logo__title">
+								Cozy House
+							</h1>
+							<h5 class="logo__subtitle">
+								Shelter for pets in Boston
+							</h5>
+						</div>
+					</a>
+					<div class="burger burger_hidden nav-menu-header__burger">
+						<span class="burger__line"></span>
+					</div>
+				</div>
 				<ul class="nav__list">
 					<li class="nav__item">
 						<a href="../main/index.html" class="nav__link">About the shelter</a>
 					</li>
 					<li class="nav__item">
-						<a href="#" class="nav__link_active">Our pets</a>
+						<a href="#" class="nav__link nav__link_active">Our pets</a>
 					</li>
 					<li class="nav__item">
-						<a href="../main/index.html#help" class="nav__link" target="_blank">Help the shelter</a>
+						<a href="../main/index.html#help" class="nav__link">Help the shelter</a>
 					</li>
 					<li class="nav__item">
 						<a href="#contacts" class="nav__link">Contacts</a>
 					</li>
 				</ul>
 			</nav>
-			<div class="burger burger_hidden">
+			<div class="burger">
 				<span class="burger__line"></span>
 			</div>
 		</div>
@@ -53,95 +68,21 @@
 					<span>are looking for a house</span>
 				</h3>
 				<div class="pagination">
-					<div class="pagination__cards">
-						<div class="pagination__card">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-katrine.png" alt="pet">
-							<h4 class="pagination__title">
-								Katrine
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-jennifer.png" alt="pet">
-							<h4 class="pagination__title">
-								Jennifer
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-woody.png" alt="pet">
-							<h4 class="pagination__title">
-								Woody
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card pagination__card_hidden-mobile">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-sophia.png" alt="pet">
-							<h4 class="pagination__title">
-								Sophia
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card pagination__card_hidden-mobile">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-timmy.png" alt="pet">
-							<h4 class="pagination__title">
-								Timmy
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card pagination__card_hidden-mobile">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-charly.png" alt="pet">
-							<h4 class="pagination__title">
-								Charly
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card pagination__card_hidden">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-scarlet.png" alt="pet">
-							<h4 class="pagination__title">
-								Scarlett
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-						<div class="pagination__card pagination__card_hidden">
-							<img class="pagination__image" src="../../assets/imgs/png/pets-freddie.png" alt="pet">
-							<h4 class="pagination__title">
-								Freddie
-							</h4>
-							<button class="pagination__button ">
-								Learn more
-							</button>
-						</div>
-					</div>
 				</div>
 				<div class="pagination-buttons">
-					<button class="pagination-buttons__button_inactive">
+					<button class="pagination-buttons__button_inactive pagination-buttons_show-first-page">
 						&lt;&lt;
 					</button>
-					<button class="pagination-buttons__button_inactive">
+					<button class="pagination-buttons__button_inactive pagination-buttons__button_paginator-prev">
 						&lt;
 					</button>
 					<button class="pagination-buttons__button_active">
 						1
 					</button>
-					<button class="pagination-buttons__button_paginator">
+					<button class="pagination-buttons__button_paginator pagination-buttons__button_paginator-next">
 						&gt;
 					</button>
-					<button class="pagination-buttons__button_paginator">
+					<button class="pagination-buttons__button_paginator pagination-buttons_show-last-page">
 						&gt;&gt;
 					</button>
 				</div>
@@ -177,6 +118,7 @@
 			<img class="footer__puppy" src="../../assets/imgs/png/footer-puppy.png" alt="footer puppy">
 		</div>
 	</footer>
+	<script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

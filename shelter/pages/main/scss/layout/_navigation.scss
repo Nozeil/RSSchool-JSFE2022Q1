@@ -4,9 +4,29 @@
 
 .nav {
 	@include mixins.media-mobile {
-		&_hidden {
-			display: none;
-		}
+		position: fixed;
+		right: 0;
+		display: flex;
+		flex-direction: column;
+		width: 320px;
+		height: 100vh;
+		@include mixins.container-padding(10px, 10px);
+		background-color: variables.$color-dark-3xl;
+		transition: ease-in-out 0.5s;
+		z-index: 3;
+	}
+}
+
+.nav_hidden {
+	@include mixins.media-mobile {
+		right: -320px;
+	}
+}
+
+.nav-menu-header {
+	display: none;
+	@include mixins.media-mobile {
+		display: flex;
 	}
 }
 
@@ -19,14 +39,21 @@
 	@include mixins.media-tablet {
 		padding: calc((variables.$start-screen-header-padding) - 30px) 0;
 	}
+
+	@include mixins.media-mobile {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		flex-basis: 75%;
+		gap: 40px;
+		padding: 0;
+		margin: 0;
+		overflow-Y: scroll;
+	}
 }
 
 .nav__link {
-	@include mixins.font(variables.$Arial, 400, normal);
-	@include mixins.text-elems(0, 0, 0, 36px, 0);
-	@extend %paragraph-l;
-	@extend %link;
-	@extend %color-dark-s;
+	@extend %nav-link;
 
 	&:hover {
 		@extend %color-light-s;
@@ -38,5 +65,10 @@
 		padding-bottom: 4px;
 		color: variables.$color-light-s;
 		border-bottom: 3px solid variables.$color-primary;
+
+		@include mixins.media-mobile {
+			padding-bottom: 7px;
+		}
 	}
+
 }

@@ -2,6 +2,33 @@
 @use '../abstracts/mixins';
 @use '../abstracts/placeholders';
 
+.header__logo {
+	margin: variables.$start-screen-header-padding 0 10px;
+	@extend %link;
+	@extend %cursor-pointer;
+	opacity: 1;
+	transition: 0.3s;
+
+	@include mixins.media-mobile {
+		margin: 0;
+	}
+}
+
+.header__logo_hidden {
+	@include mixins.media-mobile {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.nav-menu-header__logo {
+	display: none;
+
+	@include mixins.media-mobile {
+		display: block;
+	}
+}
+
 .logo {
 	@include mixins.media-mobile {
 		padding: 30px 0;

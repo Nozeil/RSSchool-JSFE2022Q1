@@ -5,7 +5,7 @@
 .start-screen-container {
 	@extend %gradient;
 	@include mixins.before(100%, 100%, 0, 0, url('../../../assets/imgs/png/noise_transparent@2x.png'), -1, center, repeat);
-	z-index: 0;
+	z-index: 1;
 }
 
 .start-screen {
