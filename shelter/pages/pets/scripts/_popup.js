@@ -28,11 +28,7 @@ document.addEventListener('click', (event) => {
 			}
 		}
 
-		console.log(petsData, petName);
-
 		popupData = petsData.filter(data => data.name === petName)[0];
-
-		console.log(popupData);
 
 		const SRC = `${popupData.img.slice(0, popupData.img.indexOf('images'))}imgs/png/pets-${popupData.name.toLowerCase()}.png`;
 
