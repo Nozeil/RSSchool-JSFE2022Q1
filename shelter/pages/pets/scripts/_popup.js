@@ -4,30 +4,35 @@ import { BODY } from './_burger.js';
 
 const SECTION_PETS = document.querySelector('.section-pets');
 const POPUP_ANIMATION_TIME = 500;
+
 let popup;
 
-let sliderCard;
+let paginationCard;
 let petName;
 
 document.addEventListener('click', (event) => {
-	if (event.target.classList.contains('slider__card') ||
-		event.target.classList.contains('slider__image') ||
-		event.target.classList.contains('slider__title') ||
-		event.target.classList.contains('slider__button')) {
+	if (event.target.classList.contains('pagination__card') ||
+		event.target.classList.contains('pagination__image') ||
+		event.target.classList.contains('pagination__title') ||
+		event.target.classList.contains('pagination__button')) {
 
 		let popupData;
 
-		sliderCard = event.target.closest('.slider__card');
-		const SLIDER_CARD_CHILDS = sliderCard.children;
+		paginationCard = event.target.closest('.pagination__card');
+		const pagination_CARD_CHILDS = paginationCard.children;
 
 
-		for (let child of SLIDER_CARD_CHILDS) {
-			if (child.classList.contains('slider__title')) {
+		for (let child of pagination_CARD_CHILDS) {
+			if (child.classList.contains('pagination__title')) {
 				petName = child.textContent;
 			}
 		}
 
+		console.log(petsData, petName);
+
 		popupData = petsData.filter(data => data.name === petName)[0];
+
+		console.log(popupData);
 
 		const SRC = `${popupData.img.slice(0, popupData.img.indexOf('images'))}imgs/png/pets-${popupData.name.toLowerCase()}.png`;
 

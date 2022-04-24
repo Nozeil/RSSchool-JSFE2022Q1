@@ -238,3 +238,8 @@
 		line-height: variables.$nav-mobile-height;
 	}
 }
+
+%button-js-hover {
+	background-color: variables.$color-primary-light;
+	border-color: variables.$color-primary-light;
+}

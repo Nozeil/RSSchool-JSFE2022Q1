@@ -3,12 +3,25 @@
 @use '../abstracts/mixins';
 
 .pagination {
+	position: relative;
 	@extend %flex;
 	@extend %align-center;
 	gap: variables.$pagination-flex-gap;
+	width: variables.$pagination-cards-width;
+	height: variables.$pagination-cards-height;
+
+	@include mixins.media-tablet {
+		width: variables.$pagination-cards-width - 620px;
+		height: variables.$pagination-cards-height + 465px;
+	}
+
+	@include mixins.media-mobile {
+		width: variables.$pagination-cards-width - 930px;
+	}
 }
 
 .pagination__cards {
+	position: absolute;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: variables.$pagination-row-gap variables.$pagination-column-gap;
@@ -76,3 +89,23 @@
 		gap: variables.$pagination-buttons-gap - 10px;
 	}
 }
+
+.pagination__cards_active {
+	z-index: 1;
+	animation: show 0.3s ease-in-out backwards;
+}
+
+.pagination__cards_hidden {
+	opacity: 0;
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+

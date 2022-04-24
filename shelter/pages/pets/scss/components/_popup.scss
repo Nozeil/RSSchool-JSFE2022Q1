@@ -1,0 +1,144 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+@use '../abstracts/placeholders';
+
+.popup {
+	position: fixed;
+	top: calc(50% - variables.$popup-height/2);
+	left: calc(50% - variables.$popup-width/2);
+	display: flex;
+	width: variables.$popup-width;
+	height: fit-content;
+	font-family: variables.$Georgia;
+	color: variables.$color-black;
+	border-radius: 9px;
+	background-color: variables.$color-light-s;
+	z-index: 3;
+	filter: drop-shadow(0px 4px 4px rgba(variables.$color-black, 0.25));
+	animation: show 0.5s ease-in-out forwards;
+
+	@include mixins.media-tablet {
+		top: calc(50% - (variables.$popup-height - 150px)/2);
+		left: calc(50% - (variables.$popup-width - 270px)/2);
+		width: variables.$popup-width - 270px;
+	}
+
+	@include mixins.media-mobile {
+		top: calc(50% - (variables.$popup-height - 159px)/2);
+		left: calc(50% - (variables.$popup-width - 660px)/2);
+		width: variables.$popup-width - 660px;
+	}
+}
+
+.popup__img {
+	border-radius: 9px 0 0 9px;
+
+	@include mixins.media-tablet {
+		width: 350px;
+	}
+
+	@include mixins.media-mobile {
+		display: none;
+	}
+}
+
+.popup__header {
+	@include mixins.media-mobile {
+		text-align: center;
+	}
+}
+
+.popup__content {
+	position: relative;
+	@extend %flex;
+	@extend %flex-column;
+	gap: variables.$popup-content-gap;
+	margin: 50px 20px 88px 29px;
+
+	@include mixins.media-tablet {
+		margin: 10px 9px 37px 11px;
+		gap: variables.$popup-content-gap / 2;
+	}
+
+	@include mixins.media-mobile {
+		margin: 10px;
+	}
+}
+
+.popup__title {
+	@extend %h3;
+	margin: 0 0 10px 0;
+	font-weight: variables.$weight-400;
+	letter-spacing: 0.06em;
+}
+
+.popup__subtitle {
+	@extend %h4;
+	margin: 0;
+	font-weight: variables.$weight-400;
+	letter-spacing: 0.06em;
+}
+
+.popup__pet-description {
+	@extend %h5;
+	margin: 0;
+	font-weight: variables.$weight-400;
+	letter-spacing: 0.06em;
+
+	@include mixins.media-tablet {
+		font-size:  variables.$h5 - 2px;
+		line-height: variables.$h5-height - 3px;
+		letter-spacing: 0.059em;
+	}
+
+	@include mixins.media-mobile {
+		text-align: justify;
+	}
+}
+
+.popup__list {
+	@extend %flex;
+	@extend %flex-column;
+	gap: 11px;
+	margin: 0;
+	padding-left: 14px;
+	@extend %h5-modal-window;
+	letter-spacing: 0.06em;
+
+	@include mixins.media-tablet {
+		gap: 6px;
+	}
+}
+
+.popup__item_bold {
+	font-weight: 700;
+}
+
+.popup__item::marker {
+	color: variables.$color-primary;
+}
+
+.popup_deactivated {
+	animation: hide 0.5s ease-in-out forwards;
+}
+
+
+@keyframes show {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}

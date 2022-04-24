@@ -39,3 +39,33 @@
 	background-color: variables.$color-primary;
 }
 
+.popup__close-button {
+	position: absolute;
+	top: -28%;
+	right: -18%;
+	@extend %button;
+	@extend %round-button;
+	@include mixins.background(url('../../../assets/imgs/svg/close-icon.svg'));
+	transition: 0.3s ease-in-out;
+
+	@include mixins.media-tablet {
+		top: -21%;
+		right: -20%;
+	}
+
+	@include mixins.media-mobile {
+		top: -21%;
+		right: -19%;
+	}
+}
+
+.popup__close-button:hover {
+	border-color: variables.$color-primary-light;
+}
+
+.popup__close-button_shadow-hovered {
+	@extend .popup__close-button;
+	@extend %button-js-hover;
+	transition: 0.3s ease-in-out;
+}
+

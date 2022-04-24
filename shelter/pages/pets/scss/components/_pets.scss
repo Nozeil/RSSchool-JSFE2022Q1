@@ -7,7 +7,7 @@
 
 	@include mixins.media-tablet {
 		@include mixins.container-padding(30px, 30px, 200px, 76px);
-		gap: variables.$pets-gap - 30px;
+		gap: variables.$pets-gap - 26px;
 	}
 
 	@include mixins.media-mobile {
