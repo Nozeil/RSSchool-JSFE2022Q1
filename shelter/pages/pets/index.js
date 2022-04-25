@@ -117,6 +117,7 @@ async function addFunctionality() {
 	MOBILE_MQL_MAX_WIDTH.addEventListener('change', checkScreenViewport);
 
 	let shuffledData;
+	let shuffledCards;
 
 	checkScreenViewport(DESKTOP_MQL_MAX_WIDTH);
 	checkScreenViewport(TABLET_MQL_MAX_WIDTH);
@@ -191,19 +192,23 @@ async function addFunctionality() {
 		PAGINATION.append(...pages);
 	}
 
+	
 	function checkScreenViewport(event) {
 		if (event.matches && event.media === '(min-width: 1280px)') {
 			shuffledData = shuffleData(devideNewPetsData(DESKTOP_NUM_OF_PAGINATION_CARDS));
+			shuffledCards = shuffleCards(shuffledData);
 			appendPages(desktopPages, DESKTOP_NUM_OF_PAGINATION_CARDS);
 		}
 
 		if (event.matches && event.media === '(max-width: 1279px) and (min-width: 768px)') {
 			shuffledData = shuffleData(devideNewPetsData(TABLET_NUM_OF_PAGINATION_CARDS));
+			shuffledCards = shuffleCards(shuffledData);
 			appendPages(tabletPages, TABLET_NUM_OF_PAGINATION_CARDS);
 		}
 
 		if (event.matches && event.media === '(max-width: 767px)') {
 			shuffledData = shuffleData(devideNewPetsData(MOBILE_NUM_OF_PAGINATION_CARDS));
+			shuffledCards = shuffleCards(shuffledData);
 			appendPages(mobilePages, MOBILE_NUM_OF_PAGINATION_CARDS);
 		}
 	}
@@ -281,8 +286,16 @@ async function addFunctionality() {
 		});
 	}
 
+	function shuffleCards(card) {
+		for (let i = card.length - 1; i > 0; i--) {
+			const RANDOM_NUM = Math.floor(Math.random() * i);
+			[card[i], card[RANDOM_NUM]] = [card[RANDOM_NUM], card[i]];
+		}
+		return card;
+	}
+
 	function createCardsFromData() {
-		return shuffledData.map(data => {
+		return shuffledCards.map(data => {
 			return data.map(dataItem => {
 				const SRC = `${dataItem.img.slice(0, dataItem.img.indexOf('images'))}imgs/png/pets-${dataItem.name.toLowerCase()}.png`;
 				const CARD = new PaginationCard(dataItem.name, SRC);
