@@ -57,6 +57,9 @@ async function addFunctionality() {
 	let sliderWrapperWidth;
 	let numOfSliderCards;
 	let hasEventListener = false;
+	let centerSlider;
+	let leftSlider;
+	let rightSlider;
 
 	const DESKTOP_MQL_MAX_WIDTH = window.matchMedia('(min-width: 1280px)');
 	const TABLET_MQL_MAX_WIDTH = window.matchMedia('(max-width: 1279px) and (min-width: 768px)');
@@ -135,16 +138,15 @@ async function addFunctionality() {
 			return new SliderCard(data.name, SRC);
 		});
 
-		let centerSlider = createSliderCards(createFirstUniqueSlide(), 0);
-		let leftSlider = createSliderCards(createUniqueSlide(centerSlider), -sliderWrapperWidth);
-		let rightSlider = createSliderCards(createUniqueSlide(centerSlider), sliderWrapperWidth);
+		centerSlider = createSliderCards(createFirstUniqueSlide(), 0);
+		leftSlider = createSliderCards(createUniqueSlide(centerSlider), -sliderWrapperWidth);
+		rightSlider = createSliderCards(createUniqueSlide(centerSlider), sliderWrapperWidth);
 
 		if (hasEventListener === false) {
 			SLIDER_ARROW_RIGHT.addEventListener('click', addArrowRightListener);
 			SLIDER_ARROW_LEFT.addEventListener('click', addArrowLeftListener);
 			hasEventListener = true;
 		}
-
 
 		function getRandomNum() {
 			return Math.floor(Math.random() * SLIDER_CARDS_ARRAY.length);
@@ -169,9 +171,11 @@ async function addFunctionality() {
 
 			while (nextSlide.size < numOfSliderCards) {
 				const RANDOM_CARD = getRandomCard();
+	
 				if (!prevSlide.includes(RANDOM_CARD)) {
 					nextSlide.add(RANDOM_CARD);
 				}
+				
 			}
 
 			return Array.from(nextSlide);
