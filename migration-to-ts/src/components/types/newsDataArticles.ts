@@ -1,4 +1,4 @@
-export type articles = {
+export type Articles = {
     source: {
         id: string | null;
         name: string;

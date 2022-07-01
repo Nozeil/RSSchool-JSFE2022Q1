@@ -1,16 +1,16 @@
 import NewsData from '../../interfaces/newsData';
-import { articles } from '../../types/newsDataArticles';
+import { Articles } from '../../types/newsDataArticles';
 import './news.css';
 
 class News {
     protected draw(data: NewsData['articles']): void {
         const news: NewsData['articles'] =
-            data.length >= 10 ? data.filter((_item: articles, idx: number): boolean => idx < 10) : data;
+            data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        news.forEach((item: articles, idx: number): void => {
+        news.forEach((item: Articles, idx: number): void => {
             const newsClone: HTMLTemplateElement = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
 
             if (idx % 2) {
