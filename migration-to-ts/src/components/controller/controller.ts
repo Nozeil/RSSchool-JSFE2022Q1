@@ -3,7 +3,7 @@ import { Callback } from '../interfaces/interfaces';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: Callback): void {
+    public getSources(callback: Callback): void {
         super.getResp(
             {
                 endpoint: APIPropValues.sources,
@@ -12,7 +12,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: Callback): void {
+    public getNews(e: MouseEvent, callback: Callback): void {
         let target: HTMLDivElement = e.target as HTMLDivElement;
         const newsContainer: HTMLDivElement = e.currentTarget as HTMLDivElement;
 
