@@ -1,6 +1,5 @@
 import APIPropValues from '../enums/APIPropValues';
-import NewsData from '../interfaces/newsData';
-import SourcesData from '../interfaces/sourcesData';
+import { NewsData, SourcesData } from '../interfaces/interfaces';
 import { Data } from '../types/types';
 import News from './news/news';
 import Sources from './sources/sources';

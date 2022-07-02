@@ -1,5 +1,5 @@
 import APIPropValues from '../../enums/APIPropValues';
-import NewsData from '../../interfaces/newsData';
+import { NewsData } from '../../interfaces/interfaces';
 import { Articles } from '../../types/types';
 import './news.css';
 

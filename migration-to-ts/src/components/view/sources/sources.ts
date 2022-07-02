@@ -1,5 +1,5 @@
 import APIPropValues from '../../enums/APIPropValues';
-import SourcesData from '../../interfaces/sourcesData';
+import { SourcesData } from '../../interfaces/interfaces';
 import { TSources } from '../../types/types';
 import './sources.css';
 
