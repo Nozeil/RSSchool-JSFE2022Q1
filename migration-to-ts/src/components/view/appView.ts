@@ -1,10 +1,11 @@
 import APIPropValues from '../enums/APIPropValues';
 import { NewsData, SourcesData } from '../interfaces/interfaces';
 import { Data } from '../types/types';
+import AppViewI from './appViewI';
 import News from './news/news';
 import Sources from './sources/sources';
 
-export class AppView {
+export class AppView implements AppViewI {
     public news: {
         draw(arr: NewsData[APIPropValues.articles]): void;
     };

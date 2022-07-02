@@ -1,8 +1,9 @@
 import APIPropValues from '../enums/APIPropValues';
 import { Callback } from '../interfaces/interfaces';
 import AppLoader from './appLoader';
+import AppControllerI from './controllerI';
 
-class AppController extends AppLoader {
+class AppController extends AppLoader implements AppControllerI {
     public getSources(callback: Callback): void {
         super.getResp(
             {

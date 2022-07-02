@@ -1,9 +1,10 @@
+import NewsI from './newsI';
 import APIPropValues from '../../enums/APIPropValues';
 import { NewsData } from '../../interfaces/interfaces';
 import { Articles } from '../../types/types';
 import './news.css';
 
-class News {
+class News implements NewsI {
     public draw(data: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]>): void {
         const news: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]> =
             data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;

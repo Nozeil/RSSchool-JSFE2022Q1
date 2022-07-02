@@ -2,8 +2,9 @@ import APIPropValues from '../../enums/APIPropValues';
 import { SourcesData } from '../../interfaces/interfaces';
 import { TSources } from '../../types/types';
 import './sources.css';
+import SourcesI from './sourcesI';
 
-class Sources {
+class Sources implements SourcesI {
     public draw(data: Readonly<Pick<SourcesData, APIPropValues.sources>[APIPropValues.sources]>): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;

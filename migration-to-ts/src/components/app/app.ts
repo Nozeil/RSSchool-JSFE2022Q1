@@ -1,7 +1,8 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
+import AppI from './appI';
 
-class App {
+class App implements AppI {
     private controller: AppController;
     private view: AppView;
 

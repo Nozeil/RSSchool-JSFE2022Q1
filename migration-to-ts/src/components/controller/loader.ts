@@ -1,7 +1,8 @@
 import { Callback, Options } from '../interfaces/interfaces';
 import { Data, Endpoints } from '../types/types';
+import LoaderI from './loaderI';
 
-class Loader {
+class Loader implements LoaderI {
     private baseLink: string;
     private options: Options;
 
