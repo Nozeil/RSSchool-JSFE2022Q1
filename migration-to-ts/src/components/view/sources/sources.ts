@@ -1,6 +1,6 @@
 import APIPropValues from '../../enums/APIPropValues';
 import SourcesData from '../../interfaces/sourcesData';
-import { TSources } from '../../types/sourcesDataSources';
+import { TSources } from '../../types/types';
 import './sources.css';
 
 class Sources {

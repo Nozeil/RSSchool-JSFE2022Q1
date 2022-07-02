@@ -1,6 +1,6 @@
 import APIPropValues from '../../enums/APIPropValues';
 import NewsData from '../../interfaces/newsData';
-import { Articles } from '../../types/newsDataArticles';
+import { Articles } from '../../types/types';
 import './news.css';
 
 class News {

@@ -1,4 +1,4 @@
-import { Articles } from '../types/newsDataArticles';
+import { Articles } from '../types/types';
 
 export default interface NewsData {
     status: string;

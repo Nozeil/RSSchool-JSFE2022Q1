@@ -1,4 +1,4 @@
-import { TSources } from '../types/sourcesDataSources';
+import { TSources } from '../types/types';
 
 export default interface SourcesData {
     status: string;
