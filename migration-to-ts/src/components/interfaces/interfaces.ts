@@ -1,7 +1,7 @@
 import { Articles, Data, TSources } from '../types/types';
 
 export interface Options {
-    [s: string]: string;
+    [s: string]: string | undefined;
 }
 
 export interface Callback {

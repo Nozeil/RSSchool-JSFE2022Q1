@@ -4,8 +4,8 @@ import { Articles } from '../../types/types';
 import './news.css';
 
 class News {
-    public draw(data: NewsData[APIPropValues.articles]): void {
-        const news: NewsData[APIPropValues.articles] =
+    public draw(data: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]>): void {
+        const news: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]> =
             data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();

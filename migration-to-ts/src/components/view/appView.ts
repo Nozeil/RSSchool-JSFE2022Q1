@@ -17,14 +17,14 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    public drawNews(data: Data): void {
+    public drawNews(data: Readonly<Data>): void {
         if (APIPropValues.articles in data) {
             const values: NewsData[APIPropValues.articles] | [] = data?.articles ? data?.articles : [];
             this.news.draw(values);
         }
     }
 
-    public drawSources(data: Data): void {
+    public drawSources(data: Readonly<Data>): void {
         if (APIPropValues.sources in data) {
             const values: SourcesData[APIPropValues.sources] | [] = data?.sources ? data?.sources : [];
             this.sources.draw(values);

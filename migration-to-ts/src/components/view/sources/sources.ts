@@ -4,7 +4,7 @@ import { TSources } from '../../types/types';
 import './sources.css';
 
 class Sources {
-    public draw(data: SourcesData[APIPropValues.sources]): void {
+    public draw(data: Readonly<Pick<SourcesData, APIPropValues.sources>[APIPropValues.sources]>): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
         data.forEach((item: TSources): void => {
