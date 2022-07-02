@@ -1,3 +1,4 @@
+import APIPropValues from '../enums/APIPropValues';
 import NewsData from '../interfaces/newsData';
 import SourcesData from '../interfaces/sourcesData';
 import { Data } from '../types/types';
@@ -6,10 +7,10 @@ import Sources from './sources/sources';
 
 export class AppView {
     public news: {
-        draw(arr: NewsData['articles']): void;
+        draw(arr: NewsData[APIPropValues.articles]): void;
     };
     public sources: {
-        draw(arr: SourcesData['sources']): void;
+        draw(arr: SourcesData[APIPropValues.sources]): void;
     };
 
     constructor() {
@@ -18,15 +19,15 @@ export class AppView {
     }
 
     public drawNews(data: Data): void {
-        if ('articles' in data) {
-            const values: NewsData['articles'] | [] = data?.articles ? data?.articles : [];
+        if (APIPropValues.articles in data) {
+            const values: NewsData[APIPropValues.articles] | [] = data?.articles ? data?.articles : [];
             this.news.draw(values);
         }
     }
 
     public drawSources(data: Data): void {
-        if ('sources' in data) {
-            const values: SourcesData['sources'] | [] = data?.sources ? data?.sources : [];
+        if (APIPropValues.sources in data) {
+            const values: SourcesData[APIPropValues.sources] | [] = data?.sources ? data?.sources : [];
             this.sources.draw(values);
         }
     }

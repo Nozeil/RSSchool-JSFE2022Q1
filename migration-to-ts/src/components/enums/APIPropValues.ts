@@ -3,3 +3,5 @@ enum APIPropValues {
     sources = 'sources',
     everything = 'everything',
 }
+
+export default APIPropValues;

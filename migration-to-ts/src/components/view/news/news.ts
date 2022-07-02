@@ -1,10 +1,11 @@
+import APIPropValues from '../../enums/APIPropValues';
 import NewsData from '../../interfaces/newsData';
 import { Articles } from '../../types/newsDataArticles';
 import './news.css';
 
 class News {
-    public draw(data: NewsData['articles']): void {
-        const news: NewsData['articles'] =
+    public draw(data: NewsData[APIPropValues.articles]): void {
+        const news: NewsData[APIPropValues.articles] =
             data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();

@@ -1,9 +1,10 @@
+import APIPropValues from '../../enums/APIPropValues';
 import SourcesData from '../../interfaces/sourcesData';
 import { TSources } from '../../types/sourcesDataSources';
 import './sources.css';
 
 class Sources {
-    public draw(data: SourcesData['sources']): void {
+    public draw(data: SourcesData[APIPropValues.sources]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
         data.forEach((item: TSources): void => {
