@@ -5,5 +5,5 @@ export interface Options {
 }
 
 export interface Callback {
-    (d?: Data): void;
+    (d: Data): void;
 }
