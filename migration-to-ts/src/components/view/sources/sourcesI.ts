@@ -1,4 +1,4 @@
-import APIPropValues from '../../enums/APIPropValues';
+import { APIPropValues } from '../../enums/enums';
 import { SourcesData } from '../../interfaces/interfaces';
 
 export default interface SourcesI {

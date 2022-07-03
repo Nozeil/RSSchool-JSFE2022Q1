@@ -1,4 +1,4 @@
-import APIPropValues from '../enums/APIPropValues';
+import { APIPropValues } from '../enums/enums';
 import { NewsData, SourcesData } from '../interfaces/interfaces';
 import { Data } from '../types/types';
 import AppViewI from './appViewI';

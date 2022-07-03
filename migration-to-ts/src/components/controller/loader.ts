@@ -1,6 +1,7 @@
 import { Callback, Options } from '../interfaces/interfaces';
 import { Data, Endpoints } from '../types/types';
 import LoaderI from './loaderI';
+import { Errors } from '../enums/enums';
 
 class Loader implements LoaderI {
     private baseLink: string;
@@ -22,7 +23,7 @@ class Loader implements LoaderI {
 
     private errorHandler<T extends Response>(res: T): T {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === Errors.unauthorized || res.status === Errors.notFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }

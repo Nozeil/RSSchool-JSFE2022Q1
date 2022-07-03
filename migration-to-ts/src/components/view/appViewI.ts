@@ -1,6 +1,6 @@
 import { NewsData, SourcesData } from '../interfaces/interfaces';
 import { Data } from '../types/types';
-import APIPropValues from '../enums/APIPropValues';
+import { APIPropValues } from '../enums/enums';
 
 export default interface AppViewI {
     news: { draw(arr: NewsData[APIPropValues.articles]): void };

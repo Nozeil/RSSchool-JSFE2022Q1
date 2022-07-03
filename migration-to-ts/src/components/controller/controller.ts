@@ -1,4 +1,4 @@
-import APIPropValues from '../enums/APIPropValues';
+import { APIPropValues } from '../enums/enums';
 import { Callback } from '../interfaces/interfaces';
 import AppLoader from './appLoader';
 import AppControllerI from './controllerI';
