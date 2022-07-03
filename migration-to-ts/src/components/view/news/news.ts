@@ -2,6 +2,7 @@ import NewsI from './newsI';
 import APIPropValues from '../../enums/APIPropValues';
 import { NewsData } from '../../interfaces/interfaces';
 import { Articles } from '../../types/types';
+import newsPlaceholder from '../../../assets/img/news_placeholder.jpg';
 import './news.css';
 
 class News implements NewsI {
@@ -21,7 +22,7 @@ class News implements NewsI {
             }
 
             (newsClone.querySelector('.news__meta-photo') as HTMLDivElement).style.backgroundImage = `url(${
-                item.urlToImage || 'img/news_placeholder.jpg'
+                item.urlToImage || newsPlaceholder
             })`;
             (newsClone.querySelector('.news__meta-author') as HTMLLIElement).textContent =
                 item.author || item.source.name;
