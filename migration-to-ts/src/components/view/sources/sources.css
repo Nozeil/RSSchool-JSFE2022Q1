@@ -50,3 +50,10 @@
     white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+    .sources {
+        max-height: calc(100vh - 227.59px);
+        min-height: 60px;
+        width: 100%;
+    }
+  }
