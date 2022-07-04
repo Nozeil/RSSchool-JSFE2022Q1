@@ -1,9 +1,9 @@
 import { APIPropValues } from '../enums/enums';
-import { NewsData, SourcesData } from '../interfaces/interfaces';
+import { NewsDataI, SourcesDataI } from '../interfaces/interfaces';
 
 export type Endpoints = APIPropValues.everything | APIPropValues.sources;
 
-export type Data = NewsData | SourcesData;
+export type Data = NewsDataI | SourcesDataI;
 
 export type Articles = {
     source: {

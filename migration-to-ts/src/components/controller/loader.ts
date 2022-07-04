@@ -1,20 +1,20 @@
-import { Callback, Options } from '../interfaces/interfaces';
+import { CallbackI, OptionsI } from '../interfaces/interfaces';
 import { Data, Endpoints } from '../types/types';
 import LoaderI from './loaderI';
 import { Errors } from '../enums/enums';
 
 class Loader implements LoaderI {
     private baseLink: string;
-    private options: Options;
+    private options: OptionsI;
 
-    constructor(baseLink: string, options: Options) {
+    constructor(baseLink: string, options: OptionsI) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     public getResp(
-        { endpoint, options = {} }: { endpoint: Endpoints; options?: Partial<Options> },
-        callback: Callback = () => {
+        { endpoint, options = {} }: { endpoint: Endpoints; options?: Partial<OptionsI> },
+        callback: CallbackI = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -31,8 +31,8 @@ class Loader implements LoaderI {
         return res;
     }
 
-    private makeUrl(options: Readonly<Options>, endpoint: Readonly<Endpoints>): string {
-        const urlOptions: Options = { ...this.options, ...options };
+    private makeUrl(options: Readonly<OptionsI>, endpoint: Readonly<Endpoints>): string {
+        const urlOptions: OptionsI = { ...this.options, ...options };
         let url: string = this.baseLink + endpoint + '?';
 
         Object.keys(urlOptions).forEach((key: string): void => {
@@ -42,7 +42,7 @@ class Loader implements LoaderI {
         return url.slice(0, -1);
     }
 
-    private load(method: string, endpoint: Readonly<Endpoints>, callback: Callback, options: Options = {}): void {
+    private load(method: string, endpoint: Readonly<Endpoints>, callback: CallbackI, options: OptionsI = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then(<T extends Response>(res: T): Promise<Data> => res.json())

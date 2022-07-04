@@ -1,6 +1,6 @@
 import { APIPropValues } from '../../enums/enums';
-import { SourcesData } from '../../interfaces/interfaces';
+import { SourcesDataI } from '../../interfaces/interfaces';
 
 export default interface SourcesI {
-    draw(data: Readonly<Pick<SourcesData, APIPropValues.sources>[APIPropValues.sources]>): void;
+    draw(data: Readonly<Pick<SourcesDataI, APIPropValues.sources>[APIPropValues.sources]>): void;
 }

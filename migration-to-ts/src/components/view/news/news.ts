@@ -1,13 +1,13 @@
 import NewsI from './newsI';
 import { APIPropValues } from '../../enums/enums';
-import { NewsData } from '../../interfaces/interfaces';
+import { NewsDataI } from '../../interfaces/interfaces';
 import { Articles } from '../../types/types';
 import newsPlaceholder from '../../../assets/img/news_placeholder.jpg';
 import './news.css';
 
 class News implements NewsI {
-    public draw(data: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]>): void {
-        const news: Readonly<Pick<NewsData, APIPropValues.articles>[APIPropValues.articles]> =
+    public draw(data: Readonly<Pick<NewsDataI, APIPropValues.articles>[APIPropValues.articles]>): void {
+        const news: Readonly<Pick<NewsDataI, APIPropValues.articles>[APIPropValues.articles]> =
             data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();

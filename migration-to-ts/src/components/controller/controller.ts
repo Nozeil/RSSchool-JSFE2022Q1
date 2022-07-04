@@ -1,10 +1,10 @@
 import { APIPropValues } from '../enums/enums';
-import { Callback } from '../interfaces/interfaces';
+import { CallbackI } from '../interfaces/interfaces';
 import AppLoader from './appLoader';
 import AppControllerI from './controllerI';
 
 class AppController extends AppLoader implements AppControllerI {
-    public getSources(callback: Callback): void {
+    public getSources(callback: CallbackI): void {
         super.getResp(
             {
                 endpoint: APIPropValues.sources,
@@ -13,7 +13,7 @@ class AppController extends AppLoader implements AppControllerI {
         );
     }
 
-    public getNews(e: MouseEvent, callback: Callback): void {
+    public getNews(e: MouseEvent, callback: CallbackI): void {
         let target: HTMLDivElement = e.target as HTMLDivElement;
         const newsContainer: HTMLDivElement = e.currentTarget as HTMLDivElement;
 

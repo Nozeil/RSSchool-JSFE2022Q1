@@ -1,5 +1,5 @@
 import { APIPropValues } from '../enums/enums';
-import { NewsData, SourcesData } from '../interfaces/interfaces';
+import { NewsDataI, SourcesDataI } from '../interfaces/interfaces';
 import { Data } from '../types/types';
 import AppViewI from './appViewI';
 import News from './news/news';
@@ -7,10 +7,10 @@ import Sources from './sources/sources';
 
 export class AppView implements AppViewI {
     public news: {
-        draw(arr: NewsData[APIPropValues.articles]): void;
+        draw(arr: NewsDataI[APIPropValues.articles]): void;
     };
     public sources: {
-        draw(arr: SourcesData[APIPropValues.sources]): void;
+        draw(arr: SourcesDataI[APIPropValues.sources]): void;
     };
 
     constructor() {
@@ -20,14 +20,14 @@ export class AppView implements AppViewI {
 
     public drawNews(data: Readonly<Data>): void {
         if (APIPropValues.articles in data) {
-            const values: NewsData[APIPropValues.articles] | [] = data?.articles ? data?.articles : [];
+            const values: NewsDataI[APIPropValues.articles] | [] = data?.articles ? data?.articles : [];
             this.news.draw(values);
         }
     }
 
     public drawSources(data: Readonly<Data>): void {
         if (APIPropValues.sources in data) {
-            const values: SourcesData[APIPropValues.sources] | [] = data?.sources ? data?.sources : [];
+            const values: SourcesDataI[APIPropValues.sources] | [] = data?.sources ? data?.sources : [];
             this.sources.draw(values);
         }
     }
