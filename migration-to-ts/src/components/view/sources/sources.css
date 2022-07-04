@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    max-height: 100vh;
+    max-height: calc(100vh - 237.1px);;
     overflow: auto;
     text-align: center;
     font: 300 1em 'Fira Sans', sans-serif;
