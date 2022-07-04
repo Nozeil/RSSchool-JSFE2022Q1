@@ -1,5 +1,5 @@
 import { CallbackI, OptionsI } from '../interfaces/interfaces';
-import { Data, Endpoints } from '../types/types';
+import { DataT, EndpointsT } from '../types/types';
 import LoaderI from './loaderI';
 import { Errors } from '../enums/enums';
 
@@ -13,7 +13,7 @@ class Loader implements LoaderI {
     }
 
     public getResp(
-        { endpoint, options = {} }: { endpoint: Endpoints; options?: Partial<OptionsI> },
+        { endpoint, options = {} }: { endpoint: EndpointsT; options?: Partial<OptionsI> },
         callback: CallbackI = () => {
             console.error('No callback for GET response');
         }
@@ -31,7 +31,7 @@ class Loader implements LoaderI {
         return res;
     }
 
-    private makeUrl(options: Readonly<OptionsI>, endpoint: Readonly<Endpoints>): string {
+    private makeUrl(options: Readonly<OptionsI>, endpoint: Readonly<EndpointsT>): string {
         const urlOptions: OptionsI = { ...this.options, ...options };
         let url: string = this.baseLink + endpoint + '?';
 
@@ -42,11 +42,11 @@ class Loader implements LoaderI {
         return url.slice(0, -1);
     }
 
-    private load(method: string, endpoint: Readonly<Endpoints>, callback: CallbackI, options: OptionsI = {}): void {
+    private load(method: string, endpoint: Readonly<EndpointsT>, callback: CallbackI, options: OptionsI = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then(<T extends Response>(res: T): Promise<Data> => res.json())
-            .then((data: Data): void => callback(data))
+            .then(<T extends Response>(res: T): Promise<DataT> => res.json())
+            .then((data: DataT): void => callback(data))
             .catch(<T extends Error>(err: T): void => console.error(err));
     }
 }

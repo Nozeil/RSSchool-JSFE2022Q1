@@ -1,11 +1,11 @@
 import { APIPropValues } from '../enums/enums';
 import { NewsDataI, SourcesDataI } from '../interfaces/interfaces';
 
-export type Endpoints = APIPropValues.everything | APIPropValues.sources;
+export type EndpointsT = APIPropValues.everything | APIPropValues.sources;
 
-export type Data = NewsDataI | SourcesDataI;
+export type DataT = NewsDataI | SourcesDataI;
 
-export type Articles = {
+export type ArticlesT = {
     source: {
         id: string | null;
         name: string;
@@ -19,7 +19,7 @@ export type Articles = {
     content: string;
 };
 
-export type TSources = {
+export type SourcesT = {
     id: string;
     name: string;
     description: string;
@@ -28,3 +28,7 @@ export type TSources = {
     language: string;
     country: string;
 };
+
+export type SourcesDrawDataT = Readonly<Pick<SourcesDataI, APIPropValues.sources>[APIPropValues.sources]>;
+
+export type NewsDrawDataT = Readonly<Pick<NewsDataI, APIPropValues.articles>[APIPropValues.articles]>;

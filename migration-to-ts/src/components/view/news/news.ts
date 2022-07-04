@@ -1,19 +1,17 @@
 import NewsI from './newsI';
-import { APIPropValues } from '../../enums/enums';
-import { NewsDataI } from '../../interfaces/interfaces';
-import { Articles } from '../../types/types';
+import { ArticlesT, NewsDrawDataT } from '../../types/types';
 import newsPlaceholder from '../../../assets/img/news_placeholder.jpg';
 import './news.css';
 
 class News implements NewsI {
-    public draw(data: Readonly<Pick<NewsDataI, APIPropValues.articles>[APIPropValues.articles]>): void {
-        const news: Readonly<Pick<NewsDataI, APIPropValues.articles>[APIPropValues.articles]> =
-            data.length >= 10 ? data.filter((_item: Articles, idx: number): boolean => idx < 10) : data;
+    public draw(data: NewsDrawDataT): void {
+        const news: NewsDrawDataT =
+            data.length >= 10 ? data.filter((_item: ArticlesT, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        news.forEach((item: Articles, idx: number): void => {
+        news.forEach((item: ArticlesT, idx: number): void => {
             const newsClone: HTMLTemplateElement = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
 
             if (idx % 2) {
