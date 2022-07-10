@@ -1,0 +1,7 @@
+@use '../abstracts/variables';
+
+.title {
+  margin: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: variables.$light-s;
+}

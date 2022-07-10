@@ -1,3 +1,7 @@
 @use './vendors/normalize';
 @use './base/base';
 @use './layout/wrapper';
+@use './layout/header';
+@use './layout/container';
+@use './components/title';
+@use './components/header-cart';
