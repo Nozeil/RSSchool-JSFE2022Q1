@@ -1,0 +1,12 @@
+@use '../abstracts/variables';
+
+.header {
+  background-color: variables.$dark;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}

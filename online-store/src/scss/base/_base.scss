@@ -1,0 +1,11 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: 'Roboto', sans-serif;
+  background-color: variables.$light;
+}
