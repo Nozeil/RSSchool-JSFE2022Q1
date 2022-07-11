@@ -1,6 +1,7 @@
 @use '../abstracts/variables';
 
 .header {
+  margin-bottom: variables.$container-margin;
   background-color: variables.$dark;
 }
 

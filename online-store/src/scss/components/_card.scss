@@ -1,0 +1,82 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  gap: 20px;
+
+  @include mixins.tablet {
+    justify-content: center;
+  }
+}
+
+.card {
+  position: relative;
+  height: 160px;
+  border-radius: variables.$card-border-radius;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  overflow: hidden;
+
+  &__info {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom-left-radius: variables.$card-border-radius;
+    border-top-left-radius: variables.$card-border-radius;
+    background-color: rgba(variables.$dark, 0.5);
+    backdrop-filter: blur(2px);
+    transition: ease-in-out variables.$transition;
+    z-index: 1;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    color: variables.$dark-s;
+    list-style: none;
+    text-transform: capitalize;
+    line-height: 18px;
+  }
+
+  &__img {
+    border-radius: variables.$card-border-radius;
+    transition: ease-in-out variables.$transition;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover &__img {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  &:hover &__info {
+    left: -100%;
+  }
+
+  &_in-cart::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: variables.$light;
+    background-image: url('../../assets/svg/shoping-cart.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 1px black);
+  }
+}
+

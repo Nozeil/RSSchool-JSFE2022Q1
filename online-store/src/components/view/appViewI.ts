@@ -1,3 +1,5 @@
+import { ProductsT } from '../../types/types';
+
 export default interface AppViewI {
-  render: (el: string, elClass: string, parentEl: HTMLElement) => void;
+  render: (products: ProductsT) => void;
 }

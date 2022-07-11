@@ -1,7 +1,7 @@
 import ComponentI from './componentI';
 
 export default class Component implements ComponentI {
-  createComponent(el: string, elClass: string, parentEl: HTMLElement) {
+  createComponent(el: string, elClass: string, parentEl: HTMLElement): HTMLElement {
     const component: HTMLElement = document.createElement(el);
     component.className = elClass;
     parentEl.append(component);
