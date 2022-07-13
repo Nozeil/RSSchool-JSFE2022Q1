@@ -5,3 +5,7 @@
   font-family: 'Noto Sans TC', sans-serif;
   color: variables.$light-s;
 }
+
+.header__title {
+  -webkit-text-stroke: 1px variables.$light;
+}

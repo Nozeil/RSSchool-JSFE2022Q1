@@ -8,6 +8,7 @@ export default class Header implements HeaderI {
   headerTitle: TextComponent;
   headerCart: Component;
   headerCartCounter: TextComponent;
+  createdCounter: HTMLElement | undefined;
 
   constructor() {
     this.header = new Component();
@@ -26,6 +27,6 @@ export default class Header implements HeaderI {
     );
     this.headerTitle.createTextComponent('h1', 'header__title title', headerContainer, 'Cars Store');
     const headerCart: HTMLElement = this.headerCart.createComponent('div', 'header__cart', headerContainer);
-    this.headerCartCounter.createTextComponent('span', 'header__cart-counter', headerCart, '0');
+    this.createdCounter = this.headerCartCounter.createTextComponent('span', 'header__cart-counter', headerCart, '0');
   }
 }

@@ -16,6 +16,8 @@ export default class Main implements MainI {
   infoList: Component;
   infoListItem: TextComponent;
   cardImg: ImgComponent;
+  createdCards: HTMLDivElement[] | undefined;
+  cardNotification: TextComponent;
 
   constructor() {
     this.main = new Component();
@@ -28,6 +30,7 @@ export default class Main implements MainI {
     this.infoList = new Component();
     this.infoListItem = new TextComponent();
     this.cardImg = new ImgComponent();
+    this.cardNotification = new TextComponent();
   }
 
   renderMain(parentEl: HTMLElement, products: ProductsT): void {
@@ -35,12 +38,12 @@ export default class Main implements MainI {
     const mainContainer: HTMLElement = this.mainContainer.createComponent('div', 'main__container container', main);
     const filtersSection: HTMLElement = this.filtersSections.createComponent('section', 'filters', mainContainer);
     const productsSection: HTMLElement = this.productsSections.createComponent('section', 'products', mainContainer);
-    console.log(this.createCards(productsSection, products));
+    this.createdCards = this.createCards(productsSection, products);
   }
 
-  createCards(parentEl: HTMLElement, products: ProductsT): HTMLElement[] {
-    const cards: HTMLElement[] = products.map((product: ProductI): HTMLElement => {
-      const card: HTMLElement = this.card.createComponent('div', 'products__card card', parentEl);
+  createCards(parentEl: HTMLElement, products: ProductsT): HTMLDivElement[] {
+    const cards: HTMLDivElement[] = products.map((product: ProductI): HTMLDivElement => {
+      const card: HTMLDivElement = this.card.createComponent('div', 'products__card card', parentEl) as HTMLDivElement;
       const cardInfo: HTMLElement = this.cardInfo.createComponent('div', 'card__info', card);
       this.cardTitle.createTextComponent('h3', 'card__title title', cardInfo, product.model);
       const infoList: HTMLElement = this.infoList.createComponent('ul', 'card__list', cardInfo);
@@ -56,5 +59,9 @@ export default class Main implements MainI {
       return card;
     });
     return cards;
+  }
+
+  getCreatedCards(): HTMLDivElement[] | undefined {
+    return this.createdCards;
   }
 }

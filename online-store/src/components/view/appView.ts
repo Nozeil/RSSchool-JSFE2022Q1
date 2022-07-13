@@ -19,10 +19,13 @@ export default class AppView implements AppViewI {
 
   render(products: ProductsT) {
     const wrapper: HTMLElement = this.wrapper.createComponent('div', 'wrapper', document.body);
-
     this.header.renderHeader(wrapper);
     this.main.renderMain(wrapper, products);
 
     const footer = this.footer.createComponent('footer', 'footer', wrapper);
+  }
+
+  getMain(): Main {
+    return this.main;
   }
 }

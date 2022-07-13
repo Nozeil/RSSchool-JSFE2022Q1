@@ -9,9 +9,13 @@
 
 .header__cart-counter {
   position: absolute;
+  display: inline-block;
   top: -10px;
-  right: -10px;
-  padding: 3px 8px;
+  right: -20px;
+  width: variables.$cart-counter-size;
+  height: variables.$cart-counter-size;
+  line-height: variables.$cart-counter-size;
+  text-align: center;
   border-radius: 50%;
   color: variables.$dark;
   background: variables.$light;
