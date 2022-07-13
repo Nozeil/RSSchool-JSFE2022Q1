@@ -1,0 +1,12 @@
+@use '../abstracts/mixins';
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  gap: 20px;
+
+  @include mixins.tablet {
+    justify-content: center;
+  }
+}
