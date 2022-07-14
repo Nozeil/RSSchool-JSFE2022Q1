@@ -3,7 +3,10 @@
 @use './layout/wrapper';
 @use './layout/header';
 @use './layout/container';
+@use './layout/main';
 @use './components/title';
 @use './components/header-cart';
 @use './components/products';
 @use './components/card';
+@use './components/filters';
+@use './components/sort';

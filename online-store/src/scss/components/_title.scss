@@ -9,3 +9,8 @@
 .header__title {
   -webkit-text-stroke: 1px variables.$light;
 }
+
+.filters__title {
+  @extend .title;
+  color: variables.$dark;
+}

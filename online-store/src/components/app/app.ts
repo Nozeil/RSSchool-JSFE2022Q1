@@ -15,11 +15,16 @@ export default class App implements AppI {
 
   start() {
     this.controller.getProducts((products: ProductsT): void => {
-      this.view.render(products);
+      this.controller.addIdToProducts(products);
+      this.view.render(
+        this.controller.sortProducts(products),
+        this.controller.getFromLocalStorage('cars-store-products-cart')
+      );
       const main: Main = this.view.getMain();
       const createdCards: HTMLDivElement[] = main.getCreatedCards() as HTMLDivElement[];
       const createdCounter: HTMLElement = this.view.header.createdCounter as HTMLElement;
       this.controller.addToCart(createdCards, createdCounter);
+      this.controller.addListenerToSortFilters(main.filtersSort, main.getSortValue(), products, main, createdCounter);
     });
   }
 }

@@ -15,10 +15,10 @@ export default class AppView implements AppViewI {
     this.main = new Main();
   }
 
-  render(products: ProductsT) {
+  render(products: ProductsT, localStorageIds: string[] | null) {
     const wrapper: HTMLElement = this.component.createComponent('div', 'wrapper', document.body);
-    this.header.renderHeader(wrapper);
-    this.main.renderMain(wrapper, products);
+    this.header.renderHeader(wrapper, localStorageIds?.length);
+    this.main.renderMain(wrapper, products, localStorageIds);
 
     const footer = this.component.createComponent('footer', 'footer', wrapper);
   }

@@ -1,0 +1,77 @@
+@use '../abstracts/variables';
+@use '../abstracts/placeholders';
+
+.sort {
+  display: grid;
+  position: relative;
+  gap: 10px;
+  @extend %filters;
+
+  &__value {
+    position: relative;
+    @extend %filters;
+    cursor: pointer;
+    
+  }
+
+  &__value::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 10px;
+    height: 10px; 
+    border-bottom: 2px solid variables.$dark-s;
+    border-right: 2px solid variables.$dark-s;
+    border-bottom-right-radius: 2px;
+    transform: rotate(45deg);
+    transition: ease-in-out variables.$transition;
+  }
+
+  &__value:hover::after {
+    border-bottom: 2px solid variables.$dark;
+    border-right: 2px solid variables.$dark;
+  }
+
+  &__list {
+    @extend %list;
+    @extend %filters;
+    position: absolute;
+    top: 82%;
+    width: calc(100% - 20px);
+    padding: 0;
+    margin: 10px;
+    cursor: pointer;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) variables.$transition;
+  }
+
+  &_active &__list {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__item {
+    @extend %filters;
+    position: relative;
+    margin: 5px;
+    box-shadow: none;
+    transition: ease-in-out .3s;
+  }
+
+  &__item:hover {
+    background-color: variables.$light-s;
+  }
+
+  &__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 39px;
+    left: 23px;
+    width: 80%;
+    height: 2px;
+    background-color: variables.$light;
+  }
+}
