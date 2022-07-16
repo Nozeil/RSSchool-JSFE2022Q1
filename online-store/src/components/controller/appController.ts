@@ -1,12 +1,17 @@
-import { CallbackT, ProductsT } from '../../types/types';
+import { CallbackT, ProductsT, SliderKeysT, SliderPropsT } from '../../types/types';
 import { SortValues } from '../enums/enums';
 import Main from '../view/main/main';
+import MinMaxI from './minMaxI';
 import Loader from './loader/loader';
 import ProductI from './loader/productI';
 
 export default class AppController extends Loader {
   cart: string[];
   sortValue: string;
+  respProducts!: ProductsT;
+  main!: Main;
+  filteredProducts!: ProductsT;
+  createdCounter!: HTMLElement;
 
   constructor() {
     super();
@@ -14,7 +19,7 @@ export default class AppController extends Loader {
     this.sortValue = this.getFromLocalStorage('cars-store-sort-value');
   }
 
-  getProducts(callback: CallbackT) {
+  getResp(callback: CallbackT) {
     super.loadData(callback);
   }
 
@@ -53,8 +58,8 @@ export default class AppController extends Loader {
   }
 
   sortProducts(
-    products: ProductsT,
-    selectValue: SortValues | string = this.sortValue || SortValues.byNameAZ
+    selectValue: string | SortValues = this.sortValue || SortValues.byNameAZ,
+    products: ProductsT = this.filteredProducts
   ): ProductsT {
     const copyProducts = [...products];
     switch (selectValue) {
@@ -75,20 +80,19 @@ export default class AppController extends Loader {
       case SortValues.byYearDescending:
         return copyProducts.sort((a: ProductI, b: ProductI): number => +b.year - +a.year);
       default:
-        return products;
+        this.respProducts = products;
+        return this.respProducts;
     }
   }
 
   addListenerToSortFilters(
     sortFilters: HTMLElement,
     sortValue: HTMLElement,
-    products: ProductsT,
     main: Main,
     productsCounter: HTMLElement
   ): void {
     if (this.sortValue) {
       sortValue.textContent = this.sortValue;
-      this.sortProducts(products, sortValue.textContent as string) as ProductsT;
     }
     sortFilters.addEventListener('click', (e: MouseEvent): void => {
       const target: HTMLElement = e.target as HTMLElement;
@@ -99,10 +103,11 @@ export default class AppController extends Loader {
         sortFilters.classList.toggle('sort_active');
         sortValue.textContent = target.textContent;
         this.saveToLocalStorage('cars-store-sort-value', sortValue.textContent as string);
+        const sortedPoducts = this.sortProducts(sortValue.textContent as string) as ProductsT;
         this.addToCart(
           main.cards.renderCards(
             main.productsSection,
-            this.sortProducts(products, sortValue.textContent as string) as ProductsT,
+            sortedPoducts,
             this.getFromLocalStorage('cars-store-products-cart')
           ),
           productsCounter
@@ -111,11 +116,81 @@ export default class AppController extends Loader {
     });
   }
 
-  saveToLocalStorage(key: string, data: string[] | string) {
+  getMinMax(products: ProductsT, prop: string): MinMaxI {
+    const productsAmounts: number[] = products.map((product: ProductI): number => +product[prop]);
+    return {
+      min: Math.min(...productsAmounts),
+      max: Math.max(...productsAmounts),
+    };
+  }
+
+  saveToLocalStorage<T>(key: string, data: T): void {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
-  getFromLocalStorage(key: string) {
+  getFromLocalStorage<T>(key: string): T {
     return JSON.parse(localStorage.getItem(key) as string);
+  }
+
+  sliderAmountHandler<T>(values: T): void {
+    this.sliderHandler('cars-store-amount-slider', 'amount', values, 'cars-store-year-slider', 'year');
+  }
+
+  sliderYearHandler<T>(values: T): void {
+    this.sliderHandler('cars-store-year-slider', 'year', values, 'cars-store-amount-slider', 'amount');
+  }
+
+  sliderHandler<T>(
+    key: SliderKeysT,
+    prop: SliderPropsT,
+    values: T,
+    oppositeKey: SliderKeysT,
+    oppositeProp: SliderPropsT
+  ): void {
+    this.saveToLocalStorage(key, values);
+    this.filterProducts(key, prop);
+    this.filterProducts(oppositeKey, oppositeProp, this.filteredProducts);
+  }
+
+  filterProducts(key: SliderKeysT, prop: SliderPropsT, products = this.respProducts) {
+    const values: string[] = this.getFromLocalStorage(key) || Object.values(this.getMinMax(this.getProducts(), prop));
+    const copyProducts = products;
+    const [min, max] = values;
+
+    this.filteredProducts = copyProducts.filter((product) => +product[prop] >= +min && +product[prop] <= +max);
+
+    if (this.getCreatedCounter()) {
+      this.filteredProducts = this.sortProducts(this.main.getSortValue().textContent as string);
+      this.addToCart(
+        this.main.cards.renderCards(
+          this.main.productsSection,
+          this.filteredProducts,
+          this.getFromLocalStorage('cars-store-products-cart')
+        ),
+        this.getCreatedCounter()
+      );
+    }
+
+    return this.filteredProducts;
+  }
+
+  getProducts() {
+    return this.respProducts;
+  }
+
+  setProducts(products: ProductsT) {
+    this.respProducts = products;
+  }
+
+  setMain(main: Main) {
+    this.main = main;
+  }
+
+  getCreatedCounter(): HTMLElement {
+    return this.createdCounter;
+  }
+
+  setCreatedCounter(counter: HTMLElement): void {
+    this.createdCounter = counter;
   }
 }

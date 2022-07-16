@@ -1,5 +1,8 @@
 @use '../abstracts/placeholders';
 
 .filters {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 260px;
 }

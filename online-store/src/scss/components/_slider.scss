@@ -1,0 +1,51 @@
+@use '../abstracts/variables';
+@use '../abstracts/placeholders';
+
+.filters__range {
+  @extend %filters;
+  display: grid;
+  gap: 40px;
+}
+
+.noUi-target {
+  width: 80%;
+  justify-self: center !important;
+  border: none !important;
+  background-color: variables.$light-l  !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 4px variables.$shadow-color  !important;
+}
+
+.noUi-connect {
+  background: variables.$light-s  !important;
+}
+
+.noUi-handle {
+  right: -9px !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  cursor: grab !important;
+  box-shadow: none !important;
+  transition: cubic-bezier(0.19, 1, 0.22, 1) variables.$transition;
+}
+
+.noUi-handle:active {
+  background-color: variables.$light  !important;
+}
+
+.noUi-handle-lower::before,
+.noUi-handle-upper::before,
+.noUi-handle-lower::after,
+.noUi-handle-upper::after {
+  display: none !important;
+}
+
+.noUi-horizontal {
+  height: 10px !important;
+}
+
+.noUi-tooltip {
+  color: inherit !important;
+  border: none !important;
+}

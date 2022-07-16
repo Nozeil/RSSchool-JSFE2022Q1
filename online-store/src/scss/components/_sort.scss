@@ -42,7 +42,7 @@
     padding: 0;
     margin: 10px;
     cursor: pointer;
-    z-index: 0;
+    z-index: 2;
     opacity: 0;
     pointer-events: none;
     transition: cubic-bezier(0.165, 0.84, 0.44, 1) variables.$transition;

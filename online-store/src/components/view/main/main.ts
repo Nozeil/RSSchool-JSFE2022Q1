@@ -1,7 +1,9 @@
-import { ProductsT } from '../../../types/types';
+import { ProductsT, SliderHandlerT } from '../../../types/types';
+import MinMaxI from '../../controller/minMaxI';
 import { SortValues } from '../../enums/enums';
 import Cards from '../cards/cards';
 import Component from '../component/component';
+import Slider from '../rangeSlider/rangeSlider';
 import TextComponent from '../textComponent/textComponent';
 import MainI from './mainI';
 
@@ -13,20 +15,33 @@ export default class Main implements MainI {
   productsSection!: HTMLElement;
   filtersSort!: HTMLElement;
   private sortValue!: HTMLElement;
+  slider: Slider;
 
   constructor() {
     this.component = new Component();
     this.cards = new Cards();
     this.textComponent = new TextComponent();
+    this.slider = new Slider();
   }
 
-  renderMain(parentEl: HTMLElement, products: ProductsT, localStorageIds: string[] | null): void {
+  renderMain(
+    parentEl: HTMLElement,
+    products: ProductsT,
+    localStorageIds: string[] | null,
+    minMaxAmounts: MinMaxI,
+    minMaxYears: MinMaxI,
+    sliderAmountHandler: SliderHandlerT,
+    sliderYearHandler: SliderHandlerT
+  ): void {
     const main: HTMLElement = this.component.createComponent('main', 'main', parentEl);
     const mainContainer: HTMLElement = this.component.createComponent('div', 'main__container container', main);
     const filtersSection: HTMLElement = this.component.createComponent('section', 'filters', mainContainer);
+
     this.productsSection = this.component.createComponent('section', 'products', mainContainer);
     this.createdCards = this.cards.renderCards(this.productsSection, products, localStorageIds);
     this.renderSort(filtersSection);
+    this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
+    this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
   }
 
   renderSort(parentEl: HTMLElement, sortValue: SortValues = SortValues.byNameAZ): void {

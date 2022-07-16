@@ -16,7 +16,7 @@ export default class Cards implements CardsI {
     this.imgComponent = new ImgComponent();
   }
 
-  renderCards(parentEl: HTMLElement, products: ProductsT, localStorageIds: string[] | null): HTMLDivElement[] {
+  renderCards(parentEl: HTMLElement, products: ProductsT, localStorageIds?: string[] | null): HTMLDivElement[] {
     parentEl.innerHTML = '';
     const cards: HTMLDivElement[] = products.map((product: ProductI): HTMLDivElement => {
       const card: HTMLDivElement = this.component.createComponent(
