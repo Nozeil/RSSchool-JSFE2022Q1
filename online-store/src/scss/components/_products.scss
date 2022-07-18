@@ -1,12 +1,17 @@
 @use '../abstracts/mixins';
 
 .products {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 320px);
+  grid-auto-rows: min-content;
   max-width: 1000px;
   gap: 20px;
 
-  @include mixins.tablet {
-    justify-content: center;
+  @include mixins.tablet1 {
+    grid-template-columns: repeat(2, 320px);
+  }
+
+  @include mixins.tablet2 {
+    grid-template-columns: repeat(1, 320px);
   }
 }

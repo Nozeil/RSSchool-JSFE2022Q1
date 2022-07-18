@@ -1,4 +1,8 @@
-@mixin tablet {
+@mixin tablet1 {
   @media (max-width: 1380px) { @content; }
+}
+
+@mixin tablet2 {
+  @media (max-width: 1000px) { @content; }
 }
 
