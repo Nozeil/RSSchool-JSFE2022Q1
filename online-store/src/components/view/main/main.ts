@@ -93,6 +93,11 @@ export default class Main implements MainI {
       filtersSection,
       'reset settings'
     );
+
+    resetSettingsButton.addEventListener('click', () => {
+      window.location.reload();
+      localStorage.clear();
+    });
   }
 
   renderValuesFilters(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement) {
