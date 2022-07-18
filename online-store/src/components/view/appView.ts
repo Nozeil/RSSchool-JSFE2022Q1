@@ -25,7 +25,8 @@ export default class AppView implements AppViewI {
     minMaxAmounts: MinMaxI,
     minMaxYears: MinMaxI,
     sliderAmountHandler: SliderHandlerT,
-    sliderYearHandler: SliderHandlerT
+    sliderYearHandler: SliderHandlerT,
+    controller
   ) {
     const wrapper: HTMLElement = this.component.createComponent('div', 'wrapper', document.body);
     this.header.renderHeader(wrapper, localStorageIds?.length);
@@ -39,7 +40,8 @@ export default class AppView implements AppViewI {
       minMaxYears,
       sliderAmountHandler,
       sliderYearHandler,
-      this.header
+      this.header,
+      controller
     );
 
     const footer = this.component.createComponent('footer', 'footer', wrapper);

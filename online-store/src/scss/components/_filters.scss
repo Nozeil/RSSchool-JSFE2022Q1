@@ -6,19 +6,23 @@
   flex-direction: column;
   gap: 20px;
   width: 260px;
-  
+
   &__manufacturer {
     @extend %filters;
   }
+
   &__transmission {
     @extend %filters
   }
+
   &__color {
     @extend %filters
   }
+
   &__popular {
     @extend %filters
   }
+
   &__buttons {
     display: flex;
     justify-content: center;
@@ -26,7 +30,7 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-  
+
   &__button {
     @extend %filters;
     color: inherit;
@@ -40,8 +44,52 @@
   }
 
 
-  &_button-active, &__reset-settings:active, &__reset-filters:active {
+  &_button-active,
+  &__reset-settings:active,
+  &__reset-filters:active {
     background-color: variables.$light-s;
   }
+
+  &__search-container {
+    position: relative;
+    @extend %filters;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 32px;
+      height: 38px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      background: center/contain no-repeat url('../../assets/svg/search.svg');
+      background-color: #EDC42C;
+      pointer-events: none;
+    }
+  }
+
+  &__search {
+    position: relative;
+    @extend %filters;
+    outline: none;
+    border: none;
+    padding-left: 40px;
+    transition: ease-in-out variables.$transition;
+  }
+
+  &__search:hover, &__search:focus{
+    background-color: variables.$light-s;
+  }
+
+  &__search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: center/contain no-repeat url('../../assets/svg/cancel.svg');
+  }
+
+
 
 }

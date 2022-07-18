@@ -1,3 +1,4 @@
+import { off } from 'process';
 import { ProductsT, SliderHandlerT, ValueFiltersT } from '../../../types/types';
 import AppController from '../../controller/appController';
 import MinMaxI from '../../controller/minMaxI';
@@ -38,13 +39,47 @@ export default class Main implements MainI {
     minMaxYears: MinMaxI,
     sliderAmountHandler: SliderHandlerT,
     sliderYearHandler: SliderHandlerT,
-    header: Header
+    header: Header,
   ): void {
     const main: HTMLElement = this.component.createComponent('main', 'main', parentEl);
     const mainContainer: HTMLElement = this.component.createComponent('div', 'main__container container', main);
     const filtersSection: HTMLElement = this.component.createComponent('section', 'filters', mainContainer);
-
     this.productsSection = this.component.createComponent('section', 'products', mainContainer);
+
+    const searchContainer = this.component.createComponent('div', 'filters__search-container', filtersSection);
+    this.textComponent.createTextComponent('h3', 'filters__title', searchContainer, 'Search');
+    const search: HTMLInputElement = this.component.createComponent(
+      'input',
+      'filters__search',
+      searchContainer
+    ) as HTMLInputElement;
+    search.type = 'search';
+    search.autocomplete = 'off';
+    search.placeholder = 'Car...';
+    search.addEventListener('input', () => {
+      let copyProducts = this.controller.filteredProducts || products;
+      if (search.value) {
+        copyProducts = products.filter((product) => product.model.toLowerCase().includes(search.value.toLowerCase()));
+      }
+
+      this.controller.addToCart(
+        this.cards.renderCards(
+          this.productsSection,
+          copyProducts,
+          this.controller.getFromLocalStorage('cars-store-products-cart')
+        ),
+        header.createdCounter
+      );
+      if (!copyProducts.length) {
+        this.textComponent.createTextComponent(
+          'h2',
+          'products__not-find',
+          this.productsSection,
+          'Sorry, no matches found'
+        );
+      }
+    });
+    window.addEventListener('load', () => search.focus());
     this.createdCards = this.cards.renderCards(this.productsSection, products, localStorageIds);
     this.renderSort(filtersSection);
     const amountSlider = this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
@@ -74,7 +109,6 @@ export default class Main implements MainI {
       };
 
       this.controller.saveToLocalStorage('cars-store-value-filters', defaultSetting);
-      console.log(minMaxAmounts, amountSlider, yearSlider);
       amountSlider.noUiSlider?.set([minMaxAmounts.min, minMaxAmounts.max]);
       yearSlider.noUiSlider?.set([minMaxYears.min, minMaxYears.max]);
       this.controller.addToCart(

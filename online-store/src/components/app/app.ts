@@ -34,7 +34,8 @@ export default class App implements AppI {
         this.controller.getMinMax(products, 'amount'),
         this.controller.getMinMax(products, 'year'),
         this.controller.sliderAmountHandler.bind(this.controller),
-        this.controller.sliderYearHandler.bind(this.controller)
+        this.controller.sliderYearHandler.bind(this.controller),
+        this.controller
       );
 
       const createdCards: HTMLDivElement[] = main.getCreatedCards() as HTMLDivElement[];

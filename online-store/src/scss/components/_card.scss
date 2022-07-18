@@ -71,7 +71,7 @@
   }
 
   &_notification-active::before {
-    content: 'Извините, все слоты заполнены';
+    content: 'Sorry, all slots are full';
     position: absolute;
     top: 0;
     left: 0;
