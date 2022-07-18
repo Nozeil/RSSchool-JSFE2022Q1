@@ -2,9 +2,7 @@
 @use '../abstracts/placeholders';
 
 .sort {
-  display: grid;
   position: relative;
-  gap: 10px;
   @extend %filters;
 
   &__value {

@@ -1,4 +1,4 @@
-import { CallbackT, ProductsT, SliderKeysT, SliderPropsT } from '../../types/types';
+import { CallbackT, ProductsT, SliderKeysT, SliderPropsT, ValueFiltersT } from '../../types/types';
 import { SortValues } from '../enums/enums';
 import Main from '../view/main/main';
 import MinMaxI from './minMaxI';
@@ -12,6 +12,8 @@ export default class AppController extends Loader {
   main!: Main;
   filteredProducts!: ProductsT;
   createdCounter!: HTMLElement;
+  filteredByValue: number[] = [];
+  products = [];
 
   constructor() {
     super();
@@ -192,5 +194,75 @@ export default class AppController extends Loader {
 
   setCreatedCounter(counter: HTMLElement): void {
     this.createdCounter = counter;
+  }
+
+  getValuesForValueFilter(products: ProductsT): ValueFiltersT {
+    const result: ValueFiltersT = {
+      manufacturer: new Set(),
+      transmission: new Set(),
+      color: new Set(),
+      popular: new Set(),
+    };
+    products.forEach((product) => {
+      result.manufacturer.add(product.manufacturer);
+      result.color.add(product.color);
+      result.transmission.add(product.transmission);
+    });
+    result.popular.add('yes');
+    if (!this.getFromLocalStorage('cars-store-value-filters')) {
+      this.saveToLocalStorage(
+        'cars-store-value-filters',
+        Object.keys(result).reduce((prev, curr) => {
+          prev[curr] = [];
+          return prev;
+        }, <{ [s: string]: [] }>{})
+      );
+    }
+    return result;
+  }
+
+  valueFilterHandler(key?, value?) {
+    let storageValueFilters = this.getFromLocalStorage('cars-store-value-filters');
+
+    !storageValueFilters[key].includes(value)
+      ? storageValueFilters[key].push(value)
+      : (storageValueFilters[key] = storageValueFilters[key].filter((item) => item !== value));
+
+    this.saveToLocalStorage('cars-store-value-filters', storageValueFilters);
+
+    this.filteredByValue = [];
+    let tempProducts = [];
+
+    for (const filterKey in storageValueFilters) {
+      if (!this.filteredByValue.length) {
+        storageValueFilters[filterKey].forEach((f) => {
+          tempProducts.push(...this.filteredProducts.filter((product) => product[filterKey] === f));
+        });
+        this.filteredByValue.push(...tempProducts);
+        tempProducts = [];
+      } else {
+        if (storageValueFilters[filterKey].length) {
+          storageValueFilters[filterKey].forEach((f) => {
+            tempProducts.push(...this.filteredByValue.filter((product) => product[filterKey] === f));
+          });
+          this.filteredByValue = [...tempProducts];
+          tempProducts = [];
+        }
+      } 
+    }
+
+    if (!this.filteredByValue.length) this.filteredByValue = this.filteredProducts;
+
+    if (this.getCreatedCounter()) {
+      this.filteredByValue = this.sortProducts(this.main.getSortValue().textContent as string, this.filteredByValue);
+      this.addToCart(
+        this.main.cards.renderCards(
+          this.main.productsSection,
+          this.filteredByValue,
+          this.getFromLocalStorage('cars-store-products-cart')
+        ),
+        this.getCreatedCounter()
+      );
+    }
   }
 }

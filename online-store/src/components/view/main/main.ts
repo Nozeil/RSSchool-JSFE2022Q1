@@ -1,4 +1,5 @@
-import { ProductsT, SliderHandlerT } from '../../../types/types';
+import { ProductsT, SliderHandlerT, ValueFiltersT } from '../../../types/types';
+import AppController from '../../controller/appController';
 import MinMaxI from '../../controller/minMaxI';
 import { SortValues } from '../../enums/enums';
 import Cards from '../cards/cards';
@@ -22,9 +23,12 @@ export default class Main implements MainI {
     this.cards = new Cards();
     this.textComponent = new TextComponent();
     this.slider = new Slider();
+    this.controller = new AppController();
   }
 
   renderMain(
+    valueFilterHandler,
+    valueFilterValues,
     parentEl: HTMLElement,
     products: ProductsT,
     localStorageIds: string[] | null,
@@ -42,6 +46,51 @@ export default class Main implements MainI {
     this.renderSort(filtersSection);
     this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
     this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
+
+    this.renderValuesFilters(valueFilterHandler, valueFilterValues, filtersSection);
+  }
+
+  renderValuesFilters(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement) {
+    this.renderValueFilter(valueFilterHandler, values, parentEl);
+  }
+
+  renderValueFilter(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement): void {
+    const buttons: HTMLElement[] = [];
+    for (const key in values) {
+      const filter: HTMLElement = this.component.createComponent('div', `filters__${key}`, parentEl);
+      this.textComponent.createTextComponent('h3', 'filters__title', filter, key);
+      const filterButtons: HTMLElement = this.component.createComponent('div', 'filters__buttons', filter);
+
+      values[key].forEach((value: string): void => {
+        const button =
+          key === 'popular'
+            ? this.textComponent.createTextComponent('button', `filters__button ${key}`, filterButtons, value)
+            : this.textComponent.createTextComponent('button', `filters__button ${value}`, filterButtons, value);
+
+        buttons.push(button);
+
+        button.addEventListener('click', () => {
+          button.classList.toggle('filters_button-active');
+          valueFilterHandler(key, value);
+        });
+      });
+    }
+    this.updateActiveButtons(buttons);
+  }
+
+  updateActiveButtons(buttons) {
+    const activeButtonsClasses = Object.values(this.controller.getFromLocalStorage('cars-store-value-filters')).flat(1);
+
+    buttons.forEach((button) => {
+      activeButtonsClasses.forEach((activeButtonClass) => {
+        if (
+          button.classList.contains(activeButtonClass.split(' ')[0]) ||
+          (button.classList.contains('popular') && activeButtonClass.split(' ')[0] === 'yes')
+        ) {
+          button.classList.toggle('filters_button-active');
+        }
+      });
+    });
   }
 
   renderSort(parentEl: HTMLElement, sortValue: SortValues = SortValues.byNameAZ): void {

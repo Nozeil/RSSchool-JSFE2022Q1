@@ -3,7 +3,6 @@
 
 .filters__range {
   @extend %filters;
-  display: grid;
   gap: 40px;
 }
 

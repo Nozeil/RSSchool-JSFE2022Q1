@@ -7,8 +7,11 @@
 }
 
 %filters {
+  display: grid;
+  gap: 10px;
   padding: variables.$card-padding;
   background-color: variables.$light-m;
   border-radius: variables.$card-border-radius;
+  text-transform: capitalize;
   box-shadow: 0 0 4px variables.$shadow-color;
 }

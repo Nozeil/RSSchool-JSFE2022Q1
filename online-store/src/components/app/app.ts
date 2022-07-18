@@ -19,12 +19,16 @@ export default class App implements AppI {
       this.controller.setProducts(products);
       const main: Main = this.view.getMain();
       this.controller.setMain(main);
+      const valueFilterValues = this.controller.getValuesForValueFilter(products);
+
       this.view.render(
+        this.controller.valueFilterHandler.bind(this.controller),
         this.controller.filterProducts(
           'cars-store-year-slider',
           'year',
           this.controller.filterProducts('cars-store-amount-slider', 'amount')
         ),
+        valueFilterValues,
         this.controller.sortProducts(),
         this.controller.getFromLocalStorage('cars-store-products-cart'),
         this.controller.getMinMax(products, 'amount'),

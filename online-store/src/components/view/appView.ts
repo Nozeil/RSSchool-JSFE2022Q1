@@ -17,7 +17,9 @@ export default class AppView implements AppViewI {
   }
 
   render(
+    valueFilterHandler,
     _filteredProducts: ProductsT,
+    valueFilterValues,
     products: ProductsT,
     localStorageIds: string[] | null,
     minMaxAmounts: MinMaxI,
@@ -28,6 +30,8 @@ export default class AppView implements AppViewI {
     const wrapper: HTMLElement = this.component.createComponent('div', 'wrapper', document.body);
     this.header.renderHeader(wrapper, localStorageIds?.length);
     this.main.renderMain(
+      valueFilterHandler,
+      valueFilterValues,
       wrapper,
       products,
       localStorageIds,

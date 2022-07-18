@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const EsLintPlugin = require('eslint-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
-const Map = isProduction ? false : 'source-map';
+const Map = isProduction ? 'source-map' : false;
 
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 

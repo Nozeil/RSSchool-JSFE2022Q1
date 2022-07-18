@@ -1,8 +1,42 @@
 @use '../abstracts/placeholders';
+@use '../abstracts/variables';
 
 .filters {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 260px;
+  
+  &__manufacturer {
+    @extend %filters;
+  }
+  &__transmission {
+    @extend %filters
+  }
+  &__color {
+    @extend %filters
+  }
+  &__popular {
+    @extend %filters
+  }
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__button {
+    @extend %filters;
+    color: inherit;
+    cursor: pointer;
+    border: none;
+    transition: cubic-bezier(0.215, 0.610, 0.355, 1) variables.$transition;
+  }
+
+  &_button-active {
+    background-color: variables.$light-s;
+  }
+
 }
