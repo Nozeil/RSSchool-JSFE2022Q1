@@ -1,3 +1,3 @@
 export default interface HeaderI {
-  renderHeader: (parentEl: HTMLElement) => void;
+  renderHeader: (parentEl: HTMLElement, localStorageIdsLength: number | undefined) => void;
 }

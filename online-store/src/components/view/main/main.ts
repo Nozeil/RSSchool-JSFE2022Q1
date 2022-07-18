@@ -1,6 +1,7 @@
-import { off } from 'process';
-import { ProductsT, SliderHandlerT, ValueFiltersT } from '../../../types/types';
+import { target } from 'nouislider';
+import { ProductsT, rangeHandler, SliderHandlerT, ValueFiltersT } from '../../../types/types';
 import AppController from '../../controller/appController';
+import ProductI from '../../controller/loader/productI';
 import MinMaxI from '../../controller/minMaxI';
 import { SortValues } from '../../enums/enums';
 import Cards from '../cards/cards';
@@ -20,6 +21,7 @@ export default class Main implements MainI {
   private sortValue!: HTMLElement;
   slider: Slider;
   buttons: HTMLElement[] = [];
+  controller: AppController;
 
   constructor() {
     this.component = new Component();
@@ -30,8 +32,8 @@ export default class Main implements MainI {
   }
 
   renderMain(
-    valueFilterHandler,
-    valueFilterValues,
+    valueFilterHandler: rangeHandler,
+    valueFilterValues: ValueFiltersT,
     parentEl: HTMLElement,
     products: ProductsT,
     localStorageIds: string[] | null,
@@ -39,14 +41,18 @@ export default class Main implements MainI {
     minMaxYears: MinMaxI,
     sliderAmountHandler: SliderHandlerT,
     sliderYearHandler: SliderHandlerT,
-    header: Header,
+    header: Header
   ): void {
     const main: HTMLElement = this.component.createComponent('main', 'main', parentEl);
     const mainContainer: HTMLElement = this.component.createComponent('div', 'main__container container', main);
     const filtersSection: HTMLElement = this.component.createComponent('section', 'filters', mainContainer);
     this.productsSection = this.component.createComponent('section', 'products', mainContainer);
 
-    const searchContainer = this.component.createComponent('div', 'filters__search-container', filtersSection);
+    const searchContainer: HTMLElement = this.component.createComponent(
+      'div',
+      'filters__search-container',
+      filtersSection
+    );
     this.textComponent.createTextComponent('h3', 'filters__title', searchContainer, 'Search');
     const search: HTMLInputElement = this.component.createComponent(
       'input',
@@ -56,10 +62,12 @@ export default class Main implements MainI {
     search.type = 'search';
     search.autocomplete = 'off';
     search.placeholder = 'Car...';
-    search.addEventListener('input', () => {
-      let copyProducts = this.controller.filteredProducts || products;
+    search.addEventListener('input', (): void => {
+      let copyProducts: ProductsT = this.controller.filteredProducts || products;
       if (search.value) {
-        copyProducts = products.filter((product) => product.model.toLowerCase().includes(search.value.toLowerCase()));
+        copyProducts = products.filter((product: ProductI): boolean =>
+          product.model.toLowerCase().includes(search.value.toLowerCase())
+        );
       }
 
       this.controller.addToCart(
@@ -68,7 +76,7 @@ export default class Main implements MainI {
           copyProducts,
           this.controller.getFromLocalStorage('cars-store-products-cart')
         ),
-        header.createdCounter
+        header.createdCounter as HTMLElement
       );
       if (!copyProducts.length) {
         this.textComponent.createTextComponent(
@@ -79,27 +87,27 @@ export default class Main implements MainI {
         );
       }
     });
-    window.addEventListener('load', () => search.focus());
+    window.addEventListener('load', (): void => search.focus());
     this.createdCards = this.cards.renderCards(this.productsSection, products, localStorageIds);
     this.renderSort(filtersSection);
-    const amountSlider = this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
-    const yearSlider = this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
+    const amountSlider: target = this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
+    const yearSlider: target = this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
     this.renderValuesFilters(valueFilterHandler, valueFilterValues, filtersSection);
 
-    const resetFiltersButton = this.textComponent.createTextComponent(
+    const resetFiltersButton: HTMLElement = this.textComponent.createTextComponent(
       'button',
       'filters__button filters__reset-filters',
       filtersSection,
       'reset filters'
     );
 
-    resetFiltersButton.addEventListener('click', () => {
-      const sortedPoducts = this.controller.sortProducts(
+    resetFiltersButton.addEventListener('click', (): void => {
+      const sortedPoducts: ProductsT = this.controller.sortProducts(
         this.controller.getFromLocalStorage('cars-store-sort-value') || SortValues.byNameAZ,
         products
       ) as ProductsT;
 
-      this.buttons.forEach((button) => button.classList.remove('filters_button-active'));
+      this.buttons.forEach((button: HTMLElement): void => button.classList.remove('filters_button-active'));
 
       const defaultSetting: { [s: string]: string[] } = {
         manufacturer: [],
@@ -117,42 +125,42 @@ export default class Main implements MainI {
           sortedPoducts,
           this.controller.getFromLocalStorage('cars-store-products-cart')
         ),
-        header.createdCounter
+        header.createdCounter as HTMLElement
       );
     });
 
-    const resetSettingsButton = this.textComponent.createTextComponent(
+    const resetSettingsButton: HTMLElement = this.textComponent.createTextComponent(
       'button',
       'filters__button filters__reset-settings',
       filtersSection,
       'reset settings'
     );
 
-    resetSettingsButton.addEventListener('click', () => {
+    resetSettingsButton.addEventListener('click', (): void => {
       window.location.reload();
       localStorage.clear();
     });
   }
 
-  renderValuesFilters(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement) {
+  renderValuesFilters(valueFilterHandler: rangeHandler, values: ValueFiltersT, parentEl: HTMLElement): void {
     this.renderValueFilter(valueFilterHandler, values, parentEl);
   }
 
-  renderValueFilter(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement): void {
+  renderValueFilter(valueFilterHandler: rangeHandler, values: ValueFiltersT, parentEl: HTMLElement): void {
     for (const key in values) {
       const filter: HTMLElement = this.component.createComponent('div', `filters__${key}`, parentEl);
       this.textComponent.createTextComponent('h3', 'filters__title', filter, key);
       const filterButtons: HTMLElement = this.component.createComponent('div', 'filters__buttons', filter);
 
       values[key].forEach((value: string): void => {
-        const button =
+        const button: HTMLElement =
           key === 'popular'
             ? this.textComponent.createTextComponent('button', `filters__button ${key}`, filterButtons, value)
             : this.textComponent.createTextComponent('button', `filters__button ${value}`, filterButtons, value);
 
         this.buttons.push(button);
 
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (): void => {
           button.classList.toggle('filters_button-active');
           valueFilterHandler(key, value);
         });
@@ -161,11 +169,13 @@ export default class Main implements MainI {
     this.updateActiveButtons(this.buttons);
   }
 
-  updateActiveButtons(buttons) {
-    const activeButtonsClasses = Object.values(this.controller.getFromLocalStorage('cars-store-value-filters')).flat(1);
+  updateActiveButtons(buttons: HTMLElement[]) {
+    const activeButtonsClasses: string[] = Object.values(
+      this.controller.getFromLocalStorage('cars-store-value-filters')
+    ).flat(1) as string[];
 
-    buttons.forEach((button) => {
-      activeButtonsClasses.forEach((activeButtonClass) => {
+    buttons.forEach((button: HTMLElement): void => {
+      activeButtonsClasses.forEach((activeButtonClass: string): void => {
         if (
           button.classList.contains(activeButtonClass.split(' ')[0]) ||
           (button.classList.contains('popular') && activeButtonClass.split(' ')[0] === 'yes')
@@ -186,15 +196,17 @@ export default class Main implements MainI {
     ];
     this.textComponent.createTextComponent('h3', 'filters__title', this.filtersSort, 'Sort');
     this.setSortValue(this.textComponent.createTextComponent('div', 'sort__value', this.filtersSort, sortValue));
-    const sortList = this.component.createComponent('ul', 'sort__list', this.filtersSort);
-    sortValues.forEach((value) => this.textComponent.createTextComponent('li', 'sort__item', sortList, value));
+    const sortList: HTMLElement = this.component.createComponent('ul', 'sort__list', this.filtersSort);
+    sortValues.forEach(
+      (value: string): HTMLElement => this.textComponent.createTextComponent('li', 'sort__item', sortList, value)
+    );
   }
 
   getCreatedCards(): HTMLDivElement[] | undefined {
     return this.createdCards;
   }
 
-  getSortValue() {
+  getSortValue(): HTMLElement {
     return this.sortValue;
   }
 

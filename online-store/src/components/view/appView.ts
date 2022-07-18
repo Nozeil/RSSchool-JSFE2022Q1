@@ -1,4 +1,4 @@
-import { ProductsT, SliderHandlerT } from '../../types/types';
+import { ProductsT, rangeHandler, SliderHandlerT, ValueFiltersT } from '../../types/types';
 import MinMaxI from '../controller/minMaxI';
 import AppViewI from './appViewI';
 import Component from './component/component';
@@ -20,17 +20,16 @@ export default class AppView implements AppViewI {
   }
 
   render(
-    valueFilterHandler,
+    valueFilterHandler: rangeHandler,
     _filteredProducts: ProductsT,
-    valueFilterValues,
+    valueFilterValues: ValueFiltersT,
     products: ProductsT,
     localStorageIds: string[] | null,
     minMaxAmounts: MinMaxI,
     minMaxYears: MinMaxI,
     sliderAmountHandler: SliderHandlerT,
-    sliderYearHandler: SliderHandlerT,
-    controller
-  ) {
+    sliderYearHandler: SliderHandlerT
+  ): void {
     const wrapper: HTMLElement = this.component.createComponent('div', 'wrapper', document.body);
     this.header.renderHeader(wrapper, localStorageIds?.length);
     this.main.renderMain(
@@ -43,8 +42,7 @@ export default class AppView implements AppViewI {
       minMaxYears,
       sliderAmountHandler,
       sliderYearHandler,
-      this.header,
-      controller
+      this.header
     );
 
     const footer: HTMLElement = this.component.createComponent('footer', 'footer', wrapper);

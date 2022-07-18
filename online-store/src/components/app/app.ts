@@ -1,25 +1,25 @@
-import { ProductsT } from '../../types/types';
+import { ProductsT, ValueFiltersT } from '../../types/types';
 import AppController from '../controller/appController';
 import AppView from '../view/appView';
 import Main from '../view/main/main';
 import AppI from './appI';
 
 export default class App implements AppI {
-  view: AppView;
-  controller: AppController;
+  private view: AppView;
+  private controller: AppController;
 
   constructor() {
     this.view = new AppView();
     this.controller = new AppController();
   }
 
-  start() {
+  public start(): void {
     this.controller.getResp((products: ProductsT): void => {
       this.controller.addIdToProducts(products);
       this.controller.setProducts(products);
       const main: Main = this.view.getMain();
       this.controller.setMain(main);
-      const valueFilterValues = this.controller.getValuesForValueFilter(products);
+      const valueFilterValues: ValueFiltersT = this.controller.getValuesForValueFilter(products);
 
       this.view.render(
         this.controller.valueFilterHandler.bind(this.controller),
@@ -34,8 +34,7 @@ export default class App implements AppI {
         this.controller.getMinMax(products, 'amount'),
         this.controller.getMinMax(products, 'year'),
         this.controller.sliderAmountHandler.bind(this.controller),
-        this.controller.sliderYearHandler.bind(this.controller),
-        this.controller
+        this.controller.sliderYearHandler.bind(this.controller)
       );
 
       const createdCards: HTMLDivElement[] = main.getCreatedCards() as HTMLDivElement[];

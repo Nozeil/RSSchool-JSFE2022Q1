@@ -1,18 +1,26 @@
-import { CallbackT, ProductsT, SliderKeysT, SliderPropsT, ValueFiltersT } from '../../types/types';
+import {
+  CallbackT,
+  ProductsT,
+  SliderKeysT,
+  SliderPropsT,
+  storageValueFiltersT,
+  ValueFiltersT,
+} from '../../types/types';
 import { SortValues } from '../enums/enums';
 import Main from '../view/main/main';
 import MinMaxI from './minMaxI';
 import Loader from './loader/loader';
 import ProductI from './loader/productI';
+import AppControllerI from './AppControllerI';
 
-export default class AppController extends Loader {
+export default class AppController extends Loader implements AppControllerI {
   cart: string[];
   sortValue: string;
   respProducts!: ProductsT;
   main!: Main;
   filteredProducts!: ProductsT;
   createdCounter!: HTMLElement;
-  filteredByValue: number[] = [];
+  filteredByValue: { [s: string]: string }[] = [];
   products = [];
 
   constructor() {
@@ -21,17 +29,17 @@ export default class AppController extends Loader {
     this.sortValue = this.getFromLocalStorage('cars-store-sort-value');
   }
 
-  getResp(callback: CallbackT) {
+  getResp(callback: CallbackT): void {
     super.loadData(callback);
   }
 
-  addIdToProducts(products: ProductsT) {
+  addIdToProducts(products: ProductsT): void {
     products.forEach((product, index) => (product.id = `${index}`));
   }
 
   addToCart(cards: HTMLDivElement[], productsCounter: HTMLElement): void {
     cards.forEach((card: HTMLDivElement): void =>
-      card.addEventListener('click', (e) => {
+      card.addEventListener('click', (e: MouseEvent): void => {
         const productCard: HTMLDivElement = (e.target as HTMLDivElement).closest('.card') as HTMLDivElement;
         const productCardId: string = productCard.dataset.id as string;
         const isInCart: boolean = productCard.classList.contains('card_in-cart');
@@ -40,7 +48,7 @@ export default class AppController extends Loader {
 
         if (this.cart.length === maxNumOfCards && !isInCart) {
           productCard.classList.add('card_notification-active');
-          setTimeout(() => {
+          setTimeout((): void => {
             productCard.classList.remove('card_notification-active');
           }, cardTimer);
         }
@@ -63,7 +71,7 @@ export default class AppController extends Loader {
     selectValue: string | SortValues = this.sortValue || SortValues.byNameAZ,
     products: ProductsT = this.filteredProducts
   ): ProductsT {
-    const copyProducts = [...products];
+    const copyProducts: ProductI[] = [...products];
     switch (selectValue) {
       case SortValues.byNameAZ:
         return copyProducts.sort((a: ProductI, b: ProductI): number => {
@@ -105,7 +113,7 @@ export default class AppController extends Loader {
         sortFilters.classList.toggle('sort_active');
         sortValue.textContent = target.textContent;
         this.saveToLocalStorage('cars-store-sort-value', sortValue.textContent as string);
-        const sortedPoducts = this.sortProducts(sortValue.textContent as string) as ProductsT;
+        const sortedPoducts: ProductsT = this.sortProducts(sortValue.textContent as string) as ProductsT;
         this.addToCart(
           main.cards.renderCards(
             main.productsSection,
@@ -149,15 +157,14 @@ export default class AppController extends Loader {
     oppositeKey: SliderKeysT,
     oppositeProp: SliderPropsT
   ): void {
-    console.log(this.respProducts);
     this.saveToLocalStorage(key, values);
     this.filterProducts(key, prop);
     this.filterProducts(oppositeKey, oppositeProp, this.filteredProducts);
   }
 
-  filterProducts(key: SliderKeysT, prop: SliderPropsT, products = this.respProducts) {
+  filterProducts(key: SliderKeysT, prop: SliderPropsT, products = this.respProducts): ProductsT {
     const values: string[] = this.getFromLocalStorage(key) || Object.values(this.getMinMax(this.getProducts(), prop));
-    const copyProducts = products;
+    const copyProducts: ProductsT = products;
     const [min, max] = values;
 
     this.filteredProducts = copyProducts.filter((product) => +product[prop] >= +min && +product[prop] <= +max);
@@ -177,15 +184,15 @@ export default class AppController extends Loader {
     return this.filteredProducts;
   }
 
-  getProducts() {
+  getProducts(): ProductsT {
     return this.respProducts;
   }
 
-  setProducts(products: ProductsT) {
+  setProducts(products: ProductsT): void {
     this.respProducts = products;
   }
 
-  setMain(main: Main) {
+  setMain(main: Main): void {
     this.main = main;
   }
 
@@ -204,7 +211,7 @@ export default class AppController extends Loader {
       color: new Set(),
       popular: new Set(),
     };
-    products.forEach((product) => {
+    products.forEach((product: ProductI): void => {
       result.manufacturer.add(product.manufacturer);
       result.color.add(product.color);
       result.transmission.add(product.transmission);
@@ -222,29 +229,29 @@ export default class AppController extends Loader {
     return result;
   }
 
-  valueFilterHandler(key?, value?) {
-    let storageValueFilters = this.getFromLocalStorage('cars-store-value-filters');
+  valueFilterHandler(key: string, value: string): void {
+    const storageValueFilters: storageValueFiltersT = this.getFromLocalStorage('cars-store-value-filters');
 
     !storageValueFilters[key].includes(value)
       ? storageValueFilters[key].push(value)
-      : (storageValueFilters[key] = storageValueFilters[key].filter((item) => item !== value));
+      : (storageValueFilters[key] = storageValueFilters[key].filter((item: string): boolean => item !== value));
 
     this.saveToLocalStorage('cars-store-value-filters', storageValueFilters);
 
     this.filteredByValue = [];
-    let tempProducts = [];
+    let tempProducts: { [s: string]: string }[] = [];
 
     for (const filterKey in storageValueFilters) {
       if (!this.filteredByValue.length) {
-        storageValueFilters[filterKey].forEach((f) => {
-          tempProducts.push(...this.filteredProducts.filter((product) => product[filterKey] === f));
+        storageValueFilters[filterKey].forEach((f: string): void => {
+          tempProducts.push(...this.filteredProducts.filter((product: ProductI): boolean => product[filterKey] === f));
         });
         this.filteredByValue.push(...tempProducts);
         tempProducts = [];
       } else {
         if (storageValueFilters[filterKey].length) {
-          storageValueFilters[filterKey].forEach((f) => {
-            tempProducts.push(...this.filteredByValue.filter((product) => product[filterKey] === f));
+          storageValueFilters[filterKey].forEach((f: string): void => {
+            tempProducts.push(...this.filteredByValue.filter((product: ProductI): boolean => product[filterKey] === f));
           });
           this.filteredByValue = [...tempProducts];
           tempProducts = [];
