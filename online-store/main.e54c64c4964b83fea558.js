@@ -50,10 +50,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/svg/shoping-cart.svg */ "./src/assets/svg/shoping-cart.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/svg/search.svg */ "./src/assets/svg/search.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/svg/cancel.svg */ "./src/assets/svg/cancel.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/svg/rs_school_js.svg */ "./src/assets/svg/rs_school_js.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/svg/rs_school_js_hover.svg */ "./src/assets/svg/rs_school_js_hover.svg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=button],\n[type=reset],\n[type=submit] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=button]::-moz-focus-inner,\n[type=reset]::-moz-focus-inner,\n[type=submit]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=button]:-moz-focusring,\n[type=reset]:-moz-focusring,\n[type=submit]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=checkbox],\n[type=radio] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=number]::-webkit-inner-spin-button,\n[type=number]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=search] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=search]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.body {\n  font-family: \"Roboto\", sans-serif;\n  color: #26272A;\n  background-color: #F2F2F2;\n}\n\n.wrapper {\n  display: flex;\n  flex-direction: column;\n}\n\n.header {\n  margin-bottom: 40px;\n  background-color: #26272A;\n}\n\n.header__container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: 80px;\n}\n\n.container {\n  max-width: 1360px;\n  margin: 0 auto;\n  padding: 0 40px;\n}\n\n.main__container {\n  display: flex;\n  gap: 20px;\n}\n\n.title, .filters__title {\n  margin: 0;\n  font-family: \"Noto Sans TC\", sans-serif;\n  color: #EDC42C;\n}\n\n.header__title {\n  -webkit-text-stroke: 1px #F2F2F2;\n}\n\n.filters__title {\n  color: #26272A;\n}\n\n.header__cart {\n  position: relative;\n  width: 35px;\n  height: 35px;\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n\n.header__cart-counter {\n  position: absolute;\n  display: inline-block;\n  top: -10px;\n  right: -20px;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  text-align: center;\n  border-radius: 50%;\n  color: #26272A;\n  background: #F2F2F2;\n}\n\n.products {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 1000px;\n  gap: 20px;\n}\n@media (max-width: 1380px) {\n  .products {\n    justify-content: center;\n  }\n}\n\n.sort__list, .card__list {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.filters__range, .sort, .sort__value, .sort__list, .sort__item, .filters__manufacturer, .filters__transmission, .filters__color, .filters__popular, .filters__button {\n  display: grid;\n  gap: 10px;\n  padding: 10px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  text-transform: capitalize;\n  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);\n}\n\n.card {\n  position: relative;\n  height: 160px;\n  border-radius: 5px;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  overflow: hidden;\n}\n.card__info {\n  position: absolute;\n  left: 0;\n  height: 100%;\n  padding: 10px;\n  font-size: 14px;\n  border-bottom-left-radius: 5px;\n  border-top-left-radius: 5px;\n  background-color: rgba(38, 39, 42, 0.5);\n  backdrop-filter: blur(2px);\n  transition: ease-in-out 0.5s;\n  z-index: 1;\n}\n.card__title {\n  margin-bottom: 10px;\n}\n.card__list {\n  color: #BDBCBC;\n  text-transform: capitalize;\n  line-height: 18px;\n}\n.card__img {\n  border-radius: 5px;\n  transition: ease-in-out 0.5s;\n}\n.card:hover {\n  cursor: pointer;\n}\n.card:hover .card__img {\n  transform: scale(1.1) rotate(-3deg);\n}\n.card:hover .card__info {\n  left: -100%;\n}\n.card_in-cart::after {\n  content: \"\";\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  padding: 5px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: #F2F2F2;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  background-position: center;\n  background-repeat: no-repeat;\n  filter: drop-shadow(0 0 1px black);\n}\n.card_notification-active {\n  pointer-events: none;\n}\n.card_notification-active::before {\n  content: \"Извините, все слоты заполнены\";\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  line-height: 160px;\n  text-align: center;\n  color: #FFFFFF;\n  background-color: #26272A;\n  z-index: 10;\n  animation: show-hide 3s ease-in-out;\n}\n\n@keyframes show-hide {\n  0% {\n    opacity: 0;\n  }\n  5% {\n    opacity: 1;\n  }\n  95% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n.filters {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n  width: 260px;\n}\n.filters__buttons {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n.filters__button {\n  color: inherit;\n  cursor: pointer;\n  border: none;\n  transition: cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;\n}\n.filters_button-active {\n  background-color: #EDC42C;\n}\n\n.sort {\n  position: relative;\n}\n.sort__value {\n  position: relative;\n  cursor: pointer;\n}\n.sort__value::after {\n  content: \"\";\n  position: absolute;\n  top: 12px;\n  right: 15px;\n  width: 10px;\n  height: 10px;\n  border-bottom: 2px solid #BDBCBC;\n  border-right: 2px solid #BDBCBC;\n  border-bottom-right-radius: 2px;\n  transform: rotate(45deg);\n  transition: ease-in-out 0.5s;\n}\n.sort__value:hover::after {\n  border-bottom: 2px solid #26272A;\n  border-right: 2px solid #26272A;\n}\n.sort__list {\n  position: absolute;\n  top: 82%;\n  width: calc(100% - 20px);\n  padding: 0;\n  margin: 10px;\n  cursor: pointer;\n  z-index: 2;\n  opacity: 0;\n  pointer-events: none;\n  transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;\n}\n.sort_active .sort__list {\n  opacity: 1;\n  pointer-events: all;\n}\n.sort__item {\n  position: relative;\n  margin: 5px;\n  box-shadow: none;\n  transition: ease-in-out 0.3s;\n}\n.sort__item:hover {\n  background-color: #EDC42C;\n}\n.sort__item:not(:last-child)::after {\n  content: \"\";\n  position: absolute;\n  top: 39px;\n  left: 23px;\n  width: 80%;\n  height: 2px;\n  background-color: #F2F2F2;\n}\n\n.filters__range {\n  gap: 40px;\n}\n\n.noUi-target {\n  width: 80%;\n  justify-self: center !important;\n  border: none !important;\n  background-color: #ffedab !important;\n  cursor: pointer !important;\n  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) !important;\n}\n\n.noUi-connect {\n  background: #EDC42C !important;\n}\n\n.noUi-handle {\n  right: -9px !important;\n  width: 20px !important;\n  height: 20px !important;\n  border-radius: 50% !important;\n  cursor: grab !important;\n  box-shadow: none !important;\n  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;\n}\n\n.noUi-handle:active {\n  background-color: #F2F2F2 !important;\n}\n\n.noUi-handle-lower::before,\n.noUi-handle-upper::before,\n.noUi-handle-lower::after,\n.noUi-handle-upper::after {\n  display: none !important;\n}\n\n.noUi-horizontal {\n  height: 10px !important;\n}\n\n.noUi-tooltip {\n  color: inherit !important;\n  border: none !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=button],\n[type=reset],\n[type=submit] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=button]::-moz-focus-inner,\n[type=reset]::-moz-focus-inner,\n[type=submit]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=button]:-moz-focusring,\n[type=reset]:-moz-focusring,\n[type=submit]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=checkbox],\n[type=radio] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=number]::-webkit-inner-spin-button,\n[type=number]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=search] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=search]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.body {\n  font-family: \"Roboto\", sans-serif;\n  color: #26272A;\n  background-color: #F2F2F2;\n}\n\n.wrapper {\n  display: flex;\n  flex-direction: column;\n}\n\n.header {\n  margin-bottom: 40px;\n  background-color: #26272A;\n}\n\n.header__container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: 80px;\n}\n\n.container {\n  max-width: 1360px;\n  margin: 0 auto;\n  padding: 0 40px;\n}\n\n.main__container {\n  display: flex;\n  justify-content: space-evenly;\n  gap: 20px;\n}\n\n.title, .filters__title {\n  margin: 0;\n  font-family: \"Noto Sans TC\", sans-serif;\n  color: #EDC42C;\n}\n\n.header__title {\n  -webkit-text-stroke: 1px #F2F2F2;\n}\n\n.filters__title {\n  color: #26272A;\n}\n\n.header__cart {\n  position: relative;\n  width: 35px;\n  height: 35px;\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n\n.header__cart-counter {\n  position: absolute;\n  display: inline-block;\n  top: -10px;\n  right: -20px;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  text-align: center;\n  border-radius: 50%;\n  color: #26272A;\n  background: #F2F2F2;\n}\n\n.products {\n  display: grid;\n  grid-template-columns: repeat(3, 320px);\n  grid-auto-rows: min-content;\n  max-width: 1000px;\n  gap: 20px;\n}\n@media (max-width: 1380px) {\n  .products {\n    grid-template-columns: repeat(2, 320px);\n  }\n}\n@media (max-width: 1000px) {\n  .products {\n    grid-template-columns: repeat(1, 320px);\n  }\n}\n\n.sort__list, .card__list {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.filters__range, .sort, .sort__value, .sort__list, .sort__item, .filters__manufacturer, .filters__transmission, .filters__color, .filters__popular, .filters__button, .filters__search-container, .filters__search {\n  display: grid;\n  gap: 10px;\n  padding: 10px;\n  background-color: #FFFFFF;\n  border-radius: 5px;\n  text-transform: capitalize;\n  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);\n}\n\n.card {\n  position: relative;\n  height: 160px;\n  border-radius: 5px;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  overflow: hidden;\n}\n.card__info {\n  position: absolute;\n  left: 0;\n  height: 100%;\n  padding: 10px;\n  font-size: 14px;\n  border-bottom-left-radius: 5px;\n  border-top-left-radius: 5px;\n  background-color: rgba(38, 39, 42, 0.5);\n  backdrop-filter: blur(2px);\n  transition: ease-in-out 0.5s;\n  z-index: 1;\n}\n.card__title {\n  margin-bottom: 10px;\n}\n.card__list {\n  color: #BDBCBC;\n  text-transform: capitalize;\n  line-height: 18px;\n}\n.card__img {\n  border-radius: 5px;\n  transition: ease-in-out 0.5s;\n}\n.card:hover {\n  cursor: pointer;\n}\n.card:hover .card__img {\n  transform: scale(1.1) rotate(-3deg);\n}\n.card:hover .card__info {\n  left: -100%;\n}\n.card_in-cart::after {\n  content: \"\";\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  padding: 5px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: #F2F2F2;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  background-position: center;\n  background-repeat: no-repeat;\n  filter: drop-shadow(0 0 1px black);\n}\n.card_notification-active {\n  pointer-events: none;\n}\n.card_notification-active::before {\n  content: \"Sorry, all slots are full\";\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  line-height: 160px;\n  text-align: center;\n  color: #FFFFFF;\n  background-color: #26272A;\n  z-index: 10;\n  animation: show-hide 3s ease-in-out;\n}\n\n@keyframes show-hide {\n  0% {\n    opacity: 0;\n  }\n  5% {\n    opacity: 1;\n  }\n  95% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n.filters {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n  width: 260px;\n}\n.filters__buttons {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n.filters__button {\n  color: inherit;\n  cursor: pointer;\n  border: none;\n  transition: cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;\n}\n.filters__button:hover {\n  background-color: #ffedab;\n}\n.filters_button-active, .filters__reset-settings:active, .filters__reset-filters:active {\n  background-color: #EDC42C;\n}\n.filters__search-container {\n  position: relative;\n}\n.filters__search-container::after {\n  content: \"\";\n  position: absolute;\n  bottom: 10px;\n  left: 10px;\n  width: 32px;\n  height: 38px;\n  border-top-left-radius: 5px;\n  border-bottom-left-radius: 5px;\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n  background-color: #EDC42C;\n  pointer-events: none;\n}\n.filters__search {\n  position: relative;\n  outline: none;\n  border: none;\n  padding-left: 40px;\n  transition: ease-in-out 0.5s;\n}\n.filters__search:hover, .filters__search:focus {\n  background-color: #EDC42C;\n}\n.filters__search::-webkit-search-cancel-button {\n  -webkit-appearance: none;\n  width: 20px;\n  height: 20px;\n  cursor: pointer;\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n\n.sort {\n  position: relative;\n}\n.sort__value {\n  position: relative;\n  cursor: pointer;\n}\n.sort__value::after {\n  content: \"\";\n  position: absolute;\n  top: 12px;\n  right: 15px;\n  width: 10px;\n  height: 10px;\n  border-bottom: 2px solid #BDBCBC;\n  border-right: 2px solid #BDBCBC;\n  border-bottom-right-radius: 2px;\n  transform: rotate(45deg);\n  transition: ease-in-out 0.5s;\n}\n.sort__value:hover::after {\n  border-bottom: 2px solid #26272A;\n  border-right: 2px solid #26272A;\n}\n.sort__list {\n  position: absolute;\n  top: 82%;\n  width: calc(100% - 20px);\n  padding: 0;\n  margin: 10px;\n  cursor: pointer;\n  z-index: 2;\n  opacity: 0;\n  pointer-events: none;\n  transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;\n}\n.sort_active .sort__list {\n  opacity: 1;\n  pointer-events: all;\n}\n.sort__item {\n  position: relative;\n  margin: 5px;\n  box-shadow: none;\n  transition: ease-in-out 0.3s;\n}\n.sort__item:hover {\n  background-color: #EDC42C;\n}\n.sort__item:not(:last-child)::after {\n  content: \"\";\n  position: absolute;\n  top: 39px;\n  left: 23px;\n  width: 80%;\n  height: 2px;\n  background-color: #F2F2F2;\n}\n\n.filters__range {\n  gap: 40px;\n}\n\n.noUi-target {\n  width: 80%;\n  justify-self: center !important;\n  border: none !important;\n  background-color: #ffedab !important;\n  cursor: pointer !important;\n  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) !important;\n}\n\n.noUi-connect {\n  background: #EDC42C !important;\n}\n\n.noUi-handle {\n  right: -9px !important;\n  width: 20px !important;\n  height: 20px !important;\n  border-radius: 50% !important;\n  cursor: grab !important;\n  box-shadow: none !important;\n  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;\n}\n\n.noUi-handle:active {\n  background-color: #F2F2F2 !important;\n}\n\n.noUi-handle-lower::before,\n.noUi-handle-upper::before,\n.noUi-handle-lower::after,\n.noUi-handle-upper::after {\n  display: none !important;\n}\n\n.noUi-horizontal {\n  height: 10px !important;\n}\n\n.noUi-tooltip {\n  color: inherit !important;\n  border: none !important;\n}\n\n.footer__link {\n  text-decoration: none;\n  color: #EDC42C;\n  cursor: pointer;\n  transition: ease-in-out 0.3s;\n}\n\n.footer__link:hover {\n  color: #ffedab;\n}\n\n.rss-link {\n  width: 100px;\n  height: 50px;\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ");\n  transition: ease-in-out 0.3s;\n}\n\n.rss-link:hover {\n  background: center/contain no-repeat url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ");\n}\n\n.footer {\n  color: #EDC42C;\n  margin-top: 40px;\n  background-color: #26272A;\n}\n\n.footer__container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: 80px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3124,7 +3132,7 @@ class AppController extends _loader_loader__WEBPACK_IMPORTED_MODULE_1__["default
         return result;
     }
     valueFilterHandler(key, value) {
-        let storageValueFilters = this.getFromLocalStorage('cars-store-value-filters');
+        const storageValueFilters = this.getFromLocalStorage('cars-store-value-filters');
         !storageValueFilters[key].includes(value)
             ? storageValueFilters[key].push(value)
             : (storageValueFilters[key] = storageValueFilters[key].filter((item) => item !== value));
@@ -3238,20 +3246,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component/component */ "./src/components/view/component/component.ts");
 /* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header/header */ "./src/components/view/header/header.ts");
 /* harmony import */ var _main_main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main/main */ "./src/components/view/main/main.ts");
+/* harmony import */ var _textComponent_textComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./textComponent/textComponent */ "./src/components/view/textComponent/textComponent.ts");
+
 
 
 
 class AppView {
     constructor() {
         this.component = new _component_component__WEBPACK_IMPORTED_MODULE_0__["default"]();
+        this.textComponent = new _textComponent_textComponent__WEBPACK_IMPORTED_MODULE_3__["default"]();
         this.header = new _header_header__WEBPACK_IMPORTED_MODULE_1__["default"]();
         this.main = new _main_main__WEBPACK_IMPORTED_MODULE_2__["default"]();
     }
     render(valueFilterHandler, _filteredProducts, valueFilterValues, products, localStorageIds, minMaxAmounts, minMaxYears, sliderAmountHandler, sliderYearHandler) {
         const wrapper = this.component.createComponent('div', 'wrapper', document.body);
         this.header.renderHeader(wrapper, localStorageIds === null || localStorageIds === void 0 ? void 0 : localStorageIds.length);
-        this.main.renderMain(valueFilterHandler, valueFilterValues, wrapper, products, localStorageIds, minMaxAmounts, minMaxYears, sliderAmountHandler, sliderYearHandler);
+        this.main.renderMain(valueFilterHandler, valueFilterValues, wrapper, products, localStorageIds, minMaxAmounts, minMaxYears, sliderAmountHandler, sliderYearHandler, this.header);
         const footer = this.component.createComponent('footer', 'footer', wrapper);
+        const footerContainer = this.component.createComponent('div', 'footer__container container', footer);
+        const githubLink = this.textComponent.createTextComponent('a', 'footer__link', footerContainer, 'GitHub');
+        githubLink.href = 'https://github.com/nozeil';
+        this.textComponent.createTextComponent('div', 'footer__year', footerContainer, '2022');
+        const rsSchoolLink = this.textComponent.createTextComponent('a', 'footer__link rss-link', footerContainer, '');
+        rsSchoolLink.href = 'https://rs.school/js/';
     }
     getMain() {
         return this.main;
@@ -3420,28 +3437,66 @@ __webpack_require__.r(__webpack_exports__);
 
 class Main {
     constructor() {
+        this.buttons = [];
         this.component = new _component_component__WEBPACK_IMPORTED_MODULE_3__["default"]();
         this.cards = new _cards_cards__WEBPACK_IMPORTED_MODULE_2__["default"]();
         this.textComponent = new _textComponent_textComponent__WEBPACK_IMPORTED_MODULE_5__["default"]();
         this.slider = new _rangeSlider_rangeSlider__WEBPACK_IMPORTED_MODULE_4__["default"]();
         this.controller = new _controller_appController__WEBPACK_IMPORTED_MODULE_0__["default"]();
     }
-    renderMain(valueFilterHandler, valueFilterValues, parentEl, products, localStorageIds, minMaxAmounts, minMaxYears, sliderAmountHandler, sliderYearHandler) {
+    renderMain(valueFilterHandler, valueFilterValues, parentEl, products, localStorageIds, minMaxAmounts, minMaxYears, sliderAmountHandler, sliderYearHandler, header) {
         const main = this.component.createComponent('main', 'main', parentEl);
         const mainContainer = this.component.createComponent('div', 'main__container container', main);
         const filtersSection = this.component.createComponent('section', 'filters', mainContainer);
         this.productsSection = this.component.createComponent('section', 'products', mainContainer);
+        const searchContainer = this.component.createComponent('div', 'filters__search-container', filtersSection);
+        this.textComponent.createTextComponent('h3', 'filters__title', searchContainer, 'Search');
+        const search = this.component.createComponent('input', 'filters__search', searchContainer);
+        search.type = 'search';
+        search.autocomplete = 'off';
+        search.placeholder = 'Car...';
+        search.addEventListener('input', () => {
+            let copyProducts = this.controller.filteredProducts || products;
+            if (search.value) {
+                copyProducts = products.filter((product) => product.model.toLowerCase().includes(search.value.toLowerCase()));
+            }
+            this.controller.addToCart(this.cards.renderCards(this.productsSection, copyProducts, this.controller.getFromLocalStorage('cars-store-products-cart')), header.createdCounter);
+            if (!copyProducts.length) {
+                this.textComponent.createTextComponent('h2', 'products__not-find', this.productsSection, 'Sorry, no matches found');
+            }
+        });
+        window.addEventListener('load', () => search.focus());
         this.createdCards = this.cards.renderCards(this.productsSection, products, localStorageIds);
         this.renderSort(filtersSection);
-        this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
-        this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
+        const amountSlider = this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
+        const yearSlider = this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
         this.renderValuesFilters(valueFilterHandler, valueFilterValues, filtersSection);
+        const resetFiltersButton = this.textComponent.createTextComponent('button', 'filters__button filters__reset-filters', filtersSection, 'reset filters');
+        resetFiltersButton.addEventListener('click', () => {
+            var _a, _b;
+            const sortedPoducts = this.controller.sortProducts(this.controller.getFromLocalStorage('cars-store-sort-value') || _enums_enums__WEBPACK_IMPORTED_MODULE_1__.SortValues.byNameAZ, products);
+            this.buttons.forEach((button) => button.classList.remove('filters_button-active'));
+            const defaultSetting = {
+                manufacturer: [],
+                transmission: [],
+                color: [],
+                popular: [],
+            };
+            this.controller.saveToLocalStorage('cars-store-value-filters', defaultSetting);
+            (_a = amountSlider.noUiSlider) === null || _a === void 0 ? void 0 : _a.set([minMaxAmounts.min, minMaxAmounts.max]);
+            (_b = yearSlider.noUiSlider) === null || _b === void 0 ? void 0 : _b.set([minMaxYears.min, minMaxYears.max]);
+            this.controller.addToCart(this.cards.renderCards(this.productsSection, sortedPoducts, this.controller.getFromLocalStorage('cars-store-products-cart')), header.createdCounter);
+        });
+        const resetSettingsButton = this.textComponent.createTextComponent('button', 'filters__button filters__reset-settings', filtersSection, 'reset settings');
+        resetSettingsButton.addEventListener('click', () => {
+            window.location.reload();
+            localStorage.clear();
+        });
     }
     renderValuesFilters(valueFilterHandler, values, parentEl) {
         this.renderValueFilter(valueFilterHandler, values, parentEl);
     }
     renderValueFilter(valueFilterHandler, values, parentEl) {
-        const buttons = [];
         for (const key in values) {
             const filter = this.component.createComponent('div', `filters__${key}`, parentEl);
             this.textComponent.createTextComponent('h3', 'filters__title', filter, key);
@@ -3450,14 +3505,14 @@ class Main {
                 const button = key === 'popular'
                     ? this.textComponent.createTextComponent('button', `filters__button ${key}`, filterButtons, value)
                     : this.textComponent.createTextComponent('button', `filters__button ${value}`, filterButtons, value);
-                buttons.push(button);
+                this.buttons.push(button);
                 button.addEventListener('click', () => {
                     button.classList.toggle('filters_button-active');
                     valueFilterHandler(key, value);
                 });
             });
         }
-        this.updateActiveButtons(buttons);
+        this.updateActiveButtons(this.buttons);
     }
     updateActiveButtons(buttons) {
         const activeButtonsClasses = Object.values(this.controller.getFromLocalStorage('cars-store-value-filters')).flat(1);
@@ -3548,6 +3603,7 @@ class Slider {
                 break;
         }
         filterRangeSlider.noUiSlider.on('update', handler);
+        return filterRangeSlider;
     }
     createUiSlider(parentEl, startRange, min, max) {
         nouislider__WEBPACK_IMPORTED_MODULE_0__.create(parentEl, {
@@ -4266,6 +4322,50 @@ module.exports = __webpack_require__.p + "assets/9.jpg";
 
 /***/ }),
 
+/***/ "./src/assets/svg/cancel.svg":
+/*!***********************************!*\
+  !*** ./src/assets/svg/cancel.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "assets/cancel.svg";
+
+/***/ }),
+
+/***/ "./src/assets/svg/rs_school_js.svg":
+/*!*****************************************!*\
+  !*** ./src/assets/svg/rs_school_js.svg ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "assets/rs_school_js.svg";
+
+/***/ }),
+
+/***/ "./src/assets/svg/rs_school_js_hover.svg":
+/*!***********************************************!*\
+  !*** ./src/assets/svg/rs_school_js_hover.svg ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "assets/rs_school_js_hover.svg";
+
+/***/ }),
+
+/***/ "./src/assets/svg/search.svg":
+/*!***********************************!*\
+  !*** ./src/assets/svg/search.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "assets/search.svg";
+
+/***/ }),
+
 /***/ "./src/assets/svg/shoping-cart.svg":
 /*!*****************************************!*\
   !*** ./src/assets/svg/shoping-cart.svg ***!
@@ -4442,6 +4542,18 @@ importAll(__webpack_require__("./src/assets/jpg sync \\.jpg$"));
 
 const app = new _components_app_app__WEBPACK_IMPORTED_MODULE_2__["default"]();
 app.start();
+console.log(`Главная страница содержит все товары магазина а также фильтры, строку поиска, поле для сортировки.Выполняются требования к вёрстке +10
+  Карточка товара содержит его изображение, название, количество данного товара на складе, год выхода на рынок, цвет, производитель и т.д., находится ли товар в корзине +10
+  Карточки товаров добавляются динамически средствами JavaScript (на кросс-чеке этот пункт не проверяется)
+  Добавление товаров в корзину +20
+  Сортировка +10
+  Фильтры в указанном диапазоне от и до +20
+  Фильтры по значению +15
+  Можно отфильтровать товары по нескольким фильтрам разного типа +10
+  Сброс фильтров +20
+  Сохранение настроек в local storage +15
+  Поиск +25
+  Итого: 145/200`);
 
 })();
 
