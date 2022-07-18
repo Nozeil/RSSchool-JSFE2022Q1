@@ -48,6 +48,7 @@ export default class AppController extends Loader {
         if (!isInCart && this.cart.length < maxNumOfCards) {
           productCard.classList.add('card_in-cart');
           this.cart.push(productCardId);
+          console.log(productsCounter, this.cart);
           productsCounter.innerHTML = `${this.cart.length}`;
         } else if (isInCart) {
           productCard.classList.remove('card_in-cart');
@@ -248,7 +249,7 @@ export default class AppController extends Loader {
           this.filteredByValue = [...tempProducts];
           tempProducts = [];
         }
-      } 
+      }
     }
 
     if (!this.filteredByValue.length) this.filteredByValue = this.filteredProducts;

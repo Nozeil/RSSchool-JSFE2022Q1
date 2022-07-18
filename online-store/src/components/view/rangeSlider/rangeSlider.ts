@@ -45,6 +45,7 @@ export default class Slider {
     }
 
     (filterRangeSlider.noUiSlider as noUiSlider.API).on('update', handler);
+    return filterRangeSlider;
   }
 
   createUiSlider(parentEl: HTMLElement, startRange: number[], min: number, max: number): void {

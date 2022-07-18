@@ -26,7 +26,7 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-
+  
   &__button {
     @extend %filters;
     color: inherit;
@@ -35,7 +35,12 @@
     transition: cubic-bezier(0.215, 0.610, 0.355, 1) variables.$transition;
   }
 
-  &_button-active {
+  &__button:hover {
+    background-color: variables.$light-l;
+  }
+
+
+  &_button-active, &__reset-settings:active, &__reset-filters:active {
     background-color: variables.$light-s;
   }
 

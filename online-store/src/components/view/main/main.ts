@@ -4,6 +4,7 @@ import MinMaxI from '../../controller/minMaxI';
 import { SortValues } from '../../enums/enums';
 import Cards from '../cards/cards';
 import Component from '../component/component';
+import Header from '../header/header';
 import Slider from '../rangeSlider/rangeSlider';
 import TextComponent from '../textComponent/textComponent';
 import MainI from './mainI';
@@ -17,6 +18,7 @@ export default class Main implements MainI {
   filtersSort!: HTMLElement;
   private sortValue!: HTMLElement;
   slider: Slider;
+  buttons: HTMLElement[] = [];
 
   constructor() {
     this.component = new Component();
@@ -35,7 +37,8 @@ export default class Main implements MainI {
     minMaxAmounts: MinMaxI,
     minMaxYears: MinMaxI,
     sliderAmountHandler: SliderHandlerT,
-    sliderYearHandler: SliderHandlerT
+    sliderYearHandler: SliderHandlerT,
+    header: Header
   ): void {
     const main: HTMLElement = this.component.createComponent('main', 'main', parentEl);
     const mainContainer: HTMLElement = this.component.createComponent('div', 'main__container container', main);
@@ -44,10 +47,52 @@ export default class Main implements MainI {
     this.productsSection = this.component.createComponent('section', 'products', mainContainer);
     this.createdCards = this.cards.renderCards(this.productsSection, products, localStorageIds);
     this.renderSort(filtersSection);
-    this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
-    this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
-
+    const amountSlider = this.slider.renderSlider(filtersSection, 'Amount', minMaxAmounts, sliderAmountHandler);
+    const yearSlider = this.slider.renderSlider(filtersSection, 'Year', minMaxYears, sliderYearHandler);
     this.renderValuesFilters(valueFilterHandler, valueFilterValues, filtersSection);
+
+    const resetFiltersButton = this.textComponent.createTextComponent(
+      'button',
+      'filters__button filters__reset-filters',
+      filtersSection,
+      'reset filters'
+    );
+
+    resetFiltersButton.addEventListener('click', () => {
+      const sortedPoducts = this.controller.sortProducts(
+        this.controller.getFromLocalStorage('cars-store-sort-value') || SortValues.byNameAZ,
+        products
+      ) as ProductsT;
+
+      this.buttons.forEach((button) => button.classList.remove('filters_button-active'));
+
+      const defaultSetting: { [s: string]: string[] } = {
+        manufacturer: [],
+        transmission: [],
+        color: [],
+        popular: [],
+      };
+
+      this.controller.saveToLocalStorage('cars-store-value-filters', defaultSetting);
+      console.log(minMaxAmounts, amountSlider, yearSlider);
+      amountSlider.noUiSlider?.set([minMaxAmounts.min, minMaxAmounts.max]);
+      yearSlider.noUiSlider?.set([minMaxYears.min, minMaxYears.max]);
+      this.controller.addToCart(
+        this.cards.renderCards(
+          this.productsSection,
+          sortedPoducts,
+          this.controller.getFromLocalStorage('cars-store-products-cart')
+        ),
+        header.createdCounter
+      );
+    });
+
+    const resetSettingsButton = this.textComponent.createTextComponent(
+      'button',
+      'filters__button filters__reset-settings',
+      filtersSection,
+      'reset settings'
+    );
   }
 
   renderValuesFilters(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement) {
@@ -55,7 +100,6 @@ export default class Main implements MainI {
   }
 
   renderValueFilter(valueFilterHandler, values: ValueFiltersT, parentEl: HTMLElement): void {
-    const buttons: HTMLElement[] = [];
     for (const key in values) {
       const filter: HTMLElement = this.component.createComponent('div', `filters__${key}`, parentEl);
       this.textComponent.createTextComponent('h3', 'filters__title', filter, key);
@@ -67,7 +111,7 @@ export default class Main implements MainI {
             ? this.textComponent.createTextComponent('button', `filters__button ${key}`, filterButtons, value)
             : this.textComponent.createTextComponent('button', `filters__button ${value}`, filterButtons, value);
 
-        buttons.push(button);
+        this.buttons.push(button);
 
         button.addEventListener('click', () => {
           button.classList.toggle('filters_button-active');
@@ -75,7 +119,7 @@ export default class Main implements MainI {
         });
       });
     }
-    this.updateActiveButtons(buttons);
+    this.updateActiveButtons(this.buttons);
   }
 
   updateActiveButtons(buttons) {

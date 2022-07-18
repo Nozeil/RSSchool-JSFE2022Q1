@@ -38,7 +38,8 @@ export default class AppView implements AppViewI {
       minMaxAmounts,
       minMaxYears,
       sliderAmountHandler,
-      sliderYearHandler
+      sliderYearHandler,
+      this.header
     );
 
     const footer = this.component.createComponent('footer', 'footer', wrapper);
