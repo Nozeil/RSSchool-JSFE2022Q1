@@ -4,14 +4,17 @@ import AppViewI from './appViewI';
 import Component from './component/component';
 import Header from './header/header';
 import Main from './main/main';
+import TextComponent from './textComponent/textComponent';
 
 export default class AppView implements AppViewI {
   component: Component;
+  textComponent: TextComponent;
   header: Header;
   main: Main;
 
   constructor() {
     this.component = new Component();
+    this.textComponent = new TextComponent();
     this.header = new Header();
     this.main = new Main();
   }
@@ -44,7 +47,25 @@ export default class AppView implements AppViewI {
       controller
     );
 
-    const footer = this.component.createComponent('footer', 'footer', wrapper);
+    const footer: HTMLElement = this.component.createComponent('footer', 'footer', wrapper);
+    const footerContainer: HTMLElement = this.component.createComponent('div', 'footer__container container', footer);
+    const githubLink: HTMLLinkElement = this.textComponent.createTextComponent(
+      'a',
+      'footer__link',
+      footerContainer,
+      'GitHub'
+    ) as HTMLLinkElement;
+    githubLink.href = 'https://github.com/nozeil';
+
+    this.textComponent.createTextComponent('div', 'footer__year', footerContainer, '2022');
+
+    const rsSchoolLink: HTMLLinkElement = this.textComponent.createTextComponent(
+      'a',
+      'footer__link rss-link',
+      footerContainer,
+      ''
+    ) as HTMLLinkElement;
+    rsSchoolLink.href = 'https://rs.school/js/';
   }
 
   getMain(): Main {

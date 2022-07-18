@@ -1,0 +1,24 @@
+@use '../abstracts/placeholders';
+@use '../abstracts/variables';
+
+.footer__link {
+  text-decoration: none;
+  color: variables.$light-s;
+  cursor: pointer;
+  transition: ease-in-out .3s;
+}
+
+.footer__link:hover {
+  color: variables.$light-l;
+}
+
+.rss-link {
+  width: 100px;
+  height: 50px;
+  background: center/contain no-repeat url('../../assets/svg/rs_school_js.svg');
+  transition: ease-in-out .3s;
+}
+
+.rss-link:hover {
+  background: center/contain no-repeat url('../../assets/svg/rs_school_js_hover.svg');
+}

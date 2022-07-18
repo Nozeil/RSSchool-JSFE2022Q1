@@ -1,0 +1,15 @@
+@use '../abstracts/placeholders';
+@use '../abstracts/variables';
+
+.footer {
+  color: variables.$light-s;
+  margin-top: variables.$container-margin;
+  background-color: variables.$dark;
+}
+
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
