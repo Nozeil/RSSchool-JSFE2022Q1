@@ -12,6 +12,7 @@ import MinMaxI from './minMaxI';
 import Loader from './loader/loader';
 import ProductI from './loader/productI';
 import AppControllerI from './AppControllerI';
+import MinMax from './loader/minMaxAmount';
 
 export default class AppController extends Loader implements AppControllerI {
   cart: string[];
@@ -127,11 +128,7 @@ export default class AppController extends Loader implements AppControllerI {
   }
 
   getMinMax(products: ProductsT, prop: string): MinMaxI {
-    const productsAmounts: number[] = products.map((product: ProductI): number => +product[prop]);
-    return {
-      min: Math.min(...productsAmounts),
-      max: Math.max(...productsAmounts),
-    };
+    return new MinMax().getMinMax(products, prop);
   }
 
   saveToLocalStorage<T>(key: string, data: T): void {
