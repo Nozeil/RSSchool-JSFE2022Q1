@@ -11,13 +11,14 @@ export default class Model {
     this.limit = limit;
   }
 
-  getQuery(queryParam: string, pageValue: number, limitValue: number): string {
-    return `${this.url}${queryParam}?${this.page}=${pageValue}&${this.limit}=${limitValue}`;
+  getQuery(queryParam: string, pageValue?: number, limitValue?: number): string {
+    const baseUrl = `${this.url}${queryParam}`;
+    return pageValue && limitValue ? `${baseUrl}?${this.page}=${pageValue}&${this.limit}=${limitValue}` : baseUrl;
   }
 
   async getCarsAndCarsCount(pageValue = 1, limitValue = 7) {
     const query = this.getQuery('garage', pageValue, limitValue);
-    const res = await fetch(`${query}`, {
+    const res = await fetch(query, {
       method: 'GET',
     });
     const cars = await res.json();
@@ -33,7 +34,7 @@ export default class Model {
 
   async getWinners(pageValue = 1, limitValue = 10) {
     const query = this.getQuery('winners', pageValue, limitValue);
-    const res = await fetch(`${query}`, {
+    const res = await fetch(query, {
       method: 'GET',
     });
     const winners = await res.json();
@@ -47,22 +48,44 @@ export default class Model {
     return { winners, winnersCount, pageValue };
   }
 
-  /*   
-  getCar() {
-
-  }
-  createCar() {
-
-  }
-
-  deleteCar() {
-
-  } 
-  
-  updateCar() {
-
+  async createCar(name: string, color: string) {
+    const query = this.getQuery('garage');
+    const res = await fetch(query, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, color }),
+    });
+    return res;
   }
 
+  async getCar(id: number) {
+    const query = `${this.getQuery('garage')}/${id}`;
+    const res = await fetch(query, {
+      method: 'GET',
+    });
+    const car = await res.json();
+    return car;
+  }
+
+  async updateCar(name: string, color: string, id: number) {
+    const query = `${this.getQuery('garage')}/${id}`;
+    const res = fetch(query, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, color }),
+    });
+    return res;
+  }
+
+  async deleteCar(id: number) {
+    const query = `${this.getQuery('garage')}/${id}`;
+    const res = fetch(query, {
+      method: 'Delete',
+    });
+    return res;
+  }
+
+  /*
   startCarsEngine() {
 
   }

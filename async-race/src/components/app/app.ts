@@ -13,17 +13,19 @@ export default class App implements AppI {
   }
 
   async start() {
-    const { cars, carsCount, pageValue } = await this.controller.garageButtonHandler();
+    const { cars, carsCount, pageValue } = await this.controller.getGarageButtonHandler();
     console.log(cars, carsCount, pageValue);
 
-    if (carsCount) {
-      await this.view.renderView(carsCount, pageValue, await this.exportButtonsHandlers());
-    }
+    this.view.renderView(cars, carsCount, pageValue, await this.exportButtonsHandlers());
   }
 
   async exportButtonsHandlers() {
-    const garageHandler = this.controller.garageButtonHandler.bind(this.controller);
-    const winnersHandler = this.controller.winnersButtonHandler.bind(this.controller);
-    return { garageHandler, winnersHandler };
+    const garageHandler = this.controller.getGarageButtonHandler.bind(this.controller);
+    const winnersHandler = this.controller.getWinnersButtonHandler.bind(this.controller);
+    const createHandler = this.controller.getCreateButtonHandler.bind(this.controller);
+    const carHandler = this.controller.getCarHandler.bind(this.controller);
+    const updateHandler = this.controller.getUpdateHandler.bind(this.controller);
+    const deleteHandler = this.controller.getDeleteHandler.bind(this.controller);
+    return { garageHandler, winnersHandler, createHandler, carHandler, updateHandler, deleteHandler };
   }
 }

@@ -7,11 +7,27 @@ export default class Controller {
     this.model = new Model();
   }
 
-  async garageButtonHandler() {
-    return this.model.getCarsAndCarsCount();
+  async getGarageButtonHandler(pageValue?: number, limitValue?: number) {
+    return this.model.getCarsAndCarsCount(pageValue, limitValue);
   }
 
-  async winnersButtonHandler() {
+  async getWinnersButtonHandler() {
     return this.model.getWinners();
+  }
+
+  async getCreateButtonHandler(name, color) {
+    return this.model.createCar(name, color);
+  }
+
+  async getCarHandler(id: number) {
+    return this.model.getCar(id);
+  }
+
+  async getUpdateHandler(name: string, color: string, id: number) {
+    return this.model.updateCar(name, color, id);
+  }
+
+  async getDeleteHandler(id: number) {
+    return this.model.deleteCar(id);
   }
 }

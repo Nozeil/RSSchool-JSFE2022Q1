@@ -7,7 +7,7 @@ export default class View {
     this.root = new Root();
   }
 
-  async renderView<T>(garageSize: number, garagePage: number, handlers: T) {
-    this.root.renderRoot(garageSize, garagePage, handlers);
+  async renderView<T>(cars, garageSize: number, garagePage: number, handlers: T) {
+    this.root.renderRoot(cars, garageSize, garagePage, handlers);
   }
 }

@@ -18,6 +18,21 @@ export default class Root implements RootI {
     this.textComponent = new TextComponent();
     this.garage = new Garage();
     this.winners = new Winners();
+    this.updateState = {
+      size: null,
+      limit: 7,
+      page: null,
+      firstPage: 1,
+      id: null,
+      createInputText: null,
+      createInputColor: null,
+      updateInputText: null,
+      updateInputColor: null,
+
+      getLastPage(): number {
+        return Math.ceil(this.size / this.limit);
+      },
+    };
   }
 
   getRoot(): HTMLElement {
@@ -44,16 +59,19 @@ export default class Root implements RootI {
     return button;
   }
 
-  renderRoot(garageSize: number, garagePage: number, handlers) {
+  renderRoot(cars, garageSize: number, garagePage: number, handlers) {
+
     const root = this.getRoot();
     const rootControls = this.getRootControls(root);
     const rootContainer = this.getRootContainer(root);
 
     const garageButton = this.getGarageButton(rootControls);
     garageButton.addEventListener('click', async () => {
-      const { cars, carsCount, pageValue } = await handlers.garageHandler();
+      const { cars, carsCount, pageValue } = this.updateState.page
+        ? await handlers.garageHandler(this.updateState.page)
+        : await handlers.garageHandler();
       rootContainer.innerHTML = '';
-      this.garage.renderGarage(rootContainer, carsCount, pageValue);
+      this.garage.renderGarage(cars, rootContainer, carsCount, pageValue, handlers, this.updateState);
     });
 
     const winnersButton = this.getWinnersButton(rootControls);
@@ -63,6 +81,6 @@ export default class Root implements RootI {
       this.winners.renderWinners(rootContainer, winnersCount, pageValue);
     });
 
-    this.garage.renderGarage(rootContainer, garageSize, garagePage);
+    this.garage.renderGarage(cars, rootContainer, garageSize, garagePage, handlers, this.updateState);
   }
 }

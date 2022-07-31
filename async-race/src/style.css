@@ -1,0 +1,7 @@
+body {
+  background-color: #2e8b57;
+}
+
+.car__car-image {
+  border-bottom: 2px dashed black;
+}
