@@ -30,4 +30,16 @@ export default class Controller {
   async getDeleteHandler(id: number) {
     return this.model.deleteCar(id);
   }
+
+  async getStartHandler(id: number) {
+    return this.model.startCarsEngine(id);
+  }
+
+  async getDriveHandler(id: number) {
+    return this.model.switchCarsEngineToDriveMode(id);
+  }
+
+  async getStopHandler(id: number) {
+    return this.model.stopCarsEngine(id);
+  }
 }

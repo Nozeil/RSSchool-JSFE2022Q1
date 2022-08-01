@@ -60,7 +60,6 @@ export default class Root implements RootI {
   }
 
   renderRoot(cars, garageSize: number, garagePage: number, handlers) {
-
     const root = this.getRoot();
     const rootControls = this.getRootControls(root);
     const rootContainer = this.getRootContainer(root);

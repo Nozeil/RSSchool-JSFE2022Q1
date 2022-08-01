@@ -105,7 +105,7 @@ export default class Garage {
             updateControls.updateColorInput.value,
             updateState.id
           );
-
+          console.log(await res.status);
           if ((await res.status) === 200) {
             const { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
 
@@ -423,13 +423,17 @@ export default class Garage {
         randomCars.push({ name: randomCarName, color: randomColor });
       }
 
-      const requests = randomCars.map((car) => handlers.createHandler(car.name, car.color));
-      const responses = await Promise.all(requests);
+      try {
+        const requests = randomCars.map((car) => handlers.createHandler(car.name, car.color));
+        const responses = await Promise.all(requests);
 
-      if (responses.every(async (res) => (await res.status) === 201)) {
-        const { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
-        containerParent.innerHTML = '';
-        this.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);
+        if (responses.every(async (res) => (await res.status) === 201)) {
+          const { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
+          containerParent.innerHTML = '';
+          this.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);
+        }
+      } catch (e) {
+        console.error(e);
       }
     });
 

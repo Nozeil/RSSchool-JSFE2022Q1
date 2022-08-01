@@ -69,7 +69,7 @@ export default class Model {
 
   async updateCar(name: string, color: string, id: number) {
     const query = `${this.getQuery('garage')}/${id}`;
-    const res = fetch(query, {
+    const res = await fetch(query, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, color }),
@@ -79,24 +79,47 @@ export default class Model {
 
   async deleteCar(id: number) {
     const query = `${this.getQuery('garage')}/${id}`;
-    const res = fetch(query, {
-      method: 'Delete',
+    const res = await fetch(query, {
+      method: 'DELETE',
+    });
+    return res;
+  }
+
+  async startCarsEngine(id: number, status = 'started') {
+    const query = `${this.getQuery('engine')}?id=${id}&status=${status}`;
+    const res = await fetch(query, {
+      method: 'PATCH',
+      body: JSON.stringify({ id, status }),
+    });
+    const params = await res.json();
+    return params;
+  }
+
+  async switchCarsEngineToDriveMode(id: number, status = 'drive') {
+    const query = `${this.getQuery('engine')}?id=${id}&status=${status}`;
+    const res = await fetch(query, {
+      method: 'PATCH',
+      body: JSON.stringify({ id, status }),
+    });
+    return res;
+  }
+
+  async stopCarsEngine(id: number, status = 'stopped') {
+    const query = `${this.getQuery('engine')}?id=${id}&status=${status}`;
+    const res = await fetch(query, {
+      method: 'PATCH',
+      body: JSON.stringify({ id, status }),
     });
     return res;
   }
 
   /*
-  startCarsEngine() {
-
-  }
 
   stopCarsEngine() {
 
   }
 
-  switchCarsEngineToDriveMode() {
 
-  }
 
 
 

@@ -26,6 +26,19 @@ export default class App implements AppI {
     const carHandler = this.controller.getCarHandler.bind(this.controller);
     const updateHandler = this.controller.getUpdateHandler.bind(this.controller);
     const deleteHandler = this.controller.getDeleteHandler.bind(this.controller);
-    return { garageHandler, winnersHandler, createHandler, carHandler, updateHandler, deleteHandler };
+    const startHandler = this.controller.getStartHandler.bind(this.controller);
+    const driveHandler = this.controller.getDriveHandler.bind(this.controller);
+    const stopHandler = this.controller.getStopHandler.bind(this.controller);
+    return {
+      garageHandler,
+      winnersHandler,
+      createHandler,
+      carHandler,
+      updateHandler,
+      deleteHandler,
+      startHandler,
+      driveHandler,
+      stopHandler,
+    };
   }
 }

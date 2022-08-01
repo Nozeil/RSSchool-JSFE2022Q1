@@ -13,6 +13,7 @@ export default class Cars {
     this.component = new Component();
     this.textComponent = new TextComponent();
     this.carSvgImage = new SvgImageComponent();
+    this.animationState = {};
   }
 
   getCar(parentEl: HTMLElement) {
@@ -32,7 +33,8 @@ export default class Cars {
     carContainer,
     garageTitle,
     garagePageTitle,
-    paginationButtons
+    paginationButtons,
+    carImage
   ) {
     const controls = this.component.getComponent('div', parentEl, 'car__controls');
     const selectButton = this.getSelectButton(controls);
@@ -63,6 +65,13 @@ export default class Cars {
       try {
         const res = await handlers.deleteHandler(id);
         if ((await res.status) === 200) {
+          Object.values(updateControls).forEach((control) => {
+            if (control instanceof HTMLInputElement || control instanceof HTMLButtonElement) {
+              const copyControl = control;
+              copyControl.disabled = true;
+            }
+          });
+
           let { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
 
           if (!cars.length && pageValue !== updateState.firstPage) {
@@ -100,9 +109,79 @@ export default class Cars {
         console.error(e);
       }
     });
-    this.getStartButton(controls);
-    this.getEndButton(controls);
+
+    const startButton = this.getStartButton(controls);
+    const endButton = this.getEndButton(controls);
+
+    startButton.addEventListener('click', async () => {
+      try {
+        startButton.disabled = true;
+
+        const animationStateKey = `id${id}`;
+
+        this.animationState[animationStateKey] = {
+          animationId: null,
+        };
+        const car = carImage.firstChild;
+        const start = carImage.firstChild.getBoundingClientRect().x;
+        const carState = this.animationState[animationStateKey];
+        const params = await handlers.startHandler(id);
+        const finish = document.documentElement.clientWidth - 150;
+        const duration = Math.floor(params.distance / params.velocity);
+
+        if (await params) {
+          endButton.disabled = false;
+        }
+
+        this.animateCar(car, start, finish, duration, animationStateKey);
+
+        const checkDrive = await handlers.driveHandler(id);
+
+        if ((await checkDrive.status) === 500) {
+          cancelAnimationFrame(carState.animationId);
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    });
+
+    endButton.addEventListener('click', async () => {
+      try {
+        endButton.disabled = true;
+        const res = await handlers.stopHandler(id);
+        const animationStateKey = `id${id}`;
+        const car = carImage.firstChild;
+
+        if ((await res.status) === 200) {
+          const carState = this.animationState[animationStateKey];
+          cancelAnimationFrame(carState.animationId);
+          carState.animationId = null;
+          startButton.disabled = false;
+          car.style.transform = 'translateX(0)';
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    });
     return controls;
+  }
+
+  animateCar(car, start, finish, duration, animationStateKey) {
+    let currX = start;
+
+    const framesCount = (duration / 1000) * 60;
+    const diffX = (finish - car.getBoundingClientRect().x) / framesCount;
+
+    const carStep = () => {
+      currX += diffX;
+      car.style.transform = `translateX(${currX}px)`;
+
+      if (currX < finish) {
+        this.animationState[animationStateKey].animationId = requestAnimationFrame(carStep);
+      }
+    };
+
+    carStep();
   }
 
   getSelectButton(parentEl: HTMLElement) {
@@ -118,7 +197,9 @@ export default class Cars {
   }
 
   getEndButton(parentEl: HTMLElement) {
-    return this.textComponent.getTextComponent('button', parentEl, 'car__end', 'End');
+    const button = this.textComponent.getTextComponent('button', parentEl, 'car__end', 'End');
+    button.disabled = true;
+    return button;
   }
 
   getCarRace(parentEl: HTMLElement) {
@@ -242,6 +323,7 @@ export default class Cars {
   ) {
     const car = this.getCar(parentEl);
     this.getCarTitle(car, title);
+    const carImage = this.getCarImage(parentEl, color);
     this.getCarControls(
       car,
       id,
@@ -251,9 +333,9 @@ export default class Cars {
       parentEl,
       garageTitle,
       garagePageTitle,
-      paginationButtons
+      paginationButtons,
+      carImage
     );
-    this.getCarImage(parentEl, color);
   }
 
   renderCars(
