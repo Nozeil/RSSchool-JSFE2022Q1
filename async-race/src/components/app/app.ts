@@ -14,7 +14,6 @@ export default class App implements AppI {
 
   async start() {
     const { cars, carsCount, pageValue } = await this.controller.getGarageButtonHandler();
-    console.log(cars, carsCount, pageValue);
 
     this.view.renderView(cars, carsCount, pageValue, await this.exportButtonsHandlers());
   }
@@ -26,9 +25,8 @@ export default class App implements AppI {
     const carHandler = this.controller.getCarHandler.bind(this.controller);
     const updateHandler = this.controller.getUpdateHandler.bind(this.controller);
     const deleteHandler = this.controller.getDeleteHandler.bind(this.controller);
-    const startHandler = this.controller.getStartHandler.bind(this.controller);
-    const driveHandler = this.controller.getDriveHandler.bind(this.controller);
-    const stopHandler = this.controller.getStopHandler.bind(this.controller);
+    const startButtonHandler = this.controller.getStartButtonHandler.bind(this.controller);
+    const stopButtonHandler = this.controller.getStopButtonHandler.bind(this.controller);
     return {
       garageHandler,
       winnersHandler,
@@ -36,9 +34,8 @@ export default class App implements AppI {
       carHandler,
       updateHandler,
       deleteHandler,
-      startHandler,
-      driveHandler,
-      stopHandler,
+      startButtonHandler,
+      stopButtonHandler,
     };
   }
 }

@@ -92,7 +92,7 @@ export default class Model {
       body: JSON.stringify({ id, status }),
     });
     const params = await res.json();
-    return params;
+    return { res, params };
   }
 
   async switchCarsEngineToDriveMode(id: number, status = 'drive') {

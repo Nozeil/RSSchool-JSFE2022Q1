@@ -28,7 +28,8 @@ export default class Root implements RootI {
       createInputColor: null,
       updateInputText: null,
       updateInputColor: null,
-
+      winnerInfo: null,
+      cars: [],
       getLastPage(): number {
         return Math.ceil(this.size / this.limit);
       },

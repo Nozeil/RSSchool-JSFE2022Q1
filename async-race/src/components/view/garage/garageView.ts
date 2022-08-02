@@ -33,24 +33,32 @@ export default class Garage {
 
   getCreateControls(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
     const controls = this.component.getComponent('div', parentEl, 'root__create-controls');
-    const button = this.getCreateButton(controls);
-    const textInput = this.getCreateTextInput(controls);
-    const colorInput = this.getCreateColorInput(controls);
+    const createControls = {
+      createButton: this.getCreateButton(controls),
+      createTextInput: this.getCreateTextInput(controls),
+      createColorInput: this.getCreateColorInput(controls),
+    };
 
     if (updateState.createInputText) {
-      textInput.value = updateState.createInputText;
+      createControls.createTextInput.value = updateState.createInputText;
     }
 
     if (updateState.createInputColor) {
-      colorInput.value = updateState.createInputColor;
+      createControls.createColorInput.value = updateState.createInputColor;
     }
 
-    button.addEventListener('click', async () => {
-      if (textInput instanceof HTMLInputElement && colorInput instanceof HTMLInputElement) {
+    createControls.createButton.addEventListener('click', async () => {
+      if (
+        createControls.createTextInput instanceof HTMLInputElement &&
+        createControls.createColorInput instanceof HTMLInputElement
+      ) {
         try {
-          const res = await handlers.createHandler(textInput.value, colorInput.value);
+          const res = await handlers.createHandler(
+            createControls.createTextInput.value,
+            createControls.createColorInput.value
+          );
           if ((await res.status) === 201) {
-            textInput.value = '';
+            createControls.createTextInput.value = '';
             const { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
 
             updateState.createInputText = null;
@@ -66,15 +74,15 @@ export default class Garage {
       }
     });
 
-    textInput.addEventListener('input', () => {
-      updateState.createInputText = textInput.value;
+    createControls.createTextInput.addEventListener('input', () => {
+      updateState.createInputText = createControls.createTextInput.value;
     });
 
-    colorInput.addEventListener('input', () => {
-      updateState.createInputColor = colorInput.value;
+    createControls.createColorInput.addEventListener('input', () => {
+      updateState.createInputColor = createControls.createColorInput.value;
     });
 
-    return controls;
+    return createControls;
   }
 
   getUpdateControls(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
@@ -191,6 +199,100 @@ export default class Garage {
 
   getCarContainer(parentEl: HTMLElement) {
     return this.component.getComponent('div', parentEl, 'root__cars');
+  }
+
+  getRaceButtons(
+    parentEl: HTMLElement,
+    createControls,
+    updateControls,
+    randomCarsButton,
+    paginationButtons,
+    handlers,
+    updateState
+  ) {
+    const raceStartButton = this.getRaceStartButton(parentEl);
+    updateState.raceStartButton = raceStartButton;
+    const raceResetButton = this.getRaceResetButton(parentEl);
+
+    raceStartButton.addEventListener('click', async () => {
+      updateState.winnerInfo = null;
+      const res = updateState.cars.map((car) =>
+        handlers.startButtonHandler(car.id, car.carImage, car.startButton, car.endButton, updateState)
+      );
+      paginationButtons.nextButton.disabled = true;
+      paginationButtons.prevButton.disabled = true;
+      raceStartButton.disabled = true;
+      raceResetButton.disabled = true;
+      randomCarsButton.disabled = true;
+
+      updateState.cars.forEach(car => {
+        car.endButton.disabled = true;
+        car.selectButton.disabled = true;
+        car.removeButton.disabled = true;
+      });
+
+      Object.values(updateControls).forEach((control) => {
+        control.disabled = true;
+      });
+
+      Object.values(createControls).forEach((control) => {
+        control.disabled = true;
+      });
+
+      if ((await Promise.all(res)).every(async (r) => (await r.status) === 200)) {
+        raceResetButton.disabled = false;
+        randomCarsButton.disabled = false;
+
+        updateState.cars.forEach(car => {
+          car.endButton.disabled = false;
+          car.selectButton.disabled = false;
+          car.removeButton.disabled = false;
+        });
+
+        Object.values(updateControls).forEach((control) => {
+          control.disabled = false;
+        });
+
+        Object.values(createControls).forEach((control) => {
+          control.disabled = false;
+        });
+
+        if (paginationButtons.prevButton instanceof HTMLButtonElement) {
+          if (updateState.page === updateState.firstPage) {
+            paginationButtons.prevButton.disabled = true;
+          } else {
+            paginationButtons.prevButton.disabled = false;
+          }
+        }
+
+        if (updateState.page === updateState.getLastPage() || updateState.getLastPage() === 0) {
+          paginationButtons.nextButton.disabled = true;
+        } else {
+          paginationButtons.nextButton.disabled = false;
+        }
+      }
+    });
+
+    raceResetButton.addEventListener('click', async () => {
+      const res = updateState.cars.map((car) =>
+        handlers.stopButtonHandler(car.id, car.startButton, car.endButton, car.carImage)
+      );
+      raceResetButton.disabled = true;
+
+      if ((await Promise.all(res)).every(async (r) => (await r.status) === 200)) {
+        raceStartButton.disabled = false;
+      }
+    });
+  }
+
+  getRaceStartButton(parentEl: HTMLElement) {
+    return this.textComponent.getTextComponent('button', parentEl, 'root__update', 'Race');
+  }
+
+  getRaceResetButton(parentEl: HTMLElement) {
+    const button = this.textComponent.getTextComponent('button', parentEl, 'root__update', 'Reset');
+    button.disabled = true;
+    return button;
   }
 
   getPaginationButtons(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
@@ -456,14 +558,22 @@ export default class Garage {
     const pageTitleText = `Page #${garagePage}`;
     const title = this.getTitle(container, titleText);
     const garage = this.getGarage(container);
-    this.getCreateControls(garage, containerParent, handlers, updateState);
+    const paginationButtons = this.getPaginationButtons(container, containerParent, handlers, updateState);
+    const createControls = this.getCreateControls(garage, containerParent, handlers, updateState);
     const updateControls = this.getUpdateControls(garage, containerParent, handlers, updateState);
-    this.getGenerateRandomCarsButton(garage, containerParent, updateState, handlers);
+    const randomCarsButton = this.getGenerateRandomCarsButton(garage, containerParent, updateState, handlers);
+    this.getRaceButtons(
+      garage,
+      createControls,
+      updateControls,
+      randomCarsButton,
+      paginationButtons,
+      handlers,
+      updateState
+    );
     const pageTitle = this.getPageTitle(garage, pageTitleText);
 
     const carContainer = this.getCarContainer(garage);
-
-    const paginationButtons = this.getPaginationButtons(container, containerParent, handlers, updateState);
 
     this.cars.renderCars(
       cars,
