@@ -27,7 +27,7 @@ export default class Cars {
     parentEl: HTMLElement,
     id: number,
     handlers,
-    updateControls,
+    vehicleUpdateControls,
     updateState,
     carContainer,
     garageTitle,
@@ -37,84 +37,28 @@ export default class Cars {
   ) {
     const controls = this.component.getComponent('div', parentEl, 'car__controls');
     const selectButton = this.getSelectButton(controls);
-    selectButton.addEventListener('click', async () => {
-      try {
-        const car = await handlers.carHandler(id);
-
-        updateControls.updateTextInput.value = car.name;
-        updateControls.updateColorInput.value = car.color;
-
-        updateState.updateInputText = car.name;
-        updateState.updateInputColor = car.color;
-
-        updateState.id = car.id;
-
-        Object.values(updateControls).forEach((control) => {
-          if (control instanceof HTMLInputElement || control instanceof HTMLButtonElement) {
-            const copyControl = control;
-            copyControl.disabled = false;
-          }
-        });
-      } catch (e) {
-        console.error(e);
-      }
-    });
+    selectButton.addEventListener('click', () => handlers.selectButtonHandler(vehicleUpdateControls, updateState, id));
     const removeButton = this.getRemoveButton(controls);
-    removeButton.addEventListener('click', async () => {
-      try {
-        const res = await handlers.deleteHandler(id);
-        if ((await res.status) === 200) {
-          Object.values(updateControls).forEach((control) => {
-            if (control instanceof HTMLInputElement || control instanceof HTMLButtonElement) {
-              const copyControl = control;
-              copyControl.disabled = true;
-            }
-          });
-
-          let { cars, carsCount, pageValue } = await handlers.garageHandler(updateState.page);
-
-          if (!cars.length && pageValue !== updateState.firstPage) {
-            updateState.page -= 1;
-            const prevPageData = await handlers.garageHandler(updateState.page);
-            cars = prevPageData.cars;
-            carsCount = prevPageData.carsCount;
-            pageValue = prevPageData.pageValue;
-          }
-
-          if (!(carsCount % updateState.limit)) {
-            paginationButtons.nextButton.disabled = true;
-          }
-
-          if (pageValue === updateState.firstPage) {
-            paginationButtons.prevButton.disabled = true;
-          }
-
-          carContainer.innerHTML = '';
-          updateState.page = pageValue;
-          garageTitle.textContent = `Garage (${carsCount})`;
-          garagePageTitle.textContent = `Page #${pageValue}`;
-          this.renderCars(
-            cars,
-            garageTitle,
-            garagePageTitle,
-            updateControls,
-            updateState,
-            handlers,
-            carContainer,
-            paginationButtons
-          );
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    });
+    removeButton.addEventListener('click', async () =>
+      handlers.removeButtonHandler(
+        id,
+        vehicleUpdateControls,
+        updateState,
+        paginationButtons,
+        carContainer,
+        garageTitle,
+        garagePageTitle,
+        handlers,
+        this
+      )
+    );
 
     const startButton = this.getStartButton(controls);
     const endButton = this.getEndButton(controls);
 
     startButton.addEventListener('click', () => handlers.startButtonHandler(id, carImage, startButton, endButton));
 
-    endButton.addEventListener('click', async () =>
+    endButton.addEventListener('click', () =>
       handlers.stopButtonHandler(id, startButton, endButton, carImage, updateState.raceStartButton)
     );
     return { startButton, endButton, selectButton, removeButton };
@@ -248,7 +192,7 @@ export default class Cars {
   renderCar(
     garageTitle,
     garagePageTitle,
-    updateControls,
+    vehicleUpdateControls,
     updateState,
     handlers,
     parentEl,
@@ -264,7 +208,7 @@ export default class Cars {
       car,
       id,
       handlers,
-      updateControls,
+      vehicleUpdateControls,
       updateState,
       parentEl,
       garageTitle,
@@ -279,7 +223,7 @@ export default class Cars {
     cars,
     garageTitle,
     garagePageTitle,
-    updateControls,
+    vehicleUpdateControls,
     updateState,
     handlers,
     carContainer,
@@ -290,7 +234,7 @@ export default class Cars {
       this.renderCar(
         garageTitle,
         garagePageTitle,
-        updateControls,
+        vehicleUpdateControls,
         updateState,
         handlers,
         carContainer,

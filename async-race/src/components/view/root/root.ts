@@ -64,22 +64,14 @@ export default class Root implements RootI {
     const root = this.getRoot();
     const rootControls = this.getRootControls(root);
     const rootContainer = this.getRootContainer(root);
-
     const garageButton = this.getGarageButton(rootControls);
-    garageButton.addEventListener('click', async () => {
-      const { cars, carsCount, pageValue } = this.updateState.page
-        ? await handlers.garageHandler(this.updateState.page)
-        : await handlers.garageHandler();
-      rootContainer.innerHTML = '';
-      this.garage.renderGarage(cars, rootContainer, carsCount, pageValue, handlers, this.updateState);
-    });
-
     const winnersButton = this.getWinnersButton(rootControls);
-    winnersButton.addEventListener('click', async () => {
-      const { winners, winnersCount, pageValue } = await handlers.winnersHandler();
-      rootContainer.innerHTML = '';
-      this.winners.renderWinners(rootContainer, winnersCount, pageValue);
-    });
+
+    garageButton.addEventListener('click', () =>
+      handlers.garageButtonHandler(this.updateState, rootContainer, this.garage, handlers)
+    );
+
+    winnersButton.addEventListener('click', () => handlers.winnersButtonHandler(rootContainer, this.winners));
 
     this.garage.renderGarage(cars, rootContainer, garageSize, garagePage, handlers, this.updateState);
   }
