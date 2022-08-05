@@ -27,8 +27,8 @@ export default class Winners {
     return this.component.getComponent(elName, parentEl, elClassName);
   }
 
-  renderWinners(containerParent: HTMLElement, winnersSize: number, winnersPage: number): void {
-    const container = this.getWinnersContainer(containerParent);
+  renderWinners(container: HTMLElement, winnersSize: number, winnersPage: number): void {
+    container.innerHTML = '';
     const title = `Winners (${winnersSize})`;
     const pageTitle = `Page #${winnersPage}`;
     this.getTitle(container, title);

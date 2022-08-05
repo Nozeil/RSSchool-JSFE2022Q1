@@ -21,7 +21,7 @@ export default class App implements AppI {
   async exportButtonsHandlers() {
     const carsData = this.controller.getCarsData.bind(this.controller);
     const createHandler = this.controller.getCreateButtonHandler.bind(this.controller);
-    const garageButtonHandler = this.controller.garageButtonHandler.bind(this.controller);
+    const rootControlsHandler = this.controller.rootControlsHandler.bind(this.controller);
     const vehicleInputHandler = this.controller.vehicleInputHandler.bind(this.controller);
     const winnersButtonHandler = this.controller.winnersButtonHandler.bind(this.controller);
     const vehicleСreationButtonHandler = this.controller.vehicleСreationButtonHandler.bind(this.controller);
@@ -48,7 +48,7 @@ export default class App implements AppI {
     return {
       createHandler,
       carsData,
-      garageButtonHandler,
+      rootControlsHandler,
       vehicleInputHandler,
       winnersButtonHandler,
       vehicleСreationButtonHandler,

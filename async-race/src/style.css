@@ -5,3 +5,7 @@ body {
 .car__car-image {
   border-bottom: 2px dashed black;
 }
+
+.hidden {
+  display: none;
+}

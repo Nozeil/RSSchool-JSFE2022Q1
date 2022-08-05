@@ -118,19 +118,12 @@ export default class Controller {
     return this.model.switchCarsEngineToDriveMode(id);
   }
 
-  async garageButtonHandler(updateState, rootContainer: HTMLElement, garage: Garage, handlers) {
-    const rootContainerCopy: HTMLElement = rootContainer;
-    const { cars, carsCount, pageValue } = updateState.page
-      ? await this.getCarsData(updateState.page)
-      : await this.getCarsData();
-    rootContainerCopy.innerHTML = '';
-    garage.renderGarage(cars, rootContainerCopy, carsCount, pageValue, handlers, updateState);
+  async rootControlsHandler(...controls: HTMLElement[]) {
+    controls.forEach((control: HTMLElement) => control.classList.toggle('hidden'));
   }
 
   async winnersButtonHandler(rootContainer: HTMLElement, winners: Winners) {
-    const rootContainerCopy: HTMLElement = rootContainer;
     const { winnersList, winnersCount, pageValue } = await this.getWinnersButtonHandler();
-    rootContainerCopy.innerHTML = '';
     winners.renderWinners(rootContainer, winnersCount, pageValue);
   }
 
@@ -153,6 +146,7 @@ export default class Controller {
         updateState.createInputColor = null;
 
         updateState.size = carsCount;
+        console.log(containerParent)
         containerParent.innerHTML = '';
 
         garage.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);

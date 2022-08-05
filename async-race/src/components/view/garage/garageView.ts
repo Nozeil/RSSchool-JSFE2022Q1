@@ -241,7 +241,7 @@ export default class Garage {
     garagePage: number,
     handlers,
     updateState
-  ): void {
+  ): HTMLElement {
     updateState.size = garageSize;
     updateState.page = garagePage;
 
@@ -251,7 +251,7 @@ export default class Garage {
     const title = this.getTitle(container, titleText);
     const garage = this.getGarage(container);
     const paginationButtons = this.getPaginationButtons(container, containerParent, handlers, updateState);
-    const creationControls = this.getCreationControls(garage, containerParent, handlers, updateState);
+    const creationControls = this.getCreationControls(garage, container, handlers, updateState);
     const vehicleUpdateControls = this.getVehicleUpdateControls(garage, containerParent, handlers, updateState);
     const randomCarsButton = this.getGenerateRandomCarsButton(garage, containerParent, updateState, handlers);
     this.getRaceButtons(
@@ -277,5 +277,7 @@ export default class Garage {
       carContainer,
       paginationButtons
     );
+
+    return container;
   }
 }
