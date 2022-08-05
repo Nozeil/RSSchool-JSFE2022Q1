@@ -3,7 +3,21 @@ body {
 }
 
 .car__car-image {
+  position: relative;
   border-bottom: 2px dashed black;
+}
+
+.car__car-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 30px;
+  width: 110px;
+  height: 56px;
+  background-image: url('./assets/finish.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
 }
 
 .hidden {
