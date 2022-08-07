@@ -32,8 +32,8 @@ export default class Model {
     return { cars, carsCount, pageValue };
   }
 
-  async getWinners(pageValue = 1, limitValue = 10) {
-    const query = this.getQuery('winners', pageValue, limitValue);
+  async getWinners(sort: 'id' | 'wins' | 'time', order: 'ASC' | 'DESC', pageValue = 1, limitValue = 10) {
+    const query = `${this.getQuery('winners', pageValue, limitValue)}&_sort=${sort}&_order=${order}`;
     const res = await fetch(query, {
       method: 'GET',
     });
@@ -113,31 +113,42 @@ export default class Model {
     return res;
   }
 
-  /*
-
-  stopCarsEngine() {
-
+  async createWinner(id: number, wins: number, time: number) {
+    const query = this.getQuery('winners');
+    const res = await fetch(query, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, wins, time }),
+    });
+    return res;
   }
 
-
-
-
-
-  getWinner() {
-
+  async getWinner(id: number) {
+    const query = `${this.getQuery('winners')}/${id}`;
+    const res = await fetch(query, {
+      method: 'GET',
+    });
+    return res.json();
   }
 
-  createWinner() {
-
+  async updateWinner(id: number, wins: number, time: number) {
+    const query = `${this.getQuery('winners')}/${id}`;
+    await fetch(query, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ wins, time }),
+    });
   }
 
-  deleteWinner() {
-
+  async deleteWinner(id: number) {
+    const query = `${this.getQuery('winners')}/${id}`;
+    const res = await fetch(query, {
+      method: 'DELETE',
+    });
+    return res;
   }
-
-  updateWinner() {
-
-  }
-
-  */
 }

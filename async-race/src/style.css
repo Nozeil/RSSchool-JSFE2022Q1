@@ -23,3 +23,20 @@ body {
 .hidden {
   display: none;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border: 2px solid darkolivegreen;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+}

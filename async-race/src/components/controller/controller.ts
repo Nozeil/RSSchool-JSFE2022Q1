@@ -1,4 +1,5 @@
 import Model from '../model/model';
+import TextComponent from '../view/constructor/textComponent/textComponent';
 import Garage from '../view/garage/garageView';
 import Winners from '../view/winners/winners';
 import CarAnimation from './animation/animation';
@@ -6,10 +7,13 @@ import CarAnimation from './animation/animation';
 export default class Controller {
   model: Model;
 
+  textComponent: TextComponent;
+
   animation: Animation;
 
   constructor() {
     this.model = new Model();
+    this.textComponent = new TextComponent();
     this.animation = new CarAnimation();
     this.animationState = {};
   }
@@ -18,8 +22,13 @@ export default class Controller {
     return this.model.getCarsAndCarsCount(pageValue, limitValue);
   }
 
-  async getWinnersButtonHandler() {
-    return this.model.getWinners();
+  async getWinnersButtonHandler(
+    sort: 'id' | 'wins' | 'time',
+    order: 'ASC' | 'DESC',
+    pageValue?: number,
+    limitValue?: number
+  ) {
+    return this.model.getWinners(sort, order, pageValue, limitValue);
   }
 
   async getCreateButtonHandler(name, color) {
@@ -46,50 +55,70 @@ export default class Controller {
     return this.model.stopCarsEngine(id);
   }
 
-  async getStartButtonHandler(id: number, carImage, startButton, endButton?, updateState?) {
-    try {
-      startButton.disabled = true;
+  async createWinner(id: number, wins: number, time: number, updateState) {
+    const winnerModal = this.textComponent.getTextComponent(
+      'div',
+      updateState.garageContainer,
+      'modal',
+      `Winner is ${updateState.winnerInfo.title}! Time: ${updateState.winnerInfo.time}s`
+    );
 
-      const animationStateKey = `id${id}`;
-
-      this.animationState[animationStateKey] = {
-        animationId: null,
-      };
-      const car = carImage.firstChild;
-      car.style.transform = 'translateX(0)';
-      const start = car.getBoundingClientRect().x;
-      const carState = this.animationState[animationStateKey];
-      const res = await this.getStartHandler(id);
-      const finish = document.documentElement.clientWidth - 150;
-      const duration = Math.floor(res.params.distance / res.params.velocity);
-
-      if (endButton && !updateState) {
-        endButton.disabled = false;
-      }
-      if (updateState) {
-        this.animation.animateCar(
-          car,
-          start,
-          finish,
-          duration,
-          this.animationState,
-          animationStateKey,
-          updateState,
-          id
-        );
-      } else {
-        this.animation.animateCar(car, start, finish, duration, this.animationState, animationStateKey);
-      }
-
-      const checkDrive = await this.getDriveHandler(id);
-
-      if (checkDrive.status === 500) {
-        cancelAnimationFrame(carState.animationId);
-      }
-      return res.res;
-    } catch (e) {
-      console.log(e.message);
+    const res = await this.model.createWinner(id, wins, time);
+    if (res.status === 500) {
+      const winner = await this.model.getWinner(id);
+      const newTime = winner.time < time ? winner.time : time;
+      await this.model.updateWinner(id, (winner.wins += 1), newTime);
     }
+
+    const timeoutTime = 5000;
+    setTimeout(() => winnerModal.remove(), timeoutTime);
+  }
+
+  async deleteWinner(id: number) {
+    return this.model.deleteWinner(id);
+  }
+
+  async getStartButtonHandler(id: number, carImage, startButton, endButton?, updateState?) {
+    startButton.disabled = true;
+
+    const animationStateKey = `id${id}`;
+
+    this.animationState[animationStateKey] = {
+      animationId: null,
+    };
+    const car = carImage.firstChild;
+    car.style.transform = 'translateX(0)';
+    const start = car.getBoundingClientRect().x;
+    const carState = this.animationState[animationStateKey];
+    const res = await this.getStartHandler(id);
+    const finish = document.documentElement.clientWidth - 150;
+    const duration = Math.floor(res.params.distance / res.params.velocity);
+
+    if (endButton && !updateState) {
+      endButton.disabled = false;
+    }
+    if (updateState) {
+      this.animation.animateCar(
+        car,
+        start,
+        finish,
+        duration,
+        this.animationState,
+        animationStateKey,
+        id,
+        updateState,
+        this.createWinner.bind(this)
+      );
+    } else {
+      this.animation.animateCar(car, start, finish, duration, this.animationState, animationStateKey);
+    }
+
+    const checkDrive = await this.getDriveHandler(id);
+
+    if (checkDrive.status === 500) {
+      cancelAnimationFrame(carState.animationId);
+    }
+    return res.res;
   }
 
   async getStopButtonHandler(id: number, startButton, endButton, carImage, raceButton?) {
@@ -122,9 +151,14 @@ export default class Controller {
     controls.forEach((control: HTMLElement) => control.classList.toggle('hidden'));
   }
 
-  async winnersButtonHandler(rootContainer: HTMLElement, winners: Winners) {
-    const { winnersList, winnersCount, pageValue } = await this.getWinnersButtonHandler();
-    winners.renderWinners(rootContainer, winnersCount, pageValue);
+  async winnersButtonHandler(rootContainer: HTMLElement, winnersClass: Winners, handlers, updateState) {
+    const { winners, winnersCount, pageValue } = await this.getWinnersButtonHandler(
+      updateState.sort,
+      updateState.order,
+      updateState.winnersPage || 1
+    );
+
+    winnersClass.renderWinners(rootContainer, winners, winnersCount, pageValue, handlers, updateState);
   }
 
   async vehicleСreationButtonHandler(controls, updateState, containerParent, handlers, garage: Garage) {
@@ -146,7 +180,6 @@ export default class Controller {
         updateState.createInputColor = null;
 
         updateState.size = carsCount;
-        console.log(containerParent)
         containerParent.innerHTML = '';
 
         garage.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);
@@ -207,9 +240,7 @@ export default class Controller {
     args.updateState.winnerInfo = null;
 
     const res = await this.updateCarStatus(args.updateState, true);
-    const carsControls = args.updateState.cars
-      .map((car) => [car.endButton, car.selectButton, car.removeButton])
-      .flat(1);
+    const carsControls = args.updateState.cars.map((car) => [car.selectButton, car.removeButton]).flat(1);
     const garageControls = { ...args.vehicleUpdateControls, ...args.creationControls };
 
     this.activateOrDeactivateControls(
@@ -238,22 +269,28 @@ export default class Controller {
       } else {
         this.activateOrDeactivateGarageControls(args.vehicleUpdateControls, true);
       }
-      this.activateOrDeactivatePrevPaginationButton(args.paginationButtons.prevButton, updateState);
-      this.activateOrDeactivateNextPaginationButton(args.paginationButtons.nextButton, updateState);
+      this.activateOrDeactivatePrevPaginationButton(args.paginationButtons.prevButton, updateState, updateState.page);
+      this.activateOrDeactivateNextPaginationButton(
+        args.paginationButtons.nextButton,
+        updateState,
+        updateState.page,
+        updateState.size,
+        updateState.limit
+      );
     }
   }
 
-  activateOrDeactivatePrevPaginationButton(prevButton: HTMLElement, updateState) {
+  activateOrDeactivatePrevPaginationButton(prevButton: HTMLElement, updateState, page) {
     const prevButtonCopy = prevButton;
     if (prevButtonCopy instanceof HTMLButtonElement) {
-      prevButtonCopy.disabled = updateState.page === updateState.firstPage;
+      prevButtonCopy.disabled = page === updateState.firstPage;
     }
   }
 
-  activateOrDeactivateNextPaginationButton(nextButton: HTMLElement, updateState) {
+  activateOrDeactivateNextPaginationButton(nextButton: HTMLElement, updateState, page, size, limit) {
     const nextButtonCopy = nextButton;
     if (nextButtonCopy instanceof HTMLButtonElement) {
-      nextButtonCopy.disabled = updateState.page === updateState.getLastPage() || !updateState.getLastPage();
+      nextButtonCopy.disabled = page === updateState.getLastPage(size, limit) || !updateState.getLastPage(size, limit);
     }
   }
 
@@ -302,7 +339,7 @@ export default class Controller {
   }
 
   async nextButtonHandler(updateState, containerParent: HTMLElement, garage: Garage, handlers, step) {
-    if (updateState.page < updateState.getLastPage()) {
+    if (updateState.page < updateState.getLastPage(updateState.size, updateState.limit)) {
       await this.paginationButtonHandler(updateState, containerParent, garage, handlers, step);
     }
   }
@@ -314,6 +351,37 @@ export default class Controller {
     const { cars, carsCount, pageValue } = await handlers.carsData(updateStateCopy.page);
     containerParentCopy.innerHTML = '';
     garage.renderGarage(cars, containerParentCopy, carsCount, pageValue, handlers, updateStateCopy);
+  }
+
+  async winnersPaginationButtonHandler(
+    updateState,
+    containerParent: HTMLElement,
+    winnersClass: Winners,
+    handlers,
+    step: number
+  ) {
+    const updateStateCopy = updateState;
+    const containerParentCopy = containerParent;
+    updateStateCopy.winnersPage += step;
+    const { winners, winnersCount, pageValue } = await this.getWinnersButtonHandler(
+      updateState.sort,
+      updateState.order,
+      updateStateCopy.winnersPage
+    );
+    containerParentCopy.innerHTML = '';
+    winnersClass.renderWinners(containerParentCopy, winners, winnersCount, pageValue, handlers, updateState);
+  }
+
+  async prevWinnersButtonHandler(updateState, containerParent: HTMLElement, winners: Winners, handlers, step: number) {
+    if (updateState.winnersPage > updateState.firstPage) {
+      await this.winnersPaginationButtonHandler(updateState, containerParent, winners, handlers, step);
+    }
+  }
+
+  async nextWinnersButtonHandler(updateState, containerParent: HTMLElement, winners: Winners, handlers, step: number) {
+    if (updateState.winnersPage < updateState.getLastPage(updateState.winnersSize, updateState.winnersLimit)) {
+      await this.winnersPaginationButtonHandler(updateState, containerParent, winners, handlers, step);
+    }
   }
 
   async randomVehiclesGenerationButtonHandler(containerParent: HTMLElement, garage: Garage, updateState, handlers) {
@@ -536,9 +604,15 @@ export default class Controller {
     garageTitle,
     garagePageTitle,
     handlers,
-    carsClass
+    carsClass,
+    raceButtons
   ) {
-    const res = await this.getDeleteHandler(id);
+    const raceButtonsCopy = raceButtons;
+    raceButtonsCopy.raceStartButton.disabled = false;
+    raceButtonsCopy.raceResetButton.disabled = true;
+
+    await this.deleteWinner(id);
+    const resFromGarage = await this.getDeleteHandler(id);
     const updateStateCopy = updateState;
     const paginationButtonsCopy = paginationButtons;
     const carContainerCopy = carContainer;
@@ -546,7 +620,7 @@ export default class Controller {
     const garagePageTitleCopy = garagePageTitle;
     const vehicleUpdateControlsCopy = vehicleUpdateControls;
 
-    if (res.status === 200) {
+    if (resFromGarage.status === 200) {
       updateStateCopy.updateInputText = null;
       updateStateCopy.updateInputColor = null;
       vehicleUpdateControlsCopy.vehicleUpdateTextInput.value = '';
@@ -584,8 +658,15 @@ export default class Controller {
         updateStateCopy,
         handlers,
         carContainerCopy,
-        paginationButtonsCopy
+        paginationButtonsCopy,
+        raceButtons
       );
     }
+  }
+
+  async sortWinners(winnersContainer: HTMLElement, winners: Winners, handlers, updateState) {
+    const updateStateCopy = updateState;
+    updateStateCopy.order = updateState.order === 'ASC' ? 'DESC' : 'ASC';
+    await this.winnersButtonHandler(winnersContainer, winners, handlers, updateState);
   }
 }

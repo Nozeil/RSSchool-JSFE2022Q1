@@ -184,6 +184,8 @@ export default class Garage {
     raceResetButton.addEventListener('click', () =>
       handlers.raceResetButtonHandler(updateState, raceStartButton, raceResetButton)
     );
+
+    return { raceStartButton, raceResetButton };
   }
 
   getRaceStartButton(parentEl: HTMLElement) {
@@ -196,31 +198,37 @@ export default class Garage {
     return button;
   }
 
-  getPaginationButtons(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
+  getPaginationButtons(parentEl: HTMLElement, handlers, updateState) {
     const pagination = this.component.getComponent('div', parentEl, 'root__pagination');
     const prevButton = this.getPaginationPrevButton(pagination, updateState, handlers);
 
     prevButton.addEventListener('click', () =>
-      handlers.paginationPrevButtonHandler(updateState, containerParent, this, handlers, -1)
+      handlers.paginationPrevButtonHandler(updateState, parentEl, this, handlers, -1)
     );
 
     const nextButton = this.getPaginationNextButton(pagination, updateState, handlers);
 
     nextButton.addEventListener('click', () =>
-      handlers.paginationNextButtonHandler(updateState, containerParent, this, handlers, 1)
+      handlers.paginationNextButtonHandler(updateState, parentEl, this, handlers, 1)
     );
     return { prevButton, nextButton };
   }
 
   getPaginationPrevButton(parentEl: HTMLElement, updateState, handlers) {
     const prevButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-prev', 'Prev');
-    handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState);
+    handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState, updateState.page);
     return prevButton;
   }
 
   getPaginationNextButton(parentEl: HTMLElement, updateState, handlers) {
     const nextButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-next', 'Next');
-    handlers.activateOrDeactivateNextPaginationButton(nextButton, updateState, handlers);
+    handlers.activateOrDeactivateNextPaginationButton(
+      nextButton,
+      updateState,
+      updateState.page,
+      updateState.size,
+      updateState.limit
+    );
     return nextButton;
   }
 
@@ -250,11 +258,11 @@ export default class Garage {
     const pageTitleText = `Page #${garagePage}`;
     const title = this.getTitle(container, titleText);
     const garage = this.getGarage(container);
-    const paginationButtons = this.getPaginationButtons(container, containerParent, handlers, updateState);
+    const paginationButtons = this.getPaginationButtons(container, handlers, updateState);
     const creationControls = this.getCreationControls(garage, container, handlers, updateState);
-    const vehicleUpdateControls = this.getVehicleUpdateControls(garage, containerParent, handlers, updateState);
-    const randomCarsButton = this.getGenerateRandomCarsButton(garage, containerParent, updateState, handlers);
-    this.getRaceButtons(
+    const vehicleUpdateControls = this.getVehicleUpdateControls(garage, container, handlers, updateState);
+    const randomCarsButton = this.getGenerateRandomCarsButton(garage, container, updateState, handlers);
+    const raceButtons = this.getRaceButtons(
       garage,
       creationControls,
       vehicleUpdateControls,
@@ -275,7 +283,8 @@ export default class Garage {
       updateState,
       handlers,
       carContainer,
-      paginationButtons
+      paginationButtons,
+      raceButtons
     );
 
     return container;

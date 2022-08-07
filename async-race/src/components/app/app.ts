@@ -45,6 +45,10 @@ export default class App implements AppI {
     );
     const selectButtonHandler = this.controller.selectButtonHandler.bind(this.controller);
     const removeButtonHandler = this.controller.removeButtonHandler.bind(this.controller);
+    const nextWinnersButtonHandler = this.controller.nextWinnersButtonHandler.bind(this.controller);
+    const prevWinnersButtonHandler = this.controller.prevWinnersButtonHandler.bind(this.controller);
+    const sortWinners = this.controller.sortWinners.bind(this.controller);
+
     return {
       createHandler,
       carsData,
@@ -66,6 +70,9 @@ export default class App implements AppI {
       randomVehiclesGenerationButtonHandler,
       selectButtonHandler,
       removeButtonHandler,
+      nextWinnersButtonHandler,
+      prevWinnersButtonHandler,
+      sortWinners,
     };
   }
 }

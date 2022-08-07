@@ -33,7 +33,8 @@ export default class Cars {
     garageTitle,
     garagePageTitle,
     paginationButtons,
-    carImage
+    carImage,
+    raceButtons
   ) {
     const controls = this.component.getComponent('div', parentEl, 'car__controls');
     const selectButton = this.getSelectButton(controls);
@@ -49,7 +50,8 @@ export default class Cars {
         garageTitle,
         garagePageTitle,
         handlers,
-        this
+        this,
+        raceButtons
       )
     );
 
@@ -199,7 +201,8 @@ export default class Cars {
     title,
     color,
     id,
-    paginationButtons
+    paginationButtons,
+    raceButtons,
   ) {
     const car = this.getCar(parentEl);
     this.getCarTitle(car, title);
@@ -214,7 +217,8 @@ export default class Cars {
       garageTitle,
       garagePageTitle,
       paginationButtons,
-      carImage
+      carImage,
+      raceButtons
     );
     updateState.cars.push({ title, carImage, startButton, endButton, selectButton, removeButton, id });
   }
@@ -227,7 +231,8 @@ export default class Cars {
     updateState,
     handlers,
     carContainer,
-    paginationButtons
+    paginationButtons,
+    raceButtons
   ) {
     updateState.cars = [];
     cars.forEach((car) =>
@@ -241,7 +246,8 @@ export default class Cars {
         car.name,
         car.color,
         car.id,
-        paginationButtons
+        paginationButtons,
+        raceButtons
       )
     );
   }

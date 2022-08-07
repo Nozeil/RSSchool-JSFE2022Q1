@@ -1,5 +1,15 @@
 export default class CarAnimation {
-  animateCar(car, start, finish, duration, animationState, animationStateKey, updateState?, id?) {
+  animateCar(
+    car,
+    start,
+    finish,
+    duration,
+    animationState,
+    animationStateKey,
+    id?,
+    updateState?,
+    createWinnerCallBack?
+  ) {
     let currX = start;
 
     const framesCount = (duration / 1000) * 60;
@@ -16,13 +26,14 @@ export default class CarAnimation {
       if (currX >= finish && updateState && id) {
         if (!updateState.winnerInfo) {
           updateState.cars.forEach((car) => {
+            const time = (duration / 1000).toFixed(2);
             if (car.id === id) {
               updateState.winnerInfo = {
                 id,
-                time: duration / 1000,
+                time,
                 title: car.title,
               };
-              alert(`Winner is ${updateState.winnerInfo.title}! Time: ${updateState.winnerInfo.time}`);
+              createWinnerCallBack(id, 1, time, updateState);
             }
           });
         }
