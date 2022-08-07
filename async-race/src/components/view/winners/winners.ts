@@ -34,12 +34,12 @@ export default class Winners {
   getWinnersTable(parentEl: HTMLElement, winners, handlers, updateState) {
     const winnersTable = this.component.getComponent('table', parentEl, 'root__winners-table');
 
-    const tHead = this.component.getComponent('thead', winnersTable, 'root__tabel-head');
+    const tHead = this.component.getComponent('thead', winnersTable, 'root__table-head');
     const tr = this.component.getComponent('tr', tHead, 'root__table-headers');
 
     const headersNames = ['Number', 'Car', 'Name', 'Wins', 'Best time (seconds)'];
     headersNames.forEach((headerName) => {
-      const th = this.textComponent.getTextComponent('th', tr, 'root__tabel-header', headerName);
+      const th = this.textComponent.getTextComponent('th', tr, 'root__table-header', headerName);
       if (headerName === 'Wins') {
         if (updateState.sort === 'wins') {
           th.textContent += updateState.order === 'ASC' ? '↑' : '↓';
@@ -66,7 +66,7 @@ export default class Winners {
   }
 
   createTableBody(winnersTable, winners, headersNames, handlers, updateState) {
-    const tBody = this.component.getComponent('tbody', winnersTable, 'root__tabel-body');
+    const tBody = this.component.getComponent('tbody', winnersTable, 'root__table-body');
     winners.forEach(async (winner, winnerIndex) => {
       const tBodyTr = this.component.getComponent('tr', tBody, 'root__table-cells');
       const winnerData = await handlers.carHandler(winner.id);

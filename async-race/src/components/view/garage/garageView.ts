@@ -36,7 +36,7 @@ export default class Garage {
   }
 
   getVehicleCreationTextInput(parentEl: HTMLElement): HTMLInputElement | HTMLElement {
-    const input = this.component.getComponent('input', parentEl, 'root__input');
+    const input = this.component.getComponent('input', parentEl, 'root__input_text');
 
     if (input instanceof HTMLInputElement) {
       input.type = 'text';
@@ -47,7 +47,7 @@ export default class Garage {
   }
 
   getVehicleCreationColorInput(parentEl: HTMLElement) {
-    const input = this.component.getComponent('input', parentEl, 'root__input');
+    const input = this.component.getComponent('input', parentEl, 'root__input_color');
 
     if (input instanceof HTMLInputElement) {
       input.type = 'color';
@@ -67,7 +67,7 @@ export default class Garage {
   }
 
   getVehicleUpdateTextInput(parentEl: HTMLElement) {
-    const input = this.component.getComponent('input', parentEl, 'root__input');
+    const input = this.component.getComponent('input', parentEl, 'root__input_text');
 
     if (input instanceof HTMLInputElement) {
       input.type = 'text';
@@ -78,7 +78,7 @@ export default class Garage {
   }
 
   getVehicleUpdateColorInput(parentEl: HTMLElement) {
-    const input = this.component.getComponent('input', parentEl, 'root__input');
+    const input = this.component.getComponent('input', parentEl, 'root__input_color');
 
     if (input instanceof HTMLInputElement) {
       input.type = 'color';
@@ -201,7 +201,6 @@ export default class Garage {
   getPaginationButtons(parentEl: HTMLElement, handlers, updateState) {
     const pagination = this.component.getComponent('div', parentEl, 'root__pagination');
     const prevButton = this.getPaginationPrevButton(pagination, updateState, handlers);
-
     prevButton.addEventListener('click', () =>
       handlers.paginationPrevButtonHandler(updateState, parentEl, this, handlers, -1)
     );
@@ -253,7 +252,9 @@ export default class Garage {
     updateState.size = garageSize;
     updateState.page = garagePage;
 
-    const container = this.getGarageContainer(containerParent);
+    const container = containerParent.classList.contains('root__garage-container')
+      ? containerParent
+      : this.getGarageContainer(containerParent);
     const titleText = `Garage (${garageSize})`;
     const pageTitleText = `Page #${garagePage}`;
     const title = this.getTitle(container, titleText);
