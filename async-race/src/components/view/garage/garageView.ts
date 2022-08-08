@@ -1,3 +1,4 @@
+import { ControlsT, HandlersT, ServerResT, UpdateStateT } from '../../types/types';
 import Cars from '../cars/cars';
 import Component from '../constructor/component/component';
 import TextComponent from '../constructor/textComponent/textComponent';
@@ -40,7 +41,6 @@ export default class Garage {
 
     if (input instanceof HTMLInputElement) {
       input.type = 'text';
-      return input;
     }
 
     return input;
@@ -88,7 +88,12 @@ export default class Garage {
     return input;
   }
 
-  getCreationControls(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
+  getCreationControls(
+    parentEl: HTMLElement,
+    containerParent: HTMLElement,
+    handlers: HandlersT,
+    updateState: UpdateStateT
+  ) {
     const controls = this.component.getComponent('div', parentEl, 'root__create-controls');
     const creationControls = {
       vehicleCreationButton: this.getVehicleCreationButton(controls),
@@ -96,11 +101,11 @@ export default class Garage {
       vehicleCreationColorInput: this.getVehicleCreationColorInput(controls),
     };
 
-    if (updateState.createInputText) {
+    if (updateState.createInputText && creationControls.vehicleCreationTextInput instanceof HTMLInputElement) {
       creationControls.vehicleCreationTextInput.value = updateState.createInputText;
     }
 
-    if (updateState.createInputColor) {
+    if (updateState.createInputColor && creationControls.vehicleCreationColorInput instanceof HTMLInputElement) {
       creationControls.vehicleCreationColorInput.value = updateState.createInputColor;
     }
 
@@ -119,7 +124,12 @@ export default class Garage {
     return creationControls;
   }
 
-  getVehicleUpdateControls(parentEl: HTMLElement, containerParent: HTMLElement, handlers, updateState) {
+  getVehicleUpdateControls(
+    parentEl: HTMLElement,
+    containerParent: HTMLElement,
+    handlers: HandlersT,
+    updateState: UpdateStateT
+  ) {
     const controls = this.component.getComponent('div', parentEl, 'root__update-controls');
     const vehicleUpdateControls = {
       vehicleUpdateButton: this.getVehicleUpdateButton(controls),
@@ -128,12 +138,23 @@ export default class Garage {
     };
 
     if (updateState.updateInputText && updateState.updateInputColor) {
-      vehicleUpdateControls.vehicleUpdateButton.disabled = false;
-      vehicleUpdateControls.vehicleUpdateColorInput.disabled = false;
-      vehicleUpdateControls.vehicleUpdateTextInput.disabled = false;
+      if (
+        vehicleUpdateControls.vehicleUpdateButton instanceof HTMLButtonElement &&
+        vehicleUpdateControls.vehicleUpdateColorInput instanceof HTMLInputElement &&
+        vehicleUpdateControls.vehicleUpdateTextInput instanceof HTMLInputElement
+      ) {
+        vehicleUpdateControls.vehicleUpdateButton.disabled = false;
+        vehicleUpdateControls.vehicleUpdateColorInput.disabled = false;
+        vehicleUpdateControls.vehicleUpdateTextInput.disabled = false;
+      }
 
-      vehicleUpdateControls.vehicleUpdateColorInput.value = updateState.updateInputColor;
-      vehicleUpdateControls.vehicleUpdateTextInput.value = updateState.updateInputText;
+      if (
+        vehicleUpdateControls.vehicleUpdateColorInput instanceof HTMLInputElement &&
+        vehicleUpdateControls.vehicleUpdateTextInput instanceof HTMLInputElement
+      ) {
+        vehicleUpdateControls.vehicleUpdateColorInput.value = updateState.updateInputColor;
+        vehicleUpdateControls.vehicleUpdateTextInput.value = updateState.updateInputText;
+      }
     }
 
     vehicleUpdateControls.vehicleUpdateButton.addEventListener('click', () =>
@@ -157,15 +178,16 @@ export default class Garage {
 
   getRaceButtons(
     parentEl: HTMLElement,
-    creationControls,
-    vehicleUpdateControls,
-    randomCarsButton,
-    paginationButtons,
-    handlers,
-    updateState
+    creationControls: ControlsT,
+    vehicleUpdateControls: ControlsT,
+    randomCarsButton: HTMLElement,
+    paginationButtons: ControlsT,
+    handlers: HandlersT,
+    updateState: UpdateStateT
   ) {
     const raceStartButton = this.getRaceStartButton(parentEl);
-    updateState.raceStartButton = raceStartButton;
+    const updateStateCopy = updateState;
+    updateStateCopy.raceStartButton = raceStartButton;
     const raceResetButton = this.getRaceResetButton(parentEl);
 
     raceStartButton.addEventListener('click', () =>
@@ -194,11 +216,13 @@ export default class Garage {
 
   getRaceResetButton(parentEl: HTMLElement) {
     const button = this.textComponent.getTextComponent('button', parentEl, 'root__update', 'Reset');
-    button.disabled = true;
+    if (button instanceof HTMLButtonElement) {
+      button.disabled = true;
+    }
     return button;
   }
 
-  getPaginationButtons(parentEl: HTMLElement, handlers, updateState) {
+  getPaginationButtons(parentEl: HTMLElement, handlers: HandlersT, updateState: UpdateStateT) {
     const pagination = this.component.getComponent('div', parentEl, 'root__pagination');
     const prevButton = this.getPaginationPrevButton(pagination, updateState, handlers);
     prevButton.addEventListener('click', () =>
@@ -213,25 +237,34 @@ export default class Garage {
     return { prevButton, nextButton };
   }
 
-  getPaginationPrevButton(parentEl: HTMLElement, updateState, handlers) {
+  getPaginationPrevButton(parentEl: HTMLElement, updateState: UpdateStateT, handlers: HandlersT) {
     const prevButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-prev', 'Prev');
-    handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState, updateState.page);
+    if (updateState.page) {
+      handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState, updateState.page);
+    }
     return prevButton;
   }
 
-  getPaginationNextButton(parentEl: HTMLElement, updateState, handlers) {
+  getPaginationNextButton(parentEl: HTMLElement, updateState: UpdateStateT, handlers: HandlersT) {
     const nextButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-next', 'Next');
-    handlers.activateOrDeactivateNextPaginationButton(
-      nextButton,
-      updateState,
-      updateState.page,
-      updateState.size,
-      updateState.limit
-    );
+    if (updateState.page && updateState.size) {
+      handlers.activateOrDeactivateNextPaginationButton(
+        nextButton,
+        updateState,
+        updateState.page,
+        updateState.size,
+        updateState.limit
+      );
+    }
     return nextButton;
   }
 
-  getGenerateRandomCarsButton(parentEl: HTMLElement, containerParent: HTMLElement, updateState, handlers): HTMLElement {
+  getGenerateRandomCarsButton(
+    parentEl: HTMLElement,
+    containerParent: HTMLElement,
+    updateState: UpdateStateT,
+    handlers: HandlersT
+  ): HTMLElement {
     const button = this.textComponent.getTextComponent('button', parentEl, 'root__generate-cars', 'Generate cars');
 
     button.addEventListener('click', () =>
@@ -242,15 +275,16 @@ export default class Garage {
   }
 
   renderGarage(
-    cars,
+    cars: ServerResT[],
     containerParent: HTMLElement,
     garageSize: number,
     garagePage: number,
-    handlers,
-    updateState
+    handlers: HandlersT,
+    updateState: UpdateStateT
   ): HTMLElement {
-    updateState.size = garageSize;
-    updateState.page = garagePage;
+    const copyUpdateState = updateState;
+    copyUpdateState.size = garageSize;
+    copyUpdateState.page = garagePage;
 
     const container = containerParent.classList.contains('root__garage-container')
       ? containerParent

@@ -1,3 +1,4 @@
+import { ControlsT, HandlersT, ServerResT, UpdateStateT } from '../../types/types';
 import Component from '../constructor/component/component';
 import TextComponent from '../constructor/textComponent/textComponent';
 import SvgImageComponent from '../svgImage/svgImage';
@@ -19,22 +20,22 @@ export default class Cars {
     return this.component.getComponent('div', parentEl, 'car');
   }
 
-  getCarTitle(parentEl, title) {
+  getCarTitle(parentEl: HTMLElement, title: string) {
     return this.textComponent.getTextComponent('h4', parentEl, 'car__title', title);
   }
 
   getCarControls(
     parentEl: HTMLElement,
     id: number,
-    handlers,
-    vehicleUpdateControls,
-    updateState,
-    carContainer,
-    garageTitle,
-    garagePageTitle,
-    paginationButtons,
-    carImage,
-    raceButtons
+    handlers: HandlersT,
+    vehicleUpdateControls: ControlsT,
+    updateState: UpdateStateT,
+    carContainer: HTMLElement,
+    garageTitle: HTMLElement,
+    garagePageTitle: HTMLElement,
+    paginationButtons: ControlsT,
+    carImage: HTMLElement,
+    raceButtons: ControlsT
   ) {
     const controls = this.component.getComponent('div', parentEl, 'car__controls');
     const selectButton = this.getSelectButton(controls);
@@ -60,9 +61,11 @@ export default class Cars {
 
     startButton.addEventListener('click', () => handlers.startButtonHandler(id, carImage, startButton, endButton));
 
-    endButton.addEventListener('click', () =>
-      handlers.stopButtonHandler(id, startButton, endButton, carImage, updateState.raceStartButton)
-    );
+    endButton.addEventListener('click', () => {
+      if (updateState.raceStartButton) {
+        handlers.stopButtonHandler(id, startButton, endButton, carImage, updateState.raceStartButton);
+      }
+    });
     return { startButton, endButton, selectButton, removeButton };
   }
 
@@ -80,7 +83,9 @@ export default class Cars {
 
   getEndButton(parentEl: HTMLElement) {
     const button = this.textComponent.getTextComponent('button', parentEl, 'car__end', 'End');
-    button.disabled = true;
+    if (button instanceof HTMLButtonElement) {
+      button.disabled = true;
+    }
     return button;
   }
 
@@ -88,7 +93,7 @@ export default class Cars {
     return this.component.getComponent('div', parentEl, 'car__race');
   }
 
-  getCarImage(parentEl: HTMLElement, color) {
+  getCarImage(parentEl: HTMLElement, color: string) {
     const svg = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100" height="50"
     viewBox="0 0 1280.000000 450" preserveAspectRatio="xMidYMid meet">
     <metadata>
@@ -192,17 +197,17 @@ export default class Cars {
   }
 
   renderCar(
-    garageTitle,
-    garagePageTitle,
-    vehicleUpdateControls,
-    updateState,
-    handlers,
-    parentEl,
-    title,
-    color,
-    id,
-    paginationButtons,
-    raceButtons,
+    garageTitle: HTMLElement,
+    garagePageTitle: HTMLElement,
+    vehicleUpdateControls: ControlsT,
+    updateState: UpdateStateT,
+    handlers: HandlersT,
+    parentEl: HTMLElement,
+    title: string,
+    color: string,
+    id: number,
+    paginationButtons: ControlsT,
+    raceButtons: ControlsT
   ) {
     const car = this.getCar(parentEl);
     this.getCarTitle(car, title);
@@ -220,35 +225,40 @@ export default class Cars {
       carImage,
       raceButtons
     );
-    updateState.cars.push({ title, carImage, startButton, endButton, selectButton, removeButton, id });
+    if (updateState.cars) {
+      updateState.cars.push({ title, carImage, startButton, endButton, selectButton, removeButton, id });
+    }
   }
 
   renderCars(
-    cars,
-    garageTitle,
-    garagePageTitle,
-    vehicleUpdateControls,
-    updateState,
-    handlers,
-    carContainer,
-    paginationButtons,
-    raceButtons
+    cars: ServerResT[],
+    garageTitle: HTMLElement,
+    garagePageTitle: HTMLElement,
+    vehicleUpdateControls: ControlsT,
+    updateState: UpdateStateT,
+    handlers: HandlersT,
+    carContainer: HTMLElement,
+    paginationButtons: ControlsT,
+    raceButtons: ControlsT
   ) {
-    updateState.cars = [];
-    cars.forEach((car) =>
-      this.renderCar(
-        garageTitle,
-        garagePageTitle,
-        vehicleUpdateControls,
-        updateState,
-        handlers,
-        carContainer,
-        car.name,
-        car.color,
-        car.id,
-        paginationButtons,
-        raceButtons
-      )
-    );
+    const updateStateCopy = updateState;
+    updateStateCopy.cars = [];
+    cars.forEach((car) => {
+      if (typeof car.name === 'string' && typeof car.color === 'string' && typeof car.id === 'number') {
+        this.renderCar(
+          garageTitle,
+          garagePageTitle,
+          vehicleUpdateControls,
+          updateState,
+          handlers,
+          carContainer,
+          car.name,
+          car.color,
+          car.id,
+          paginationButtons,
+          raceButtons
+        );
+      }
+    });
   }
 }

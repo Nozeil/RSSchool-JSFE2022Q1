@@ -1,3 +1,5 @@
+import { getCarsT, ServerResT, WinnersT } from '../types/types';
+
 export default class Model {
   url: string;
 
@@ -16,14 +18,14 @@ export default class Model {
     return pageValue && limitValue ? `${baseUrl}?${this.page}=${pageValue}&${this.limit}=${limitValue}` : baseUrl;
   }
 
-  async getCarsAndCarsCount(pageValue = 1, limitValue = 7) {
+  async getCarsAndCarsCount(pageValue = 1, limitValue = 7): Promise<getCarsT> {
     const query = this.getQuery('garage', pageValue, limitValue);
     const res = await fetch(query, {
       method: 'GET',
     });
     const cars = await res.json();
     const carsCountString = res.headers.get('X-Total-Count');
-    let carsCount;
+    let carsCount = 0;
 
     if (carsCountString) {
       carsCount = +carsCountString;
@@ -32,14 +34,19 @@ export default class Model {
     return { cars, carsCount, pageValue };
   }
 
-  async getWinners(sort: 'id' | 'wins' | 'time', order: 'ASC' | 'DESC', pageValue = 1, limitValue = 10) {
+  async getWinners(
+    sort: 'id' | 'wins' | 'time',
+    order: 'ASC' | 'DESC',
+    pageValue = 1,
+    limitValue = 10
+  ): Promise<WinnersT> {
     const query = `${this.getQuery('winners', pageValue, limitValue)}&_sort=${sort}&_order=${order}`;
     const res = await fetch(query, {
       method: 'GET',
     });
     const winners = await res.json();
     const winnersCountString = res.headers.get('X-Total-Count');
-    let winnersCount;
+    let winnersCount = 0;
 
     if (winnersCountString) {
       winnersCount = +winnersCountString;
@@ -63,7 +70,7 @@ export default class Model {
     const res = await fetch(query, {
       method: 'GET',
     });
-    const car = await res.json();
+    const car: ServerResT = await res.json();
     return car;
   }
 

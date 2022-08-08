@@ -1,3 +1,4 @@
+import { HandlersT, ServerResT, UpdateStateT } from '../../types/types';
 import Component from '../constructor/component/component';
 import TextComponent from '../constructor/textComponent/textComponent';
 import SvgImageComponent from '../svgImage/svgImage';
@@ -31,7 +32,8 @@ export default class Winners {
     return this.component.getComponent(elName, parentEl, elClassName);
   }
 
-  getWinnersTable(parentEl: HTMLElement, winners, handlers, updateState) {
+  getWinnersTable(parentEl: HTMLElement, winners: ServerResT[], handlers: HandlersT, updateState: UpdateStateT) {
+    const updateStateCopy = updateState;
     const winnersTable = this.component.getComponent('table', parentEl, 'root__winners-table');
 
     const tHead = this.component.getComponent('thead', winnersTable, 'root__table-head');
@@ -46,8 +48,8 @@ export default class Winners {
         }
         th.classList.add('clickable');
         th.addEventListener('click', async () => {
-          updateState.sort = 'wins';
-          await handlers.sortWinners(parentEl, this, handlers, updateState, th);
+          updateStateCopy.sort = 'wins';
+          await handlers.sortWinners(parentEl, this, handlers, updateState);
         });
       }
       if (headerName === 'Best time (seconds)') {
@@ -56,8 +58,8 @@ export default class Winners {
         }
         th.classList.add('clickable');
         th.addEventListener('click', async () => {
-          updateState.sort = 'time';
-          await handlers.sortWinners(parentEl, this, handlers, updateState, th);
+          updateStateCopy.sort = 'time';
+          await handlers.sortWinners(parentEl, this, handlers, updateState);
         });
       }
     });
@@ -65,22 +67,27 @@ export default class Winners {
     this.createTableBody(winnersTable, winners, headersNames, handlers, updateState);
   }
 
-  createTableBody(winnersTable, winners, headersNames, handlers, updateState) {
+  createTableBody(
+    winnersTable: HTMLElement,
+    winners: ServerResT[],
+    headersNames: string[],
+    handlers: HandlersT,
+    updateState: UpdateStateT
+  ) {
     const tBody = this.component.getComponent('tbody', winnersTable, 'root__table-body');
     winners.forEach(async (winner, winnerIndex) => {
       const tBodyTr = this.component.getComponent('tr', tBody, 'root__table-cells');
-      const winnerData = await handlers.carHandler(winner.id);
-
+      const winnerData = await handlers.carHandler(+winner.id);
       for (let i = 0; i < headersNames.length; i += 1) {
         if (i === 0) {
           if (updateState.winnersPage === 1) {
-            this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', winnerIndex + 1);
-          } else {
+            this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', `${winnerIndex + 1}`);
+          } else if (updateState.winnersPage && updateState.winnersPage > 1) {
             this.textComponent.getTextComponent(
               'td',
               tBodyTr,
               'root__table-cell',
-              winnerIndex + 1 + (updateState.winnersPage - 1) * updateState.winnersLimit
+              `${winnerIndex + 1 + (updateState.winnersPage - 1) * updateState.winnersLimit}`
             );
           }
         } else if (i === 1) {
@@ -185,18 +192,18 @@ export default class Winners {
         </svg>`;
           const td = this.component.getComponent('td', tBodyTr, 'root__table-cell');
           this.carSvgImage.getSvgImage('div', td, 'car__winner-car-image', svg);
-        } else if (i === 2) {
+        } else if (i === 2 && typeof winnerData.name === 'string') {
           this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', winnerData.name);
         } else if (i === 3) {
-          this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', winner.wins);
+          this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', `${winner.wins}`);
         } else if (i === 4) {
-          this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', winner.time);
+          this.textComponent.getTextComponent('td', tBodyTr, 'root__table-cell', `${winner.time}`);
         }
       }
     });
   }
 
-  getPaginationButtons(parentEl: HTMLElement, handlers, updateState) {
+  getPaginationButtons(parentEl: HTMLElement, handlers: HandlersT, updateState: UpdateStateT) {
     const pagination = this.component.getComponent('div', parentEl, 'root__pagination');
     const prevButton = this.getPaginationPrevButton(pagination, updateState, handlers);
 
@@ -212,36 +219,42 @@ export default class Winners {
     return { prevButton, nextButton };
   }
 
-  getPaginationPrevButton(parentEl: HTMLElement, updateState, handlers) {
+  getPaginationPrevButton(parentEl: HTMLElement, updateState: UpdateStateT, handlers: HandlersT) {
     const prevButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-prev', 'Prev');
-    handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState, updateState.winnersPage);
+    if (updateState.winnersPage) {
+      handlers.activateOrDeactivatePrevPaginationButton(prevButton, updateState, updateState.winnersPage);
+    }
     return prevButton;
   }
 
-  getPaginationNextButton(parentEl: HTMLElement, updateState, handlers) {
+  getPaginationNextButton(parentEl: HTMLElement, updateState: UpdateStateT, handlers: HandlersT) {
     const nextButton = this.textComponent.getTextComponent('button', parentEl, 'root__pagination-next', 'Next');
-    handlers.activateOrDeactivateNextPaginationButton(
-      nextButton,
-      updateState,
-      updateState.winnersPage,
-      updateState.winnersSize,
-      updateState.winnersLimit
-    );
+    if (updateState.winnersPage && updateState.winnersSize) {
+      handlers.activateOrDeactivateNextPaginationButton(
+        nextButton,
+        updateState,
+        updateState.winnersPage,
+        updateState.winnersSize,
+        updateState.winnersLimit
+      );
+    }
     return nextButton;
   }
 
   renderWinners(
     container: HTMLElement,
-    winners,
+    winners: ServerResT[],
     winnersSize: number,
     winnersPage: number,
-    handlers,
-    updateState
+    handlers: HandlersT,
+    updateState: UpdateStateT
   ): void {
-    updateState.winnersPage = winnersPage;
-    updateState.winnersSize = winnersSize;
+    const updateStateCopy = updateState;
+    const containerCopy = container;
+    updateStateCopy.winnersPage = winnersPage;
+    updateStateCopy.winnersSize = winnersSize;
 
-    container.innerHTML = '';
+    containerCopy.innerHTML = '';
     const title = `Winners (${winnersSize})`;
     const pageTitle = `Page #${winnersPage}`;
     this.getTitle(container, title);

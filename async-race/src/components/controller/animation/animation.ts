@@ -1,15 +1,19 @@
+import { AnimationStateT, UpdateStateT } from '../../types/types';
+
 export default class CarAnimation {
   animateCar(
-    car,
-    start,
-    finish,
-    duration,
-    animationState,
-    animationStateKey,
-    id?,
-    updateState?,
-    createWinnerCallBack?
+    car: SVGElement,
+    start: number,
+    finish: number,
+    duration: number,
+    animationState: AnimationStateT,
+    animationStateKey: string,
+    id?: number,
+    updateState?: UpdateStateT,
+    createWinnerCallBack?: (_id: number, wins: number, time: number, _updateState: UpdateStateT) => Promise<void>
   ) {
+    const carCopy = car;
+    const animationStateCopy = animationState;
     let currX = start;
 
     const framesCount = (duration / 1000) * 60;
@@ -17,23 +21,25 @@ export default class CarAnimation {
 
     const carStep = () => {
       currX += diffX;
-      car.style.transform = `translateX(${currX}px)`;
-
+      carCopy.style.transform = `translateX(${currX}px)`;
       if (currX < finish) {
-        animationState[animationStateKey].animationId = requestAnimationFrame(carStep);
+        animationStateCopy[animationStateKey].animationId = requestAnimationFrame(carStep);
       }
 
       if (currX >= finish && updateState && id) {
         if (!updateState.winnerInfo) {
-          updateState.cars.forEach((car) => {
-            const time = (duration / 1000).toFixed(2);
-            if (car.id === id) {
-              updateState.winnerInfo = {
+          updateState.cars.forEach((updateStateCar) => {
+            const time = +(duration / 1000).toFixed(2);
+            if (updateStateCar.id === id) {
+              const updateStateCopy = updateState;
+              updateStateCopy.winnerInfo = {
                 id,
                 time,
-                title: car.title,
+                title: updateStateCar.title,
               };
-              createWinnerCallBack(id, 1, time, updateState);
+              if (createWinnerCallBack) {
+                createWinnerCallBack(id, 1, time, updateState);
+              }
             }
           });
         }

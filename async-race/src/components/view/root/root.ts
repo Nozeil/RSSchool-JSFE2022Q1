@@ -3,6 +3,7 @@ import Component from '../constructor/component/component';
 import RootI from './rootI';
 import Garage from '../garage/garageView';
 import Winners from '../winners/winners';
+import { HandlersT, ServerResT, UpdateStateT } from '../../types/types';
 
 export default class Root implements RootI {
   private component: Component;
@@ -12,6 +13,8 @@ export default class Root implements RootI {
   private garage: Garage;
 
   private winners: Winners;
+
+  public updateState: UpdateStateT;
 
   constructor() {
     this.component = new Component();
@@ -39,6 +42,7 @@ export default class Root implements RootI {
       getLastPage(size: number, limit: number): number {
         return Math.ceil(size / limit);
       },
+      raceStartButton: null,
     };
   }
 
@@ -56,17 +60,18 @@ export default class Root implements RootI {
 
   getGarageButton(parentEl: HTMLElement): HTMLElement {
     const button = this.textComponent.getTextComponent('button', parentEl, 'root__button', 'To garage');
-    button.disabled = true;
+    if (button instanceof HTMLButtonElement) {
+      button.disabled = true;
+    }
     return button;
   }
 
   getWinnersButton(parentEl: HTMLElement): HTMLElement {
     const button = this.textComponent.getTextComponent('button', parentEl, 'root__button', 'To winners');
-
     return button;
   }
 
-  async renderRoot(cars, garageSize: number, garagePage: number, handlers) {
+  async renderRoot(cars: ServerResT[], garageSize: number, garagePage: number, handlers: HandlersT): Promise<void> {
     const root = this.getRoot();
     const rootControls = this.getRootControls(root);
     const rootContainer = this.getRootContainer(root);
@@ -87,14 +92,18 @@ export default class Root implements RootI {
     this.updateState.garageContainer = garageContainer;
 
     garageButton.addEventListener('click', () => {
-      winnersButton.disabled = false;
-      garageButton.disabled = true;
+      if (winnersButton instanceof HTMLButtonElement && garageButton instanceof HTMLButtonElement) {
+        winnersButton.disabled = false;
+        garageButton.disabled = true;
+      }
       handlers.rootControlsHandler(garageContainer, winnersContainer);
     });
 
     winnersButton.addEventListener('click', () => {
-      winnersButton.disabled = true;
-      garageButton.disabled = false;
+      if (winnersButton instanceof HTMLButtonElement && garageButton instanceof HTMLButtonElement) {
+        winnersButton.disabled = true;
+        garageButton.disabled = false;
+      }
       handlers.rootControlsHandler(garageContainer, winnersContainer);
       handlers.winnersButtonHandler(winnersContainer, this.winners, handlers, this.updateState);
     });

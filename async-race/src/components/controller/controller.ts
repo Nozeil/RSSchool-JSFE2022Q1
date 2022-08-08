@@ -1,4 +1,6 @@
 import Model from '../model/model';
+import { AnimationStateT, ControlsT, getCarsT, HandlersT, StatePropT, UpdateStateT } from '../types/types';
+import Cars from '../view/cars/cars';
 import TextComponent from '../view/constructor/textComponent/textComponent';
 import Garage from '../view/garage/garageView';
 import Winners from '../view/winners/winners';
@@ -9,7 +11,9 @@ export default class Controller {
 
   textComponent: TextComponent;
 
-  animation: Animation;
+  animation: CarAnimation;
+
+  animationState: AnimationStateT;
 
   constructor() {
     this.model = new Model();
@@ -18,7 +22,7 @@ export default class Controller {
     this.animationState = {};
   }
 
-  async getCarsData(pageValue?: number, limitValue?: number) {
+  async getCarsData(pageValue?: number, limitValue?: number): Promise<getCarsT> {
     return this.model.getCarsAndCarsCount(pageValue, limitValue);
   }
 
@@ -31,7 +35,7 @@ export default class Controller {
     return this.model.getWinners(sort, order, pageValue, limitValue);
   }
 
-  async getCreateButtonHandler(name, color) {
+  async getCreateButtonHandler(name: string, color: string) {
     return this.model.createCar(name, color);
   }
 
@@ -55,31 +59,41 @@ export default class Controller {
     return this.model.stopCarsEngine(id);
   }
 
-  async createWinner(id: number, wins: number, time: number, updateState) {
-    const winnerModal = this.textComponent.getTextComponent(
-      'div',
-      updateState.garageContainer,
-      'modal',
-      `Winner is ${updateState.winnerInfo.title}! Time: ${updateState.winnerInfo.time}s`
-    );
+  async createWinner(id: number, wins: number, time: number, updateState: UpdateStateT) {
+    if (updateState.garageContainer instanceof HTMLElement && updateState.winnerInfo) {
+      const winnerModal = this.textComponent.getTextComponent(
+        'div',
+        updateState.garageContainer,
+        'modal',
+        `Winner is ${updateState.winnerInfo.title}! Time: ${updateState.winnerInfo.time}s`
+      );
+      const res = await this.model.createWinner(id, wins, time);
+      if (res.status === 500) {
+        const winner = await this.model.getWinner(id);
+        const newTime = winner.time < time ? winner.time : time;
+        await this.model.updateWinner(id, (winner.wins += 1), newTime);
+      }
 
-    const res = await this.model.createWinner(id, wins, time);
-    if (res.status === 500) {
-      const winner = await this.model.getWinner(id);
-      const newTime = winner.time < time ? winner.time : time;
-      await this.model.updateWinner(id, (winner.wins += 1), newTime);
+      const timeoutTime = 5000;
+      setTimeout(() => winnerModal.remove(), timeoutTime);
     }
-
-    const timeoutTime = 5000;
-    setTimeout(() => winnerModal.remove(), timeoutTime);
   }
 
   async deleteWinner(id: number) {
     return this.model.deleteWinner(id);
   }
 
-  async getStartButtonHandler(id: number, carImage, startButton, endButton?, updateState?) {
-    startButton.disabled = true;
+  async getStartButtonHandler(
+    id: number,
+    carImage: HTMLElement,
+    startButton: HTMLElement,
+    endButton?: HTMLElement,
+    updateState?: UpdateStateT
+  ) {
+    if (startButton instanceof HTMLButtonElement) {
+      const startButtonCopy = startButton;
+      startButtonCopy.disabled = true;
+    }
 
     const animationStateKey = `id${id}`;
 
@@ -87,57 +101,74 @@ export default class Controller {
       animationId: null,
     };
     const car = carImage.firstChild;
-    car.style.transform = 'translateX(0)';
-    const start = car.getBoundingClientRect().x;
-    const carState = this.animationState[animationStateKey];
-    const res = await this.getStartHandler(id);
-    const finish = document.documentElement.clientWidth - 150;
-    const duration = Math.floor(res.params.distance / res.params.velocity);
+    if (car instanceof SVGElement) {
+      car.style.transform = 'translateX(0)';
+      const start = car.getBoundingClientRect().x;
+      const carState = this.animationState[animationStateKey];
+      const res = await this.getStartHandler(id);
+      const finish = document.documentElement.clientWidth - 150;
+      const duration = Math.floor(res.params.distance / res.params.velocity);
 
-    if (endButton && !updateState) {
-      endButton.disabled = false;
-    }
-    if (updateState) {
-      this.animation.animateCar(
-        car,
-        start,
-        finish,
-        duration,
-        this.animationState,
-        animationStateKey,
-        id,
-        updateState,
-        this.createWinner.bind(this)
-      );
-    } else {
-      this.animation.animateCar(car, start, finish, duration, this.animationState, animationStateKey);
-    }
+      if (endButton && !updateState && endButton instanceof HTMLButtonElement) {
+        const endButtonCopy = endButton;
+        endButtonCopy.disabled = false;
+      }
+      if (updateState) {
+        this.animation.animateCar(
+          car,
+          start,
+          finish,
+          duration,
+          this.animationState,
+          animationStateKey,
+          id,
+          updateState,
+          this.createWinner.bind(this)
+        );
+      } else {
+        this.animation.animateCar(car, start, finish, duration, this.animationState, animationStateKey);
+      }
 
-    const checkDrive = await this.getDriveHandler(id);
+      const checkDrive = await this.getDriveHandler(id);
 
-    if (checkDrive.status === 500) {
-      cancelAnimationFrame(carState.animationId);
+      if (checkDrive.status === 500 && carState.animationId) {
+        cancelAnimationFrame(carState.animationId);
+      }
+      return res.res;
     }
-    return res.res;
+    return undefined;
   }
 
-  async getStopButtonHandler(id: number, startButton, endButton, carImage, raceButton?) {
-    endButton.disabled = true;
+  async getStopButtonHandler(
+    id: number,
+    startButton: HTMLElement,
+    endButton: HTMLElement,
+    carImage: HTMLElement,
+    raceButton?: HTMLElement
+  ) {
+    if (endButton instanceof HTMLButtonElement) {
+      const endButtonCopy = endButton;
+      endButtonCopy.disabled = true;
+    }
 
     const res = await this.getStopHandler(id);
     const animationStateKey = `id${id}`;
     const car = carImage.firstChild;
 
-    if (raceButton) {
-      raceButton.disabled = false;
+    if (raceButton instanceof HTMLButtonElement) {
+      const raceButtonCopy = raceButton;
+      raceButtonCopy.disabled = false;
     }
 
     if (res.status === 200) {
       const carState = this.animationState[animationStateKey];
-      cancelAnimationFrame(carState.animationId);
-      carState.animationId = null;
-      startButton.disabled = false;
-      car.style.transform = 'translateX(0)';
+      if (carState.animationId && startButton instanceof HTMLButtonElement && car instanceof SVGElement) {
+        const startButtonCopy = startButton;
+        cancelAnimationFrame(carState.animationId);
+        carState.animationId = null;
+        startButtonCopy.disabled = false;
+        car.style.transform = 'translateX(0)';
+      }
     }
 
     return res;
@@ -151,7 +182,12 @@ export default class Controller {
     controls.forEach((control: HTMLElement) => control.classList.toggle('hidden'));
   }
 
-  async winnersButtonHandler(rootContainer: HTMLElement, winnersClass: Winners, handlers, updateState) {
+  async winnersButtonHandler(
+    rootContainer: HTMLElement,
+    winnersClass: Winners,
+    handlers: HandlersT,
+    updateState: UpdateStateT
+  ) {
     const { winners, winnersCount, pageValue } = await this.getWinnersButtonHandler(
       updateState.sort,
       updateState.order,
@@ -161,7 +197,13 @@ export default class Controller {
     winnersClass.renderWinners(rootContainer, winners, winnersCount, pageValue, handlers, updateState);
   }
 
-  async vehicleСreationButtonHandler(controls, updateState, containerParent, handlers, garage: Garage) {
+  async vehicleСreationButtonHandler(
+    controls: ControlsT,
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    handlers: HandlersT,
+    garage: Garage
+  ) {
     if (
       controls.vehicleCreationTextInput instanceof HTMLInputElement &&
       controls.vehicleCreationColorInput instanceof HTMLInputElement
@@ -173,31 +215,46 @@ export default class Controller {
 
       if (res.status === 201) {
         const controlsCopy = controls;
-        controlsCopy.vehicleCreationTextInput.value = '';
-        const { cars, carsCount, pageValue } = await this.getCarsData(updateState.page);
+        const updateStateCopy = updateState;
+        const containerParentCopy = containerParent;
 
-        updateState.createInputText = null;
-        updateState.createInputColor = null;
+        if (controlsCopy.vehicleCreationTextInput instanceof HTMLInputElement && updateState.page) {
+          controlsCopy.vehicleCreationTextInput.value = '';
+          const { cars, carsCount, pageValue } = await this.getCarsData(updateState.page);
 
-        updateState.size = carsCount;
-        containerParent.innerHTML = '';
+          updateStateCopy.createInputText = null;
+          updateStateCopy.createInputColor = null;
 
-        garage.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);
+          updateStateCopy.size = carsCount;
+          containerParentCopy.innerHTML = '';
+
+          garage.renderGarage(cars, containerParent, carsCount, pageValue, handlers, updateState);
+        }
       }
     }
   }
 
-  vehicleInputHandler(updateState, stateProp: string, input) {
+  vehicleInputHandler(updateState: UpdateStateT, stateProp: StatePropT, input: HTMLElement | HTMLInputElement): void {
     const copyUpdateState = updateState;
-    copyUpdateState[stateProp] = input.value;
+    if (input instanceof HTMLInputElement && stateProp) {
+      copyUpdateState[stateProp] = input.value;
+    }
   }
 
-  async vehicleUpdateControlsHandler(controls, updateState, containerParent: HTMLElement, handlers, garage: Garage) {
+  async vehicleUpdateControlsHandler(
+    controls: ControlsT,
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    handlers: HandlersT,
+    garage: Garage
+  ) {
     const copyUpdateState = updateState;
     const copyContainerParent = containerParent;
     if (
       controls.vehicleUpdateColorInput instanceof HTMLInputElement &&
-      controls.vehicleUpdateTextInput instanceof HTMLInputElement
+      controls.vehicleUpdateTextInput instanceof HTMLInputElement &&
+      copyUpdateState.id &&
+      copyUpdateState.page
     ) {
       const res = await this.getUpdateHandler(
         controls.vehicleUpdateTextInput.value,
@@ -218,14 +275,14 @@ export default class Controller {
   }
 
   async raceStartButtonHandler(
-    updateState,
-    handlers,
-    paginationButtons,
-    raceStartButton,
-    raceResetButton,
-    randomVehicleGenerationButton,
-    creationControls,
-    vehicleUpdateControls
+    updateState: UpdateStateT,
+    handlers: HandlersT,
+    paginationButtons: ControlsT,
+    raceStartButton: HTMLElement,
+    raceResetButton: HTMLElement,
+    randomVehicleGenerationButton: HTMLElement,
+    creationControls: ControlsT,
+    vehicleUpdateControls: ControlsT
   ) {
     const args = {
       updateState,
@@ -240,7 +297,14 @@ export default class Controller {
     args.updateState.winnerInfo = null;
 
     const res = await this.updateCarStatus(args.updateState, true);
-    const carsControls = args.updateState.cars.map((car) => [car.selectButton, car.removeButton]).flat(1);
+    const carsControls = args.updateState.cars
+      .map((car) => {
+        if (car) {
+          return [car.selectButton, car.removeButton];
+        }
+        return [];
+      })
+      .flat(1);
     const garageControls = { ...args.vehicleUpdateControls, ...args.creationControls };
 
     this.activateOrDeactivateControls(
@@ -269,32 +333,40 @@ export default class Controller {
       } else {
         this.activateOrDeactivateGarageControls(args.vehicleUpdateControls, true);
       }
-      this.activateOrDeactivatePrevPaginationButton(args.paginationButtons.prevButton, updateState, updateState.page);
-      this.activateOrDeactivateNextPaginationButton(
-        args.paginationButtons.nextButton,
-        updateState,
-        updateState.page,
-        updateState.size,
-        updateState.limit
-      );
+      if (updateState.page && updateState.size) {
+        this.activateOrDeactivatePrevPaginationButton(args.paginationButtons.prevButton, updateState, updateState.page);
+        this.activateOrDeactivateNextPaginationButton(
+          args.paginationButtons.nextButton,
+          updateState,
+          updateState.page,
+          updateState.size,
+          updateState.limit
+        );
+      }
     }
   }
 
-  activateOrDeactivatePrevPaginationButton(prevButton: HTMLElement, updateState, page) {
+  activateOrDeactivatePrevPaginationButton(prevButton: HTMLElement, updateState: UpdateStateT, page: number) {
     const prevButtonCopy = prevButton;
     if (prevButtonCopy instanceof HTMLButtonElement) {
       prevButtonCopy.disabled = page === updateState.firstPage;
     }
   }
 
-  activateOrDeactivateNextPaginationButton(nextButton: HTMLElement, updateState, page, size, limit) {
+  activateOrDeactivateNextPaginationButton(
+    nextButton: HTMLElement,
+    updateState: UpdateStateT,
+    page: number,
+    size: number,
+    limit: number
+  ) {
     const nextButtonCopy = nextButton;
     if (nextButtonCopy instanceof HTMLButtonElement) {
       nextButtonCopy.disabled = page === updateState.getLastPage(size, limit) || !updateState.getLastPage(size, limit);
     }
   }
 
-  activateOrDeactivateControls(controls, disabled: boolean) {
+  activateOrDeactivateControls(controls: HTMLElement[], disabled: boolean) {
     controls.forEach((control) => {
       if (control instanceof HTMLButtonElement || control instanceof HTMLInputElement) {
         const controlCopy = control;
@@ -303,88 +375,138 @@ export default class Controller {
     });
   }
 
-  activateOrDeactivateGarageControls(controls, disabled: boolean) {
+  activateOrDeactivateGarageControls(controls: ControlsT, disabled: boolean) {
     const garageControls = Object.values(controls);
     this.activateOrDeactivateControls(garageControls, disabled);
   }
 
-  async updateCarStatus(updateState, isStart: boolean) {
-    const res = await updateState.cars.map(async (car) => {
-      const resProps = isStart
-        ? await this.getStartButtonHandler(car.id, car.carImage, car.startButton, car.endButton, updateState)
-        : await this.getStopButtonHandler(car.id, car.startButton, car.endButton, car.carImage);
-      return resProps;
+  async updateCarStatus(updateState: UpdateStateT, isStart: boolean) {
+    const res = updateState.cars.map(async (car) => {
+      if (car) {
+        const resProps = isStart
+          ? await this.getStartButtonHandler(car.id, car.carImage, car.startButton, car.endButton, updateState)
+          : await this.getStopButtonHandler(car.id, car.startButton, car.endButton, car.carImage);
+        return resProps;
+      }
+      return undefined;
     });
     return res;
   }
 
-  async raceResetButtonHandler(updateState, raceStartButton, raceResetButton) {
+  async raceResetButtonHandler(updateState: UpdateStateT, raceStartButton: HTMLElement, raceResetButton: HTMLElement) {
     const res = await this.updateCarStatus(updateState, false);
 
     this.activateOrDeactivateControls([raceResetButton], true);
 
-    if (await this.areTheRequestsSuccessful(await res, 200)) {
+    if (await this.areTheRequestsSuccessful(res, 200)) {
       this.activateOrDeactivateControls([raceStartButton], false);
     }
   }
 
-  async areTheRequestsSuccessful(res, statusCode: number): Promise<boolean> {
-    return (await Promise.all(res)).every(async (r) => (await r.status) === statusCode);
+  async areTheRequestsSuccessful(res: Promise<Response | undefined>[], statusCode: number): Promise<boolean> {
+    return (await Promise.all(res)).every(async (r) => (r ? r.status === statusCode : false));
   }
 
-  async prevButtonHandler(updateState, containerParent: HTMLElement, garage: Garage, handlers, step) {
-    if (updateState.page > updateState.firstPage) {
-      await this.paginationButtonHandler(updateState, containerParent, garage, handlers, step);
-    }
-  }
-
-  async nextButtonHandler(updateState, containerParent: HTMLElement, garage: Garage, handlers, step) {
-    if (updateState.page < updateState.getLastPage(updateState.size, updateState.limit)) {
-      await this.paginationButtonHandler(updateState, containerParent, garage, handlers, step);
-    }
-  }
-
-  async paginationButtonHandler(updateState, containerParent: HTMLElement, garage: Garage, handlers, step) {
-    const updateStateCopy = updateState;
-    const containerParentCopy = containerParent;
-    updateStateCopy.page += step;
-    const { cars, carsCount, pageValue } = await handlers.carsData(updateStateCopy.page);
-    containerParentCopy.innerHTML = '';
-    garage.renderGarage(cars, containerParentCopy, carsCount, pageValue, handlers, updateStateCopy);
-  }
-
-  async winnersPaginationButtonHandler(
-    updateState,
+  async prevButtonHandler(
+    updateState: UpdateStateT,
     containerParent: HTMLElement,
-    winnersClass: Winners,
-    handlers,
+    garage: Garage,
+    handlers: HandlersT,
+    step: number
+  ) {
+    if (updateState.page && updateState.page > updateState.firstPage) {
+      await this.paginationButtonHandler(updateState, containerParent, garage, handlers, step);
+    }
+  }
+
+  async nextButtonHandler(
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    garage: Garage,
+    handlers: HandlersT,
+    step: number
+  ) {
+    if (
+      updateState.page &&
+      updateState.size &&
+      updateState.page < updateState.getLastPage(updateState.size, updateState.limit)
+    ) {
+      await this.paginationButtonHandler(updateState, containerParent, garage, handlers, step);
+    }
+  }
+
+  async paginationButtonHandler(
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    garage: Garage,
+    handlers: HandlersT,
     step: number
   ) {
     const updateStateCopy = updateState;
     const containerParentCopy = containerParent;
-    updateStateCopy.winnersPage += step;
-    const { winners, winnersCount, pageValue } = await this.getWinnersButtonHandler(
-      updateState.sort,
-      updateState.order,
-      updateStateCopy.winnersPage
-    );
-    containerParentCopy.innerHTML = '';
-    winnersClass.renderWinners(containerParentCopy, winners, winnersCount, pageValue, handlers, updateState);
+    if (updateStateCopy.page) {
+      updateStateCopy.page += step;
+      const { cars, carsCount, pageValue } = await handlers.carsData(updateStateCopy.page);
+      containerParentCopy.innerHTML = '';
+      garage.renderGarage(cars, containerParentCopy, carsCount, pageValue, handlers, updateStateCopy);
+    }
   }
 
-  async prevWinnersButtonHandler(updateState, containerParent: HTMLElement, winners: Winners, handlers, step: number) {
-    if (updateState.winnersPage > updateState.firstPage) {
+  async winnersPaginationButtonHandler(
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    winnersClass: Winners,
+    handlers: HandlersT,
+    step: number
+  ) {
+    const updateStateCopy = updateState;
+    const containerParentCopy = containerParent;
+    if (updateStateCopy.winnersPage) {
+      updateStateCopy.winnersPage += step;
+      const { winners, winnersCount, pageValue } = await this.getWinnersButtonHandler(
+        updateState.sort,
+        updateState.order,
+        updateStateCopy.winnersPage
+      );
+      containerParentCopy.innerHTML = '';
+      winnersClass.renderWinners(containerParentCopy, winners, winnersCount, pageValue, handlers, updateState);
+    }
+  }
+
+  async prevWinnersButtonHandler(
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    winners: Winners,
+    handlers: HandlersT,
+    step: number
+  ) {
+    if (updateState.winnersPage && updateState.winnersPage > updateState.firstPage) {
       await this.winnersPaginationButtonHandler(updateState, containerParent, winners, handlers, step);
     }
   }
 
-  async nextWinnersButtonHandler(updateState, containerParent: HTMLElement, winners: Winners, handlers, step: number) {
-    if (updateState.winnersPage < updateState.getLastPage(updateState.winnersSize, updateState.winnersLimit)) {
+  async nextWinnersButtonHandler(
+    updateState: UpdateStateT,
+    containerParent: HTMLElement,
+    winners: Winners,
+    handlers: HandlersT,
+    step: number
+  ) {
+    if (
+      updateState.winnersPage &&
+      updateState.winnersSize &&
+      updateState.winnersPage < updateState.getLastPage(updateState.winnersSize, updateState.winnersLimit)
+    ) {
       await this.winnersPaginationButtonHandler(updateState, containerParent, winners, handlers, step);
     }
   }
 
-  async randomVehiclesGenerationButtonHandler(containerParent: HTMLElement, garage: Garage, updateState, handlers) {
+  async randomVehiclesGenerationButtonHandler(
+    containerParent: HTMLElement,
+    garage: Garage,
+    updateState: UpdateStateT,
+    handlers: HandlersT
+  ) {
     const carBrand = [
       'Acura',
       'Alfa Romeo',
@@ -570,7 +692,7 @@ export default class Controller {
 
     const requests = randomCars.map((car) => this.getCreateButtonHandler(car.name, car.color));
 
-    if (await this.areTheRequestsSuccessful(requests, 201)) {
+    if (updateState.page && (await this.areTheRequestsSuccessful(requests, 201))) {
       const containerParentCopy = containerParent;
       const { cars, carsCount, pageValue } = await this.getCarsData(updateState.page);
       containerParentCopy.innerHTML = '';
@@ -578,39 +700,54 @@ export default class Controller {
     }
   }
 
-  async selectButtonHandler(vehicleUpdateControls, updateState, id: number) {
+  async selectButtonHandler(vehicleUpdateControls: ControlsT, updateState: UpdateStateT, id: number) {
     const car = await this.getCarHandler(id);
     const vehicleUpdateControlsCopy = vehicleUpdateControls;
     const updateStateCopy = updateState;
 
-    [vehicleUpdateControlsCopy.vehicleUpdateTextInput.value, vehicleUpdateControlsCopy.vehicleUpdateColorInput.value] =
-      [car.name, car.color];
+    if (
+      vehicleUpdateControlsCopy.vehicleUpdateTextInput instanceof HTMLInputElement &&
+      vehicleUpdateControlsCopy.vehicleUpdateColorInput instanceof HTMLInputElement &&
+      typeof car.name === 'string' &&
+      typeof car.color === 'string'
+    ) {
+      [
+        vehicleUpdateControlsCopy.vehicleUpdateTextInput.value,
+        vehicleUpdateControlsCopy.vehicleUpdateColorInput.value,
+      ] = [car.name, car.color];
+    }
 
-    [updateStateCopy.updateInputText, updateStateCopy.updateInputColor, updateStateCopy.id] = [
-      car.name,
-      car.color,
-      car.id,
-    ];
-
+    if (typeof car.name === 'string' && typeof car.color === 'string' && typeof car.id === 'number') {
+      [updateStateCopy.updateInputText, updateStateCopy.updateInputColor, updateStateCopy.id] = [
+        car.name,
+        car.color,
+        car.id,
+      ];
+    }
     this.activateOrDeactivateGarageControls(vehicleUpdateControls, false);
   }
 
   async removeButtonHandler(
     id: number,
-    vehicleUpdateControls,
-    updateState,
-    paginationButtons,
-    carContainer,
-    garageTitle,
-    garagePageTitle,
-    handlers,
-    carsClass,
-    raceButtons
+    vehicleUpdateControls: ControlsT,
+    updateState: UpdateStateT,
+    paginationButtons: ControlsT,
+    carContainer: HTMLElement,
+    garageTitle: HTMLElement,
+    garagePageTitle: HTMLElement,
+    handlers: HandlersT,
+    carsClass: Cars,
+    raceButtons: ControlsT
   ) {
     const raceButtonsCopy = raceButtons;
-    raceButtonsCopy.raceStartButton.disabled = false;
-    raceButtonsCopy.raceResetButton.disabled = true;
 
+    if (
+      raceButtonsCopy.raceStartButton instanceof HTMLButtonElement &&
+      raceButtonsCopy.raceResetButton instanceof HTMLButtonElement
+    ) {
+      raceButtonsCopy.raceStartButton.disabled = false;
+      raceButtonsCopy.raceResetButton.disabled = true;
+    }
     await this.deleteWinner(id);
     const resFromGarage = await this.getDeleteHandler(id);
     const updateStateCopy = updateState;
@@ -620,7 +757,12 @@ export default class Controller {
     const garagePageTitleCopy = garagePageTitle;
     const vehicleUpdateControlsCopy = vehicleUpdateControls;
 
-    if (resFromGarage.status === 200) {
+    if (
+      resFromGarage.status === 200 &&
+      updateStateCopy.page &&
+      vehicleUpdateControlsCopy.vehicleUpdateTextInput instanceof HTMLInputElement &&
+      vehicleUpdateControlsCopy.vehicleUpdateColorInput instanceof HTMLInputElement
+    ) {
       updateStateCopy.updateInputText = null;
       updateStateCopy.updateInputColor = null;
       vehicleUpdateControlsCopy.vehicleUpdateTextInput.value = '';
@@ -631,17 +773,17 @@ export default class Controller {
 
       if (!cars.length && pageValue !== updateState.firstPage) {
         updateStateCopy.page -= 1;
-        const prevPageData = await this.getCarsData(updateState.page);
+        const prevPageData = await this.getCarsData(updateStateCopy.page);
         cars = prevPageData.cars;
         carsCount = prevPageData.carsCount;
         pageValue = prevPageData.pageValue;
       }
 
-      if (!(carsCount % updateState.limit)) {
+      if (!(carsCount % updateState.limit) && paginationButtonsCopy.nextButton instanceof HTMLButtonElement) {
         paginationButtonsCopy.nextButton.disabled = true;
       }
 
-      if (pageValue === updateState.firstPage) {
+      if (pageValue === updateState.firstPage && paginationButtonsCopy.prevButton instanceof HTMLButtonElement) {
         paginationButtonsCopy.prevButton.disabled = true;
       }
 
@@ -664,7 +806,7 @@ export default class Controller {
     }
   }
 
-  async sortWinners(winnersContainer: HTMLElement, winners: Winners, handlers, updateState) {
+  async sortWinners(winnersContainer: HTMLElement, winners: Winners, handlers: HandlersT, updateState: UpdateStateT) {
     const updateStateCopy = updateState;
     updateStateCopy.order = updateState.order === 'ASC' ? 'DESC' : 'ASC';
     await this.winnersButtonHandler(winnersContainer, winners, handlers, updateState);
