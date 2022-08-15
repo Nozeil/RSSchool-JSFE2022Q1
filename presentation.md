@@ -1,0 +1,2 @@
+- [Video](https://youtu.be/f6DVo8bR0EM)
+- [Slides](https://nozeil.github.io/software-license-presentation/reveal.js/)
