@@ -7,7 +7,7 @@ export default class Model {
 
   limit: string;
 
-  constructor(url = 'http://127.0.0.1:3000/', page = '_page', limit = '_limit') {
+  constructor(url = 'https://delicious-observant-thrush.glitch.me/', page = '_page', limit = '_limit') {
     this.url = url;
     this.page = page;
     this.limit = limit;
